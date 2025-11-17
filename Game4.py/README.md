@@ -29,12 +29,14 @@
 
 - 🎮 Classic worm/snake gameplay
 - 🎯 Progressive difficulty levels
-- 🎨 Colorful, vibrant graphics
-- 🔊 Sound effects (optional)
+- 🎨 Colorful, vibrant graphics with animations
+- 🌟 Bonus food with time-slow power-up
+- ⏱️ Time manipulation mechanics
 - 📱 Mobile-friendly controls
-- 🏆 Score tracking
-- ⌨️ Keyboard controls
-- 🎭 Smooth animations
+- 🏆 Score tracking and level system
+- ⌨️ Keyboard controls (Arrow Keys / WASD)
+- 🎭 Smooth animations and visual effects
+- 🎮 Play/Pause functionality
 
 ---
 
@@ -51,17 +53,25 @@ Guide your worm to eat food and grow longer without colliding with the walls or 
    - Change direction using keyboard controls
 
 2. **Eating Food**
-   - Worms grow when they eat food
-   - Each food item increases your score
+   - Worms grow when they eat red food (🍎)
+   - Each red food increases your score by 10 × Level
+   - Bonus golden food (⭐) grants time-slow ability for 5 seconds
+   - Bonus food awards 50 × Level points
    - New food appears randomly after being eaten
 
-3. **Collision**
+3. **Power-ups**
+   - **⭐ Bonus Food (Golden Star)** - Activates time-slow mode
+   - When collected, the game slows down 2x for 5 seconds
+   - Appears randomly (15% chance) after eating regular food
+   - Perfect for dodging tight situations!
+
+4. **Collision**
    - Avoid hitting the walls of the game area
    - Don't collide with your own body
    - Game ends on collision
 
-4. **Difficulty**
-   - Game speed increases as your score grows
+5. **Difficulty**
+   - Game speed increases as you level up (every 5 foods eaten)
    - Longer worms are harder to control
    - Challenge yourself for high scores!
 
@@ -73,7 +83,9 @@ Guide your worm to eat food and grow longer without colliding with the walls or 
 | Move Down | ↓ or S |
 | Move Left | ← or A |
 | Move Right | → or D |
-| Pause | P or Space |
+| Pause/Resume | P |
+| Start Game | Click "Start Game" button |
+| Restart | Click "Restart Game" button |
 
 ---
 
@@ -142,8 +154,10 @@ google-chrome worm.html
 ## 📁 File Structure
 
 ```
-worm-game/
-├── 📄 worm.html          # Main HTML file
+Game4.py/
+├── 📄 worm.html          # Main HTML file with UI
+├── 🎨 worm.css           # Styling and animations
+├── 🔧 worm.js            # Game logic and mechanics
 └── 📖 README.md          # This file
 ```
 
@@ -151,13 +165,15 @@ worm-game/
 
 ## 🎨 Game Elements
 
-| Element | Description |
-|---------|-------------|
-| 🟢 Worm | Your player character that grows with each food |
-| 🍎 Food | Points to collect to grow and score |
-| ⬜ Walls | Game boundaries - don't touch! |
-| 📊 Score | Track your current score |
-| 🎚️ Level | Current difficulty level |
+| Element | Description | Points |
+|---------|-------------|--------|
+| 🐛 Worm | Your player character that grows with each food | - |
+| 🍎 Red Food | Regular food to collect and grow | 10 × Level |
+| ⭐ Golden Food | Bonus food that slows time for 5 seconds | 50 × Level |
+| ⬜ Walls | Game boundaries - don't touch! | Game Over |
+| 📊 Score | Track your current score | Increases per food |
+| 🎚️ Level | Current difficulty level (increases every 5 foods) | - |
+| 🐛 Length | Current worm length | - |
 
 ---
 
@@ -165,11 +181,14 @@ worm-game/
 
 1. **Plan Ahead** - Think about your next moves before making them
 2. **Keep Distance** - Maintain space between your head and body
-3. **Eat Efficiently** - Plan routes to collect food with minimal backtracking
-4. **Use Walls** - Sometimes walls can help you navigate safely
-5. **Slow and Steady** - In early levels, take your time to master controls
-6. **Corner Control** - Practice turning in tight spaces
-7. **Score Multiplier** - Longer worms = higher scores per food!
+3. **Catch Bonus Food** - Look for golden stars ⭐ to get a time-slow boost
+4. **Use Time Slow Wisely** - Use the 5-second slow mode to escape tight situations
+5. **Eat Efficiently** - Plan routes to collect food with minimal backtracking
+6. **Use Walls** - Sometimes walls can help you navigate safely
+7. **Slow and Steady** - In early levels, take your time to master controls
+8. **Corner Control** - Practice turning in tight spaces
+9. **Score Multiplier** - Longer worms and higher levels = higher scores per food!
+10. **Bonus Hunting** - Collect bonus food for a 5x score multiplier advantage!
 
 ---
 
@@ -228,13 +247,16 @@ Created with ❤️ by **Faiz Ahmad Khan**
 
 ## 🔮 Future Enhancements
 
-- [ ] Power-ups and special items
-- [ ] Multiple game modes
+- [ ] Additional power-ups (speed boost, shield, etc.)
+- [ ] Multiple game modes (Classic, Endless, Timed)
 - [ ] Obstacle-filled levels
 - [ ] Sound effects and background music
-- [ ] Leaderboard system
-- [ ] Different worm skins
-- [ ] Level progression
+- [ ] Leaderboard system with local storage
+- [ ] Different worm skins and themes
+- [ ] Level progression with unique challenges
+- [ ] Difficulty settings (Easy, Normal, Hard)
+- [ ] Multiplayer mode
+- [ ] Mobile app version
 
 ---
 
