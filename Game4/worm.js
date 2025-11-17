@@ -21,7 +21,7 @@ class WormGame {
         this.state = GameState.IDLE;
         this.score = 0;
         this.level = 1;
-        this.gameSpeed = 60; // milliseconds
+        this.gameSpeed = 120; // milliseconds
 
         // Worm segments - each segment is {x, y}
         this.worm = [
@@ -270,7 +270,7 @@ class WormGame {
 
     levelUp() {
         this.level++;
-        this.gameSpeed = Math.max(50, 100 - this.level * 10);
+        this.gameSpeed = Math.max(80, 150 - this.level * 10);
         clearInterval(this.gameLoopInterval);
         if (this.state === GameState.PLAYING) {
             this.gameLoopInterval = setInterval(() => this.update(), this.gameSpeed);
@@ -511,7 +511,7 @@ class WormGame {
     restart() {
         this.score = 0;
         this.level = 1;
-        this.gameSpeed = 100;
+        this.gameSpeed = 120;
         this.foodEaten = 0;
         this.worm = [
             { x: 10, y: 10 },
