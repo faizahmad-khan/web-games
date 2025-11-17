@@ -21,7 +21,7 @@ class WormGame {
         this.state = GameState.IDLE;
         this.score = 0;
         this.level = 1;
-        this.gameSpeed = 100; // milliseconds
+        this.gameSpeed = 60; // milliseconds
 
         // Worm segments - each segment is {x, y}
         this.worm = [
