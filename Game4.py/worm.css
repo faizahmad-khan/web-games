@@ -1,0 +1,260 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 700px;
+    width: 100%;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 25px;
+    border-bottom: 3px solid #667eea;
+    padding-bottom: 20px;
+}
+
+h1 {
+    color: #333;
+    font-size: 2.5em;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1em;
+}
+
+.label {
+    font-weight: bold;
+    color: #667eea;
+}
+
+#score,
+#length,
+#level {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #764ba2;
+    min-width: 40px;
+}
+
+.game-area {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+    background: linear-gradient(to bottom, #e8f4f8, #f0e8f8);
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+canvas {
+    background: linear-gradient(to bottom, #1a1a2e, #16213e);
+    border-radius: 10px;
+    display: block;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    cursor: none;
+}
+
+.game-over-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    z-index: 1000;
+}
+
+.game-over-screen.hidden {
+    display: none;
+}
+
+.game-over-content {
+    text-align: center;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    animation: slideInScale 0.3s ease-out;
+}
+
+@keyframes slideInScale {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.game-over-content h2 {
+    color: #ff6b6b;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.game-over-content p {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+#restartBtn {
+    margin-top: 20px;
+    padding: 12px 30px;
+    font-size: 1.1em;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#restartBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(102, 126, 234, 0.4);
+}
+
+#restartBtn:active {
+    transform: translateY(0);
+}
+
+.instructions {
+    background: #f8f9fa;
+    border-left: 4px solid #667eea;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.instructions h3 {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.instructions ul {
+    list-style: none;
+}
+
+.instructions li {
+    color: #555;
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+    font-size: 0.95em;
+}
+
+.instructions li:before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: #764ba2;
+    font-weight: bold;
+}
+
+.control-btn {
+    padding: 12px 25px;
+    font-size: 1em;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+#startBtn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    flex-grow: 1;
+}
+
+#startBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(102, 126, 234, 0.4);
+}
+
+#startBtn:active {
+    transform: translateY(0);
+}
+
+#pauseBtn {
+    background: #ff6b6b;
+    color: white;
+    flex-grow: 1;
+}
+
+#pauseBtn:hover {
+    background: #ff5252;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(255, 107, 107, 0.4);
+}
+
+#pauseBtn:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    canvas {
+        width: 100%;
+        height: auto;
+    }
+
+    .stats {
+        gap: 20px;
+    }
+
+    .stat {
+        font-size: 0.95em;
+    }
+
+    .instructions li {
+        font-size: 0.85em;
+    }
+}
