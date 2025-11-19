@@ -17,7 +17,7 @@
 
 <div align="center">
 
-> 📌 **Try the game directly or [open in fullscreen](https://htmlpreview.github.io/?https://github.com/faizahmad-khan/web-games/blob/main/Game3.py/snake_ladder.html)**
+> 📌 **Try the game directly or [open in fullscreen](https://htmlpreview.github.io/?https://github.com/faizahmad-khan/web-games/blob/main/Game3/snake_ladder.html)**
 
 </div>
 
