@@ -19,7 +19,7 @@
 
 <div align="center">
 
-> 📌 **Try the game directly or [open in fullscreen](https://htmlpreview.github.io/?https://github.com/faizahmad-khan/web-games/blob/main/Game4.py/worm.html)**
+> 📌 **Try the game directly or [open in fullscreen](https://htmlpreview.github.io/?https://github.com/faizahmad-khan/web-games/blob/main/Game4/worm.html)**
 
 </div>
 
