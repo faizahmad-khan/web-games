@@ -1,0 +1,11 @@
+body {
+    overflow: hidden;
+}
+
+canvas {
+    border: 1px solid #000;
+    display: block;
+    margin: 0 auto;
+    background-image: url('flappybird-background.png'); /* You'll need to create this image */
+    background-size: cover;
+}
