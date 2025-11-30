@@ -19,7 +19,7 @@
 
 <div align="center">
 
-> 📌 **Try the game directly below or [open in fullscreen](https://htmlpreview.github.io/?https://github.com/faizahmad-khan/web-games/blob/main/Game2/ludo.html)**
+> 📌 **Try the game directly below or [Play on Render](https://web-games-zpyo.onrender.com)**
 
 </div>
 
