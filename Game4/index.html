@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worm Game</title>
+    <link rel="stylesheet" href="worm.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐛 Worm Game 🐛</h1>
+            <div class="stats">
+                <div class="stat">
+                    <span class="label">Score:</span>
+                    <span id="score">0</span>
+                </div>
+                <div class="stat">
+                    <span class="label">Length:</span>
+                    <span id="length">3</span>
+                </div>
+                <div class="stat">
+                    <span class="label">Level:</span>
+                    <span id="level">1</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="game-area">
+            <canvas id="gameCanvas" width="600" height="400"></canvas>
+            <div id="gameOverScreen" class="game-over-screen hidden">
+                <div class="game-over-content">
+                    <h2>Game Over!</h2>
+                    <p id="finalScore">Final Score: 0</p>
+                    <p id="finalLength">Worm Length: 3</p>
+                    <button id="restartBtn">Restart Game</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h3>📋 How to Play</h3>
+            <ul>
+                <li><strong>Arrow Keys</strong> or <strong>WASD</strong> - Control the worm's direction</li>
+                <li>Eat the <span style="color: #ff6b6b;">🍎 red food</span> to grow and gain 10 points</li>
+                <li>Eat the <span style="color: #FFD700;">⭐ golden bonus food</span> to slow time for 5 seconds and gain 50 points</li>
+                <li>Don't hit the walls or yourself!</li>
+                <li>Game gets faster as you level up</li>
+                <li><strong>P</strong> - Pause/Resume</li>
+            </ul>
+        </div>
+
+        <button id="pauseBtn" class="control-btn">Pause</button>
+        <button id="startBtn" class="control-btn">Start Game</button>
+    </div>
+
+    <script src="worm.js"></script>
+</body>
+</html>
