@@ -17,7 +17,7 @@
 
 <div align="center">
 
-> 📌 **Try the game directly or [open in fullscreen](https://htmlpreview.github.io/?https://github.com/faizahmad-khan/web-games/blob/main/Game3/snake_ladder.html)**
+> 📌 **Try the game directly or <a href="https://snake-ladder-wxc8.onrender.com" target="_blank" style="display: inline-block; padding: 10px 20px; font-size: 1.2em; color: white; background-color: #4CAF50; border-radius: 8px; text-decoration: none; margin-top: 15px;">🎮 Play on Render</a>**
 
 </div>
 
