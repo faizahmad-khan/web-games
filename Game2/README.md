@@ -17,11 +17,9 @@
 
 ## 🎮 Live Preview
 
-<div align="center">
-
-> 📌 **Try the game directly below or [Play on Render](https://web-games-zpyo.onrender.com)**
-
-</div>
+> <a href="https://render.com/deploy?repo=https://github.com/faizahmad-khan/web-games/tree/main/Game3" target="_blank" style="display: inline-block; padding: 10px 20px; font-size: 1.2em; color: white; background-color: #6e00ff; border-radius: 10px; text-decoration: none; margin-top: 20px;">
+  <img src="https://render.com/images/deploy-to-render-button.svg" alt="Deploy to Render" style="height: 2.5em; vertical-align: middle; margin-right: 100px;">
+</a>
 
 ---
 
