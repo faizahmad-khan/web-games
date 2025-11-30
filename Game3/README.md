@@ -18,7 +18,9 @@
 <div align="center">
 <img src="https://via.placeholder.com/600x400?text=Snake+and+Ladder+Game" alt="Snake and Ladder Game Preview" style="width:100%; max-width:600px; border-radius: 8px; margin-bottom: 15px;">
 
-> 📌 **Try the game directly or <a href="https://snake-ladder-wxc8.onrender.com" target="_blank" style="display: inline-block; padding: 10px 20px; font-size: 1.2em; color: white; background-color: #4CAF50; border-radius: 8px; text-decoration: none; margin-top: 15px;">🎮 Play on Render</a>**
+> 📌 **Try the game directly**
+
+> <a href="https://snake-ladder-wxc8.onrender.com" target="_blank" style="display: inline-block; padding: 10px 20px; font-size: 1.2em; color: white; background-color: #4CAF50; border-radius: 8px; text-decoration: none; margin-top: 15px;">🎮 Play on Render</a>
 
 </div>
 
