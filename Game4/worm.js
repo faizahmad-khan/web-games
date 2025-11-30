@@ -65,6 +65,9 @@ class WormGame {
     }
 
     handleKeyDown(e) {
+        if (this.state === GameState.IDLE && ['arrowup', 'w', 'arrowdown', 's', 'arrowleft', 'a', 'arrowright', 'd'].includes(e.key.toLowerCase())) {
+            this.startGame();
+        }
         switch (e.key.toLowerCase()) {
             case 'arrowup':
             case 'w':
