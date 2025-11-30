@@ -20,7 +20,10 @@
 
 > 📌 **Try the game directly**
 
-> <a href="https://snake-ladder-wxc8.onrender.com" target="_blank" style="display: inline-block; padding: 10px 20px; font-size: 1.2em; color: white; background-color: #4CAF50; border-radius: 8px; text-decoration: none; margin-top: 15px;">🎮 Play on Render</a>
+> <a href="https://render.com/deploy?repo=https://github.com/faizahmad-khan/web-games/tree/main/Game3" target="_blank" style="display: inline-block; padding: 10px 20px; font-size: 1.2em; color: white; background-color: #6e00ff; border-radius: 8px; text-decoration: none; margin-top: 15px;">
+  <img src="https://render.com/images/deploy-to-render-button.svg" alt="Deploy to Render" style="height: 1.2em; vertical-align: middle; margin-right: 5px;">
+  Deploy to Render
+</a>
 
 </div>
 
