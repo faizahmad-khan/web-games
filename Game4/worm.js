@@ -78,6 +78,17 @@ class WormGame {
             this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
             this.audioInitialized = true;
         }
+        
+        // Resume the audio context if it's suspended (common on mobile browsers and GitHub Pages)
+        if (this.audioContext.state === 'suspended') {
+            this.audioContext.resume()
+                .then(() => {
+                    console.log("Audio context resumed successfully");
+                })
+                .catch((err) => {
+                    console.log("Failed to resume audio context:", err);
+                });
+        }
     }
 
     handleKeyDown(e) {
@@ -305,28 +316,68 @@ class WormGame {
         
         // Create and play audio object only when needed
         try {
-            this.gameOverAudio = new Audio('assets/indian-meme.mp3');
-            console.log("Audio object created, attempting to play");
-            this.gameOverAudio.currentTime = 0;
-            const playPromise = this.gameOverAudio.play();
-            
-            if (playPromise !== undefined) {
-                playPromise
-                    .then(() => {
-                        console.log("Audio played successfully");
-                    })
-                    .catch(error => {
-                        console.log("Audio play failed:", error);
-                        // Fallback: try to play after a small delay
-                        setTimeout(() => {
-                            if (this.gameOverAudio) {
-                                const retryPlay = this.gameOverAudio.play();
-                                if (retryPlay !== undefined) {
-                                    retryPlay.catch(err => console.log("Retry also failed:", err));
-                                }
-                            }
-                        }, 100);
-                    });
+            // Check if audio context is initialized before playing audio
+            if (this.audioInitialized || this.audioContext?.state === 'running') {
+                // Create audio element with the correct path for GitHub Pages
+                this.gameOverAudio = new Audio();
+                this.gameOverAudio.src = './assets/indian-meme.mp3';  // Use relative path with './'
+                this.gameOverAudio.preload = 'auto';
+                
+                // Load audio and play when ready
+                this.gameOverAudio.load();
+                
+                const playAudio = () => {
+                    this.gameOverAudio.currentTime = 0;
+                    const playPromise = this.gameOverAudio.play();
+                    
+                    if (playPromise !== undefined) {
+                        playPromise
+                            .then(() => {
+                                console.log("Audio played successfully");
+                            })
+                            .catch(error => {
+                                console.log("Audio play failed:", error);
+                                // Fallback: try to play after a small delay
+                                setTimeout(() => {
+                                    if (this.gameOverAudio) {
+                                        const retryPlay = this.gameOverAudio.play();
+                                        if (retryPlay !== undefined) {
+                                            retryPlay.catch(err => console.log("Retry also failed:", err));
+                                        }
+                                    }
+                                }, 100);
+                            });
+                    }
+                };
+                
+                // If audio is already loaded, play immediately
+                if (this.gameOverAudio.readyState >= 2) { // HAVE_CURRENT_DATA
+                    playAudio();
+                } else {
+                    // Otherwise, wait for the audio to load
+                    this.gameOverAudio.addEventListener('loadeddata', playAudio, { once: true });
+                }
+            } else {
+                console.log("Audio context not initialized, attempting to initialize now");
+                // Attempt to initialize audio context if not already done
+                this.setupAudioContext();
+                
+                // Set up a retry mechanism
+                setTimeout(() => {
+                    if (this.audioContext?.state === 'running') {
+                        this.gameOverAudio = new Audio();
+                        this.gameOverAudio.src = './assets/indian-meme.mp3';
+                        this.gameOverAudio.preload = 'auto';
+                        this.gameOverAudio.load();
+                        
+                        this.gameOverAudio.addEventListener('loadeddata', () => {
+                            this.gameOverAudio.currentTime = 0;
+                            this.gameOverAudio.play().catch(err => console.log("Delayed audio play also failed:", err));
+                        }, { once: true });
+                    } else {
+                        console.log("Audio context still not initialized after retry");
+                    }
+                }, 100);
             }
         } catch (e) {
             console.log("Error creating audio object:", e);
