@@ -48,6 +48,7 @@ class WormGame {
 
         // Initialize audio object reference but don't create it yet
         this.gameOverAudio = null;
+        this.audioInitialized = false;
 
         // Game loop variables
         this.lastRenderTime = 0;
@@ -75,6 +76,7 @@ class WormGame {
         // Create audio context on first user interaction to comply with autoplay policy
         if (this.audioContext === undefined) {
             this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            this.audioInitialized = true;
         }
     }
 
@@ -303,7 +305,7 @@ class WormGame {
         
         // Create and play audio object only when needed
         try {
-            this.gameOverAudio = new Audio('/Game4/assets/indian-meme.mp3');
+            this.gameOverAudio = new Audio('assets/indian-meme.mp3');
             console.log("Audio object created, attempting to play");
             this.gameOverAudio.currentTime = 0;
             const playPromise = this.gameOverAudio.play();
@@ -583,6 +585,8 @@ class WormGame {
             // Set to null to release the resource
             this.gameOverAudio = null;
         }
+        // Clear any pending audio
+        this.pendingGameOverAudio = false;
 
         clearInterval(this.gameLoopInterval);
         document.getElementById('gameOverScreen').classList.add('hidden');
