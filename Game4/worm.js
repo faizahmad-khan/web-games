@@ -320,7 +320,7 @@ class WormGame {
             if (this.audioInitialized || this.audioContext?.state === 'running') {
                 // Create audio element with the correct path for GitHub Pages
                 this.gameOverAudio = new Audio();
-                this.gameOverAudio.src = './assets/indian-meme.mp3';  // Use relative path with './'
+                this.gameOverAudio.src = './assets/audio.mp3'; // Use relative path with './'
                 this.gameOverAudio.preload = 'auto';
                 
                 // Load audio and play when ready
@@ -366,7 +366,7 @@ class WormGame {
                 setTimeout(() => {
                     if (this.audioContext?.state === 'running') {
                         this.gameOverAudio = new Audio();
-                        this.gameOverAudio.src = './assets/indian-meme.mp3';
+                        this.gameOverAudio.src = './assets/audio.mp3';
                         this.gameOverAudio.preload = 'auto';
                         this.gameOverAudio.load();
                         
