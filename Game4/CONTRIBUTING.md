@@ -104,7 +104,7 @@ Want to add features or fix bugs? Follow this process:
 # Fork repository on GitHub
 # Clone your fork
 git clone https://github.com/YOUR-USERNAME/web-games.git
-cd web-games/Game4.py
+cd web-games/Game4
 
 # Create feature branch
 git checkout -b feature/your-feature-name

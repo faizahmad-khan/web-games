@@ -10,25 +10,25 @@
 ### Option 1: Direct File Opening (Easiest)
 
 **Windows:**
-1. Navigate to the `Game4.py` folder
-2. Double-click `worm.html`
+1. Navigate to the `Game4` folder
+2. Double-click `index.html`
 3. Game opens in your default browser - Play! 🎮
 
 **Mac:**
-1. Navigate to the `Game4.py` folder
-2. Right-click `worm.html`
+1. Navigate to the `Game4` folder
+2. Right-click `index.html`
 3. Select "Open With" → Choose your browser
 4. Game starts immediately
 
 **Linux:**
 ```bash
 # Using xdg-open (default browser)
-xdg-open /path/to/worm.html
+xdg-open /path/to/index.html
 
 # Or with specific browser
-firefox /path/to/worm.html
-google-chrome /path/to/worm.html
-chromium /path/to/worm.html
+firefox /path/to/index.html
+google-chrome /path/to/index.html
+chromium /path/to/index.html
 ```
 
 ### Option 2: Using Git (For Developers)
@@ -36,55 +36,55 @@ chromium /path/to/worm.html
 ```bash
 # Clone the repository
 git clone https://github.com/faizahmad-khan/web-games.git
-cd web-games/Game4.py
+cd web-games/Game4
 
 # Open in browser
-open worm.html          # Mac
-xdg-open worm.html      # Linux
-start worm.html         # Windows (PowerShell)
+open index.html          # Mac
+xdg-open index.html      # Linux
+start index.html         # Windows (PowerShell)
 ```
 
 ### Option 3: Local Development Server
 
 **Using Python 3:**
 ```bash
-cd /path/to/Game4.py
+cd /path/to/Game4
 python -m http.server 8000
-# Then open: http://localhost:8000/worm.html
+# Then open: http://localhost:8000/index.html
 ```
 
 **Using Python 2:**
 ```bash
-cd /path/to/Game4.py
+cd /path/to/Game4
 python -m SimpleHTTPServer 8000
-# Then open: http://localhost:8000/worm.html
+# Then open: http://localhost:8000/index.html
 ```
 
 **Using Node.js (npm):**
 ```bash
-cd /path/to/Game4.py
+cd /path/to/Game4
 npx http-server
-# Then open: http://127.0.0.1:8080/worm.html
+# Then open: http://127.0.0.1:8080/index.html
 ```
 
 **Using PHP:**
 ```bash
-cd /path/to/Game4.py
+cd /path/to/Game4
 php -S localhost:8000
-# Then open: http://localhost:8000/worm.html
+# Then open: http://localhost:8000/index.html
 ```
 
 **Using Live Server (VS Code Extension):**
 1. Install "Live Server" extension in VS Code
-2. Right-click on `worm.html`
+2. Right-click on `index.html`
 3. Click "Open with Live Server"
 4. Browser opens automatically
 
 ## File Structure
 
 ```
-Game4.py/
-├── 📄 worm.html           # Main game HTML (2.2 KB)
+Game4/
+├── 📄 index.html           # Main game HTML (2.2 KB)
 ├── 🎨 worm.css            # Styling & animations (4.5 KB)
 ├── 🔧 worm.js             # Game logic (17.6 KB)
 ├── 📖 README.md           # Main documentation
@@ -127,7 +127,7 @@ Game4.py/
 5. Tap to play!
 
 ### Android
-1. Download `worm.html` or access via GitHub Pages
+1. Download `index.html` or access via GitHub Pages
 2. Open with any browser
 3. Tap menu → "Add to Home Screen"
 4. Choose a name
@@ -206,7 +206,7 @@ terser worm.js -o worm.min.js
 ```bash
 # Clone repository
 git clone https://github.com/faizahmad-khan/web-games.git
-cd web-games/Game4.py
+cd web-games/Game4
 
 # Open in editor
 code .              # VS Code
@@ -216,7 +216,7 @@ sublime .           # Sublime Text
 python -m http.server 8000
 
 # Open in browser
-open http://localhost:8000/worm.html
+open http://localhost:8000/index.html
 ```
 
 ### Git Workflow
@@ -241,13 +241,13 @@ git push origin feature/new-feature
 # Push to gh-pages branch
 git push origin main:gh-pages
 
-# Access at: https://faizahmad-khan.github.io/web-games/Game4.py/worm.html
+# Access at: https://faizahmad-khan.github.io/web-games/Game4/index.html
 ```
 
 ### 2. Netlify (Free)
 - Connect GitHub repository
 - Set build command: (none needed)
-- Set publish directory: ./Game4.py
+- Set publish directory: ./Game4
 - Deploy!
 
 ### 3. Vercel (Free)

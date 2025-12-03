@@ -459,7 +459,7 @@ Guide your worm to eat food and grow longer without colliding with the walls or 
 **Method 1: Quick Start (No Installation Required)**
 1. Download the files
 2. Navigate to `Game4/`
-3. Double-click `worm.html`
+3. Double-click `index.html`
 4. Start playing! 🎮
 
 **Method 2: Using a Local Server**
@@ -473,7 +473,7 @@ python -m SimpleHTTPServer 8000
 # Using Node.js
 npx http-server
 ```
-Then open `http://localhost:8000/worm.html` in your browser.
+Then open `http://localhost:8000/index.html` in your browser.
 
 #### 🎨 Game Elements
 
@@ -553,7 +553,7 @@ Then open `http://localhost:8000/worm.html` in your browser.
 #### 📁 File Structure
 ```
 Game4/
-├── 📄 worm.html          # Main HTML file with UI
+├── 📄 index.html          # Main HTML file with UI
 ├── 🎨 worm.css           # Styling and animations
 ├── 🔧 worm.js            # Game logic and mechanics
 └── 📖 README.md          # Game documentation
@@ -638,7 +638,7 @@ web-games/
 │   ├── snake_ladder.js            # Snake & Ladder (Logic)
 │   └── README.md                  # Game documentation
 ├── Game4/
-│   ├── worm.html                  # Worm Game (HTML)
+│   ├── index.html                  # Worm Game (HTML)
 │   ├── worm.css                   # Worm Game (Styles)
 │   ├── worm.js                    # Worm Game (Logic)
 │   ├── README.md                  # Game documentation

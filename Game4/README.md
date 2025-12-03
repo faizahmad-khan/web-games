@@ -19,7 +19,7 @@
 
 <div align="center">
 
-> 📌 **Try the game directly or [open in fullscreen](https://htmlpreview.github.io/?https://github.com/faizahmad-khan/web-games/blob/main/Game4/worm.html)**
+> 📌 **Try the game directly or [open in fullscreen](https://htmlpreview.github.io/?https://github.com/faizahmad-khan/web-games/blob/main/Game4/index.html)**
 
 </div>
 
@@ -100,7 +100,7 @@ Guide your worm to eat food and grow longer without colliding with the walls or 
    ```
 
 2. **Open in Browser**
-   - Simply double-click `worm.html`
+   - Simply double-click `index.html`
    - OR right-click → Open with → Your favorite browser
    - That's it! Start playing! 🎮
 
@@ -117,36 +117,36 @@ python -m SimpleHTTPServer 8000
 npx http-server
 ```
 
-Then open `http://localhost:8000/worm.html` in your browser.
+Then open `http://localhost:8000/index.html` in your browser.
 
 ---
 
 ## 🛠️ How to Run
 
 ### **For Windows:**
-1. Download `worm.html`
+1. Download `index.html`
 2. Double-click the file
 3. Your default browser will open with the game
 
 ### **For Mac:**
-1. Download `worm.html`
+1. Download `index.html`
 2. Right-click → Open With → Safari/Chrome/Firefox
 3. Game will load in your browser
 
 ### **For Linux:**
 ```bash
 # Open with default browser
-xdg-open worm.html
+xdg-open index.html
 
 # Or use a specific browser
-firefox worm.html
-google-chrome worm.html
+firefox index.html
+google-chrome index.html
 ```
 
 ### **For Mobile Devices:**
-1. Transfer `worm.html` to your phone
+1. Transfer `index.html` to your phone
 2. Use any file manager to navigate to the file
-3. Tap on `worm.html`
+3. Tap on `index.html`
 4. Choose "Open with Browser"
 
 ---
@@ -154,8 +154,8 @@ google-chrome worm.html
 ## 📁 File Structure
 
 ```
-Game4.py/
-├── 📄 worm.html          # Main HTML file with UI
+Game4/
+├── 📄 index.html          # Main HTML file with UI
 ├── 🎨 worm.css           # Styling and animations
 ├── 🔧 worm.js            # Game logic and mechanics
 └── 📖 README.md          # This file
