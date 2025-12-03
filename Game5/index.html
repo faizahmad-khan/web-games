@@ -2,24 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Flappy Bird Pro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Flappy Bird</title>
     <link rel="stylesheet" href="flappybird.css">
 </head>
 <body>
     <div id="game-container">
-        <canvas id="gameCanvas" width="300" height="500"></canvas>
-        <div id="score-board">Score: <span id="score">0</span></div>
-        <div id="start-screen">
-            <h1>Flappy Bird Pro</h1>
-            <button id="startButton">Start Game</button>
-        </div>
-        <div id="game-over-screen" class="hidden">
-            <h2>Game Over!</h2>
-            <p>Your Score: <span id="final-score">0</span></p>
-            <p>Previous Score: <span id="previous-score">0</span></p>
-            <p>High Score: <span id="high-score">0</span></p>
-            <button id="restartButton">Play Again</button>
+        <canvas id="gameCanvas" width="400" height="600"></canvas>
+        <div id="ui-container">
+            <div id="score">0</div>
+            <div id="high-score">High Score: <span id="high-score-value">0</span></div>
+            <div id="start-screen">
+                <h1>Flappy Bird</h1>
+                <p>Press SPACE or tap to fly</p>
+                <button id="start-btn">Start Game</button>
+            </div>
+            <div id="game-over" class="hidden">
+                <h2>Game Over!</h2>
+                <p>Score: <span id="final-score">0</span></p>
+                <p>High Score: <span id="game-over-high-score">0</span></p>
+                <button id="restart-btn">Play Again</button>
+            </div>
         </div>
     </div>
     <script src="flappybird.js"></script>

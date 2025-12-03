@@ -1,45 +1,43 @@
-# Flappy Bird Pro
+# Simple Flappy Bird Game
 
-Welcome to Flappy Bird Pro, a modern take on the classic Flappy Bird game built with HTML, CSS, and JavaScript!
-
-## How to Play
-
-1.  **Start the Game**: Click the "Start Game" button on the start screen.
-2.  **Control the Bird**: Press the **Spacebar** to make the bird flap its wings and move upwards. 
-3.  **Avoid Pipes**: Navigate your bird through the gaps in the pipes. 
-4.  **Score Points**: Each pair of pipes you successfully pass earns you one point.
-5.  **Game Over**: The game ends if the bird collides with a pipe or the top/bottom edges of the screen.
+A clean and visually appealing implementation of the classic Flappy Bird game using HTML, CSS, and JavaScript.
 
 ## Features
 
-*   **Dynamic Difficulty**: The game speed gradually increases as you score more points.
-*   **High Score Tracking**: Your highest score is saved locally in your browser.
-*   **Previous Score**: Your score from the last game is also displayed.
-*   **Responsive Design**: Enjoy the game on various screen sizes (though best experienced on desktop).
+- Simple and intuitive gameplay
+- Attractive visual design with gradients and animations
+- Responsive layout that works on different screen sizes
+- Score tracking system
+- Start and restart functionality
+- Mobile-friendly controls (tap to flap)
 
-## Local Development
+## How to Play
 
-To run this game locally:
+1. Click the "Start Game" button to begin
+2. Press SPACEBAR or tap/click to make the bird flap and avoid pipes
+3. Navigate through the gaps in the pipes to earn points
+4. The game ends when the bird collides with a pipe or the ground
+5. Click "Play Again" to restart after game over
 
-1.  Clone this repository:
-    `git clone https://github.com/faizahmad-khan/web-games.git`
-2.  Navigate to the game directory:
-    `cd web-games/Game5`
-3.  Open `flappybird.html` in your web browser.
+## Files
 
-## Assets
+- `index.html` - Main HTML structure
+- `flappybird.css` - Styling and layout
+- `flappybird.js` - Game logic and mechanics
 
-This game uses placeholder images. For the full visual experience, you will need to add the following image files to the `Game5/` directory:
+## Controls
 
-*   `flappybird.png`
-*   `pipeNorth.png`
-*   `pipeSouth.png`
-*   `background.png`
+- **Desktop**: Spacebar or mouse click to flap
+- **Mobile**: Tap the screen to flap
 
-## Contributing
+## Requirements
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute to this project.
+- Modern web browser with JavaScript support
+- Canvas element support
 
-## License
+## Customization
 
-This project is licensed under the terms specified in the [LICENSE](LICENSE) file.
+The game can be easily customized by modifying:
+- Colors in the CSS file
+- Game parameters (gravity, speed, pipe gaps) in the JavaScript file
+- Visual elements and styling
