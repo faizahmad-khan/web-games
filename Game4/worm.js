@@ -46,11 +46,15 @@ class WormGame {
         this.originalGameSpeed = this.gameSpeed;
         this.timeSlowMultiplier = 2; // Game runs 2x slower
 
+        // Initialize audio object reference but don't create it yet
+        this.gameOverAudio = null;
+
         // Game loop variables
         this.lastRenderTime = 0;
         this.gameLoopInterval = null;
 
         this.setupEventListeners();
+        this.setupAudioContext(); // Initialize audio context on user interaction
         this.render();
     }
 
@@ -62,6 +66,16 @@ class WormGame {
         document.getElementById('startBtn').addEventListener('click', () => this.startGame());
         document.getElementById('pauseBtn').addEventListener('click', () => this.togglePause());
         document.getElementById('restartBtn').addEventListener('click', () => this.restart());
+        
+        // Canvas click for audio context
+        this.canvas.addEventListener('click', () => this.setupAudioContext());
+    }
+    
+    setupAudioContext() {
+        // Create audio context on first user interaction to comply with autoplay policy
+        if (this.audioContext === undefined) {
+            this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        }
     }
 
     handleKeyDown(e) {
@@ -284,6 +298,37 @@ class WormGame {
         this.state = GameState.GAME_OVER;
         clearInterval(this.gameLoopInterval);
         this.showGameOverScreen();
+        
+        console.log("Game Over triggered - attempting to play audio");
+        
+        // Create and play audio object only when needed
+        try {
+            this.gameOverAudio = new Audio('/Game4/assets/indian-meme.mp3');
+            console.log("Audio object created, attempting to play");
+            this.gameOverAudio.currentTime = 0;
+            const playPromise = this.gameOverAudio.play();
+            
+            if (playPromise !== undefined) {
+                playPromise
+                    .then(() => {
+                        console.log("Audio played successfully");
+                    })
+                    .catch(error => {
+                        console.log("Audio play failed:", error);
+                        // Fallback: try to play after a small delay
+                        setTimeout(() => {
+                            if (this.gameOverAudio) {
+                                const retryPlay = this.gameOverAudio.play();
+                                if (retryPlay !== undefined) {
+                                    retryPlay.catch(err => console.log("Retry also failed:", err));
+                                }
+                            }
+                        }, 100);
+                    });
+            }
+        } catch (e) {
+            console.log("Error creating audio object:", e);
+        }
     }
 
     showGameOverScreen() {
@@ -527,6 +572,17 @@ class WormGame {
         this.bonusFood = null;
         this.isTimeSlow = false;
         this.state = GameState.IDLE;
+
+        console.log("Restart function called - stopping audio");
+        
+        // Stop game over audio if it exists
+        if (this.gameOverAudio) {
+            console.log("Stopping audio on restart");
+            this.gameOverAudio.pause();
+            this.gameOverAudio.currentTime = 0;
+            // Set to null to release the resource
+            this.gameOverAudio = null;
+        }
 
         clearInterval(this.gameLoopInterval);
         document.getElementById('gameOverScreen').classList.add('hidden');
