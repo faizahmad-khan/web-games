@@ -12,18 +12,18 @@ const gameState = {
 // Game Configuration
 const COLORS = ['red', 'green', 'yellow', 'blue'];
 const START_POSITIONS = {
-    green: 0,   // Green start - arrow pointing RIGHT (→)
-    yellow: 13, // Yellow start - arrow pointing DOWN (↓)
-    blue: 26,   // Blue start - arrow pointing LEFT (←)
-    red: 39     // Red start - arrow pointing UP (↑)
+    red: 0,     // Red start - arrow pointing RIGHT (→)
+    green: 13,  // Green start - arrow pointing DOWN (↓)
+    yellow: 26, // Yellow start - arrow pointing LEFT (←)
+    blue: 39    // Blue start - arrow pointing UP (↑)
 };
 
-const SAFE_POSITIONS = [0, 9, 13, 22, 26, 35, 39, 48]; // Star positions on board
+const SAFE_POSITIONS = [0, 9, 13, 22, 26, 35, 39, 48]; // Star positions on board - updated for traditional layout
 const HOME_STRETCH_ENTRY = {
-    green: 51,  // Entry before position 0
-    yellow: 12, // Entry before position 13
-    blue: 25,   // Entry before position 26
-    red: 38     // Entry before position 39
+    red: 51,    // Entry before position 0
+    green: 12,  // Entry before position 13
+    yellow: 25, // Entry before position 26
+    blue: 38    // Entry before position 39
 };
 
 // Initialize game
@@ -197,14 +197,14 @@ function createBoard() {
 }
 
 function getPathInfo(row, col) {
-    // Ludo board is 15x15 grid (matching reference image exactly)
+    // Ludo board is 15x15 grid (matching traditional Ludo layout)
     // Main path: 52 positions around the board (0-51)
-    // GREEN (top-left), YELLOW (top-right), RED (bottom-left), BLUE (bottom-right)
+    // RED (top-left), GREEN (top-right), YELLOW (bottom-right), BLUE (bottom-left)
     
     // Complete path based on reference image
     const pathMap = [
-        // GREEN section - starts with arrow pointing RIGHT (→)
-        [6, 1],   // 0 - GREEN START (arrow →)
+        // RED section - starts with arrow pointing RIGHT (→)
+        [6, 1],   // 0 - RED START (arrow →)
         [6, 2],   // 1
         [6, 3],   // 2
         [6, 4],   // 3
@@ -218,8 +218,8 @@ function getPathInfo(row, col) {
         [0, 6],   // 11 - corner, turn right
         [0, 7],   // 12
         
-        // YELLOW section - starts with arrow pointing DOWN (↓)
-        [1, 7],   // 13 - YELLOW START (arrow ↓)
+        // GREEN section - starts with arrow pointing DOWN (↓)
+        [1, 7],   // 13 - GREEN START (arrow ↓)
         [2, 7],   // 14
         [3, 7],   // 15
         [4, 7],   // 16
@@ -233,8 +233,8 @@ function getPathInfo(row, col) {
         [6, 13],  // 24 - corner, turn down
         [7, 13],  // 25
         
-        // BLUE section - starts with arrow pointing LEFT (←)
-        [7, 12],  // 26 - BLUE START (arrow ←)
+        // YELLOW section - starts with arrow pointing LEFT (←)
+        [7, 12],  // 26 - YELLOW START (arrow ←)
         [7, 11],  // 27
         [7, 10],  // 28
         [7, 9],   // 29
@@ -248,8 +248,8 @@ function getPathInfo(row, col) {
         [13, 7],  // 37 - corner, turn left
         [13, 6],  // 38
         
-        // RED section - starts with arrow pointing UP (↑)
-        [12, 6],  // 39 - RED START (arrow ↑)
+        // BLUE section - starts with arrow pointing UP (↑)
+        [12, 6],  // 39 - BLUE START (arrow ↑)
         [11, 6],  // 40
         [10, 6],  // 41
         [9, 6],   // 42
@@ -275,19 +275,19 @@ function getPathInfo(row, col) {
                 color: null
             };
             
-            // Mark starting positions based on reference image
-            if (i === 0) {  // Green start (→)
-                info.start = true;
-                info.color = 'green';
-            } else if (i === 13) {  // Yellow start (↓)
-                info.start = true;
-                info.color = 'yellow';
-            } else if (i === 26) {  // Blue start (←)
-                info.start = true;
-                info.color = 'blue';
-            } else if (i === 39) {  // Red start (↑)
+            // Mark starting positions based on traditional Ludo layout
+            if (i === 0) { // Red start (→)
                 info.start = true;
                 info.color = 'red';
+            } else if (i === 13) {  // Green start (↓)
+                info.start = true;
+                info.color = 'green';
+            } else if (i === 26) {  // Yellow start (←)
+                info.start = true;
+                info.color = 'yellow';
+            } else if (i === 39) {  // Blue start (↑)
+                info.start = true;
+                info.color = 'blue';
             }
             
             // Mark safe positions (stars)
@@ -299,40 +299,40 @@ function getPathInfo(row, col) {
         }
     }
     
-    // Home stretches (colored paths to center) - based on reference image
+    // Home stretches (colored paths to center) - based on traditional Ludo layout
+    // Red home stretch (column 7, rows 3-7) - going UP towards center
+    if (col === 7 && row >= 3 && row <= 7) {
+        return {
+            type: 'homeStretch',
+            color: 'red',
+            homePosition: 7 - row
+        };
+    }
+    
     // Green home stretch (row 6, columns 6-10) - going RIGHT towards center
     if (row === 6 && col >= 6 && col <= 10) {
-        return { 
-            type: 'homeStretch', 
-            color: 'green', 
-            homePosition: col - 6 
+        return {
+            type: 'homeStretch',
+            color: 'green',
+            homePosition: col - 6
         };
     }
     
     // Yellow home stretch (column 6, rows 6-10) - going DOWN towards center
     if (col === 6 && row >= 6 && row <= 10) {
-        return { 
-            type: 'homeStretch', 
-            color: 'yellow', 
-            homePosition: row - 6 
+        return {
+            type: 'homeStretch',
+            color: 'yellow',
+            homePosition: row - 6
         };
     }
     
     // Blue home stretch (row 7, columns 3-7) - going LEFT towards center
     if (row === 7 && col >= 3 && col <= 7) {
-        return { 
-            type: 'homeStretch', 
-            color: 'blue', 
-            homePosition: 7 - col 
-        };
-    }
-    
-    // Red home stretch (column 7, rows 3-7) - going UP towards center
-    if (col === 7 && row >= 3 && row <= 7) {
-        return { 
-            type: 'homeStretch', 
-            color: 'red', 
-            homePosition: 7 - row 
+        return {
+            type: 'homeStretch',
+            color: 'blue',
+            homePosition: 7 - col
         };
     }
     
