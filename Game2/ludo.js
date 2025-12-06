@@ -300,39 +300,39 @@ function getPathInfo(row, col) {
     }
     
     // Home stretches (colored paths to center) - based on traditional Ludo layout
-    // Red home stretch (column 7, rows 3-7) - going UP towards center
-    if (col === 7 && row >= 3 && row <= 7) {
+    // Red home stretch (column 7, rows 2-6) - going UP towards center
+    if (col === 7 && row >= 2 && row <= 6) {
         return {
             type: 'homeStretch',
             color: 'red',
-            homePosition: 7 - row
+            homePosition: 6 - row
         };
     }
     
-    // Green home stretch (row 6, columns 6-10) - going RIGHT towards center
-    if (row === 6 && col >= 6 && col <= 10) {
+    // Green home stretch (row 6, columns 7-11) - going RIGHT towards center
+    if (row === 6 && col >= 7 && col <= 11) {
         return {
             type: 'homeStretch',
             color: 'green',
-            homePosition: col - 6
+            homePosition: col - 7
         };
     }
     
-    // Yellow home stretch (column 6, rows 6-10) - going DOWN towards center
-    if (col === 6 && row >= 6 && row <= 10) {
+    // Yellow home stretch (column 6, rows 7-11) - going DOWN towards center
+    if (col === 6 && row >= 7 && row <= 11) {
         return {
             type: 'homeStretch',
             color: 'yellow',
-            homePosition: row - 6
+            homePosition: row - 7
         };
     }
     
-    // Blue home stretch (row 7, columns 3-7) - going LEFT towards center
-    if (row === 7 && col >= 3 && col <= 7) {
+    // Blue home stretch (row 7, columns 2-6) - going LEFT towards center
+    if (row === 7 && col >= 2 && col <= 6) {
         return {
             type: 'homeStretch',
             color: 'blue',
-            homePosition: 7 - col
+            homePosition: 6 - col
         };
     }
     
@@ -556,7 +556,7 @@ function animatePieceMovement(player, piece, pieceIndex, diceValue) {
             let newPosition = piece.position + 1;
             
             // Check if entering home stretch
-            if (piece.position <= homeEntry && newPosition > homeEntry) {
+            if (piece.position < homeEntry && newPosition >= homeEntry) {
                 piece.inHomeStretch = true;
                 piece.homeStretchPosition = 0;
             } else if (newPosition > 51) {
