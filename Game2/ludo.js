@@ -157,6 +157,7 @@ function startGame() {
     gameState.currentPlayerIndex = 0;
     
     updateCurrentPlayerDisplay();
+    updateScoreBoard(); // Initialize score board
     showMessage(`${getCurrentPlayer().color.toUpperCase()}'s turn! Roll the dice.`);
     
     // Setup dice roll
@@ -377,7 +378,7 @@ function rollDice() {
             
             handleDiceRoll(finalValue);
         }
-    }, 100);
+    }, 10);
 }
 
 function handleDiceRoll(value) {
@@ -534,6 +535,8 @@ function animatePieceMovement(player, piece, pieceIndex, diceValue) {
             if (piece.finished && player.pieces.every(p => p.finished)) {
                 showMessage(`🏆 ${player.color.toUpperCase()} WINS THE GAME! 🏆`);
                 document.getElementById('rollDiceBtn').disabled = true;
+                // Add victory celebration animation
+                celebrateVictory(player.color);
                 return;
             }
             
@@ -566,12 +569,24 @@ function animatePieceMovement(player, piece, pieceIndex, diceValue) {
                 piece.position = newPosition;
             }
         } else if (piece.inHomeStretch) {
-            piece.homeStretchPosition += 1;
-            
-            // Check if reached center (finished)
-            if (piece.homeStretchPosition >= 5) {
-                piece.finished = true;
-                showMessage(`${player.color.toUpperCase()} piece reached home! 🎉`);
+            // Check if the move would overshoot the home position (position 5)
+            const newPosition = piece.homeStretchPosition + stepsRemaining;
+            if (newPosition > 5) {
+                showMessage(`${player.color.toUpperCase()} piece cannot move, would overshoot home!`);
+                // Move back to the original position
+                piece.homeStretchPosition = piece.homeStretchPosition - diceValue + stepsRemaining;
+                updateBoard();
+                setTimeout(() => nextTurn(), 1500);
+                return;
+            } else {
+                piece.homeStretchPosition = newPosition;
+                
+                // Check if reached center (finished)
+                if (piece.homeStretchPosition >= 5) {
+                    piece.finished = true;
+                    showMessage(`${player.color.toUpperCase()} piece reached home! 🎉`);
+                    updateScoreBoard(); // Update score when a piece reaches home
+                }
             }
         }
         
@@ -612,7 +627,19 @@ function checkForCapture(currentPlayer, movedPiece) {
                     piece.isHome = true;
                     piece.inHomeStretch = false;
                     piece.homeStretchPosition = -1;
+                    // Add bounce animation to captured piece
+                    const capturedPieceElement = document.querySelector(`.path-cell[data-position="${position}"] .${player.color}-piece`);
+                    if (capturedPieceElement) {
+                        capturedPieceElement.classList.add('captured');
+                        setTimeout(() => {
+                            if (capturedPieceElement.parentNode) {
+                                capturedPieceElement.parentNode.removeChild(capturedPieceElement);
+                            }
+                        }, 600); // Match animation duration
+                    }
+                    
                     showMessage(`${currentPlayer.color.toUpperCase()} captured ${player.color.toUpperCase()}'s piece!`);
+                    updateScoreBoard(); // Update score after capture
                 }
             });
         }
@@ -672,6 +699,81 @@ function nextTurn() {
     showMessage(`${getCurrentPlayer().color.toUpperCase()}'s turn! Roll the dice.`);
     document.getElementById('rollDiceBtn').disabled = false;
     document.getElementById('diceResult').textContent = '';
+}
+
+function celebrateVictory(winnerColor) {
+    // Add celebration animation to the board
+    const board = document.querySelector('.board');
+    board.classList.add('victory');
+    
+    // Create confetti effect
+    for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+            createConfetti();
+        }, i * 100);
+    }
+    
+    // Add pulsing effect to winner's pieces
+    const winnerPieces = document.querySelectorAll(`.piece.${winnerColor}-piece`);
+    winnerPieces.forEach(piece => {
+        piece.classList.add('victory-piece');
+    });
+    
+    // Add special styling to the center star
+    const centerStar = document.querySelector('.center-star');
+    if (centerStar) {
+        centerStar.classList.add('victory-star');
+    }
+}
+
+function createConfetti() {
+    const board = document.querySelector('.board');
+    const confetti = document.createElement('div');
+    confetti.className = 'confetti';
+    confetti.style.left = Math.random() * 100 + '%';
+    confetti.style.top = '-10%';
+    confetti.style.backgroundColor = ['#e74c3c', '#2ecc71', '#f1c40f', '#3498db'][Math.floor(Math.random() * 4)];
+    confetti.style.width = Math.random() * 10 + 5 + 'px';
+    confetti.style.height = Math.random() * 10 + 5 + 'px';
+    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+    confetti.style.position = 'absolute';
+    confetti.style.zIndex = '100';
+    confetti.style.opacity = '0.8';
+    confetti.style.animation = `confetti-fall ${Math.random() * 3 + 2}s linear forwards`;
+    
+    board.appendChild(confetti);
+    
+    // Remove confetti after animation
+    setTimeout(() => {
+        if (confetti.parentNode) {
+            confetti.parentNode.removeChild(confetti);
+        }
+    }, 5000);
+}
+
+function updateScoreBoard() {
+    const scoreBoard = document.getElementById('playerScores');
+    if (!scoreBoard) return;
+    
+    scoreBoard.innerHTML = '';
+    
+    gameState.players.forEach(player => {
+        const scoreItem = document.createElement('div');
+        scoreItem.className = 'score-item';
+        
+        // Count how many pieces have reached home
+        const finishedPieces = player.pieces.filter(piece => piece.finished).length;
+        
+        scoreItem.innerHTML = `
+            <span>
+                <span class="score-color" style="background-color: ${player.color}"></span>
+                ${player.color.toUpperCase()}
+            </span>
+            <span class="score-value">${finishedPieces}/4</span>
+        `;
+        
+        scoreBoard.appendChild(scoreItem);
+    });
 }
 
 function showMessage(message) {
