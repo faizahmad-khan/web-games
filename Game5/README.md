@@ -4,7 +4,7 @@ A clean and visually appealing implementation of the classic Flappy Bird game us
 
 ## Play Now
 
-🎮 **[Play the game directly](./index.html)** or try it below:
+🎮 **[Play Online](https://web-games-3r9f.onrender.com/Game5/index.html)** | **[Local Version](./index.html)**
 
 <div align="center">
   <iframe src="./index.html" width="450" height="700" frameborder="0" style="border: 2px solid #333; border-radius: 8px;"></iframe>
