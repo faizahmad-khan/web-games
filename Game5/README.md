@@ -1,12 +1,14 @@
 # Simple Flappy Bird Game
 
-![Flappy Bird Preview](assets/flappybird.png)
-
 A clean and visually appealing implementation of the classic Flappy Bird game using HTML, CSS, and JavaScript.
 
-## Live Preview
+## Play Now
 
-You can play the game online [here](https://faizahmadkhan.github.io/web-games/Game5/).
+🎮 **[Play the game directly](./index.html)** or try it below:
+
+<div align="center">
+  <iframe src="./index.html" width="450" height="700" frameborder="0" style="border: 2px solid #333; border-radius: 8px;"></iframe>
+</div>
 
 ## Features
 
