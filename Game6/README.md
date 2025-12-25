@@ -25,12 +25,14 @@ A classic Rock Paper Scissors game built with HTML, CSS, and JavaScript. Play ag
 - HTML5
 - CSS3 (with gradients and animations)
 - JavaScript (ES6)
-
 ## How to Run
 
 1. Clone or download this repository
 2. Navigate to the Game6 directory
 3. Open `index.html` in your preferred web browser
+
+Alternatively, you can play the game directly by opening the [game page](index.html).
+
 
 Alternatively, you can run a local server:
 
