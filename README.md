@@ -18,7 +18,7 @@
 
 ## 🎮 Games Overview
 
-This repository contains **4 exciting games** that you can play right in your browser or on desktop:
+This repository contains **5 exciting games** that you can play right in your browser or on desktop:
 
 | Game | Type | Tech | Players | Status |
 |------|------|------|---------|--------|
@@ -26,6 +26,7 @@ This repository contains **4 exciting games** that you can play right in your br
 | 🎲 **Ludo Game** | Browser Game | HTML/CSS/JS | 2-4 | ✅ Ready |
 | 🐍 **Snake & Ladder** | Browser Game | HTML/CSS/JS | 1-4 | ✅ Ready |
 | 🪱 **Worm Game** | Browser Game | HTML/CSS/JS | 1 | ✅ Ready |
+| ✂️ **Rock Paper Scissors** | Browser Game | HTML/CSS/JS | 1 | ✅ Ready |
 
 ---
 
@@ -798,12 +799,13 @@ For questions, issues, or feedback:
 <div align="center">
 
 ### 🎮 Ready to Play? Let's Begin! 🎮
-
 **Choose Your Game:**
 - 🎲 [Number Guessing](Game1/) - Quick Python game
 - 🎲 [Ludo](Game2/) - Classic board game
 - 🐍 [Snake & Ladder](Game3/) - Board game adventure
 - 🪱 [Worm](Game4/) - Action-packed gameplay
+- ✂️ [Rock Paper Scissors](Game6/) - Classic hand game
+
 
 **Made with 💖 using HTML5, CSS3, JavaScript, and Python**
 
