@@ -42,10 +42,14 @@ python -m http.server 8000
 ```
 
 Then visit `http://localhost:8000` in your browser.
+## Live Preview
+
+Play the game directly: [Rock Paper Scissors Game](index.html)
 
 ## Screenshots
 
 ![Rock Paper Scissors Game](screenshot.png) <!-- Placeholder - add actual screenshot if available -->
+
 
 ## Contributing
 
