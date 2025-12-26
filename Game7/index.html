@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Playground - Game 7</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 Image Playground</h1>
+            <p>Create custom images by selecting environment and objects</p>
+        </header>
+        
+        <main>
+            <section class="controls">
+                <div class="control-group">
+                    <label for="environment">Environment:</label>
+                    <select id="environment">
+                        <option value="forest">Forest</option>
+                        <option value="beach">Beach</option>
+                        <option value="city">City</option>
+                        <option value="space">Space</option>
+                        <option value="underwater">Underwater</option>
+                        <option value="mountain">Mountain</option>
+                        <option value="desert">Desert</option>
+                        <option value="jungle">Jungle</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label for="object">Object:</label>
+                    <select id="object">
+                        <option value="car">Car</option>
+                        <option value="house">House</option>
+                        <option value="animal">Animal</option>
+                        <option value="person">Person</option>
+                        <option value="tree">Tree</option>
+                        <option value="building">Building</option>
+                        <option value="vehicle">Vehicle</option>
+                        <option value="furniture">Furniture</option>
+                    </select>
+                </div>
+                
+                <button id="generate-btn">Generate Image</button>
+            </section>
+            
+            <section class="preview">
+                <div id="image-container">
+                    <div id="placeholder">Your generated image will appear here</div>
+                    <img id="generated-image" src="" alt="Generated image" style="display: none;">
+                </div>
+                <div class="loading" id="loading" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Generating your image...</p>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>Game 7 - Image Playground | Create amazing images with AI</p>
+        </footer>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
