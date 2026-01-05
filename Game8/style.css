@@ -1,0 +1,83 @@
+body {
+    font-family: 'Courier New', monospace;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #fff;
+}
+
+.game-container {
+    text-align: center;
+    background: rgba(0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    border: 2px solid #00ffff;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin: 0 0 20px;
+    text-shadow: 0 10px #00ffff;
+    color: #00ffff;
+    letter-spacing: 3px;
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.score, .level, .lines {
+    background: rgba(0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #00ffff;
+}
+
+#tetris {
+    border: 2px solid #00ffff;
+    background: #000;
+    display: block;
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.controls {
+    margin: 15px 0;
+    font-size: 0.9em;
+    line-height: 1.4;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #00ffff;
+}
+
+button {
+    background: #00ffff;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Courier New', monospace;
+}
+
+button:hover {
+    background: #00e6e6;
+    box-shadow: 0 0 10px #00ffff;
+    transform: scale(1.05);
+}
+
+button:active {
+    transform: scale(0.95);
+}
