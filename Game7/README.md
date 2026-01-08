@@ -28,7 +28,16 @@ A web-based image generation playground that allows users to create custom image
 - `index.html` - Main HTML structure
 - `style.css` - Styling and layout
 - `script.js` - Interactive functionality
+- `config.js` - API configuration
+
+## Setup
+
+To use the full functionality with AI image generation:
+
+1. Get an API token from [Hugging Face](https://huggingface.co/settings/tokens)
+2. Add your token to the `config.js` file in the `huggingFace.token` field
+3. The application will use fallback images if no token is provided
 
 ## Note
 
-This is a frontend demonstration using sample images. In a production environment, this would connect to an AI image generation API such as DALL-E, Stable Diffusion, or similar services.
+This application connects to the Hugging Face API for AI image generation, with fallback images provided when the API is not configured or unavailable.
