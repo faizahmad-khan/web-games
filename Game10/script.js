@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Disable matched cards
     function disableCards() {
         flippedCards.forEach(card => {
-            card.classList.add('matched');
+            card.classList.add('matched', 'flipped');
             card.removeEventListener('click', flipCard);
         });
         
