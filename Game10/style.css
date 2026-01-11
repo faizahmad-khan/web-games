@@ -64,7 +64,8 @@ h1 {
 }
 
 .card.matched {
-    opacity: 0.7;
+    opacity: 1;
+    transform: rotateY(180deg);
 }
 
 .front, .back {
