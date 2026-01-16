@@ -19,7 +19,8 @@ A classic Tic Tac Toe game implemented in HTML, CSS, and JavaScript. Two players
 3. The first player to get 3 of their marks in a row (horizontally, vertically, or diagonally) wins
 4. If all squares are filled with no winner, the game ends in a draw
 5. Use the "Reset Game" button to clear the board and start a new round
-6. Use the "New Game" button to reset scores and start completely fresh
+6. Use the "Another Round" button after a game ends to continue playing without resetting scores
+7. Use the "New Game" button to reset scores and start completely fresh
 
 ## Controls
 
@@ -45,7 +46,7 @@ A classic Tic Tac Toe game implemented in HTML, CSS, and JavaScript. Two players
 - **Current Player Indicator**: Shows whose turn it is
 - **Score Tracker**: Keeps track of wins for both players and draws
 - **Message Display**: Shows win/draw messages
-- **Control Buttons**: Reset and New Game buttons
+- **Control Buttons**: Reset, Another Round, and New Game buttons
 
 ## Implementation Details
 
