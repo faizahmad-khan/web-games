@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const scoreXElement = document.getElementById('score-x');
     const scoreOElement = document.getElementById('score-o');
     const scoreDrawElement = document.getElementById('score-draw');
+    const anotherRoundButton = document.getElementById('another-round-btn');
 
     // Winning combinations
     const winPatterns = [
@@ -34,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         resetButton.addEventListener('click', resetGame);
         newGameButton.addEventListener('click', newGame);
+        anotherRoundButton.addEventListener('click', anotherRound);
 
         updateScoreDisplay();
     }
@@ -82,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function endGame(message, className) {
         gameActive = false;
-        messageElement.textContent = message;
+        document.querySelector('.message-text').textContent = message;
         messageElement.className = `message ${className}`;
         messageElement.classList.remove('hidden');
     }
@@ -101,10 +103,16 @@ document.addEventListener('DOMContentLoaded', () => {
         currentPlayerDisplay.textContent = currentPlayer;
     }
 
+    function anotherRound() {
+        resetGame();
+        messageElement.classList.add('hidden');
+    }
+
     function newGame() {
         resetGame();
         scores = { X: 0, O: 0, draw: 0 };
         updateScoreDisplay();
+        messageElement.classList.add('hidden');
     }
 
     function updateScoreDisplay() {

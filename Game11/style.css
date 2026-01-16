@@ -161,6 +161,10 @@ button {
     padding: 15px;
     border-radius: 8px;
     animation: pop 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
 }
 
 .message.winner {
@@ -171,6 +175,23 @@ button {
 .message.draw {
     background-color: #9b59b6;
     color: white;
+}
+
+.another-round-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    align-self: center;
+}
+
+.another-round-btn:hover {
+    background-color: #2980b9;
 }
 
 .hidden {
