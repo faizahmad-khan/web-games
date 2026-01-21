@@ -26,7 +26,7 @@ h1 {
 .game-info {
     display: flex;
     justify-content: space-between;
-    width: 600px;
+    width: 540px;
     margin-bottom: 10px;
     color: white;
     font-size: 1.2rem;
@@ -121,14 +121,12 @@ h1 {
     z-index: 3;
 }
 
-.power-pellet {
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    background-color: #FFCC00;
-    border-radius: 50%;
-    z-index: 3;
-    animation: pulse 1s infinite;
+/* Remove the unnecessary power-pellet class as we're drawing directly on canvas */
+
+/* We're not using these CSS classes since drawing is done on canvas */
+.pacman, .ghost, .dot, .power-pellet {
+    /* These are not used since we draw on canvas */
+    display: none;
 }
 
 @keyframes pulse {
