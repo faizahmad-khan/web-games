@@ -21,8 +21,8 @@ let dots = [];
 let powerPellets = [];
 let ghosts = [];
 let pacman = {
-    x: 300,
-    y: 400,
+    x: 30,  // Changed from 300 to 30 to start in the maze
+    y: 30,  // Changed from 400 to 30 to start in the maze
     radius: 10,
     speed: 3,
     direction: 'right',
@@ -35,26 +35,26 @@ let pacman = {
 const maze = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1],
+    [1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1],
     [1, 2, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 2, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1],
-    [1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1],
-    [1, 1, 1, 0, 1, 1, 1, 3, 1, 1, 0, 1, 1, 1, 1, 1],
+    [1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+    [1, 1, 1, 0, 1, 1, 1, 3, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1],
     [3, 3, 3, 1, 0, 1, 3, 3, 3, 3, 3, 3, 1, 0, 1, 3, 3, 3],
     [1, 1, 1, 0, 1, 3, 1, 1, 1, 1, 3, 0, 1, 1, 1, 1, 1, 1],
     [3, 3, 3, 3, 0, 3, 3, 1, 3, 3, 1, 3, 3, 0, 3, 3, 3, 3],
-    [1, 1, 0, 1, 3, 1, 1, 1, 1, 1, 3, 0, 1, 1, 1, 1, 1],
+    [1, 1, 0, 1, 3, 1, 1, 1, 1, 1, 3, 0, 1, 1, 1, 1, 1, 1],
     [3, 3, 3, 1, 0, 1, 3, 3, 3, 3, 3, 3, 1, 0, 1, 3, 3, 3],
     [1, 1, 1, 1, 0, 1, 3, 1, 1, 1, 1, 1, 3, 0, 1, 1, 1, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1],
     [1, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 1],
     [1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1],
     [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ];
 
 // Initialize game
@@ -86,7 +86,7 @@ function initGame() {
     
     // Reset Pacman position
     pacman.x = 30;
-    pacman.y = 400;
+    pacman.y = 30;
     pacman.direction = 'right';
     pacman.nextDirection = 'right';
     
@@ -114,7 +114,7 @@ function drawMaze() {
                 ctx.strokeRect(x, y, 30, 30);
             } else if (maze[row][col] === 3) { // Empty space
                 ctx.fillStyle = '#000';
-                ctx.fillRect(x, y, 30);
+                 ctx.fillRect(x, y, 30, 30);
             }
         }
     }
@@ -233,9 +233,18 @@ function movePacman() {
         }
     }
     
-    // Wrap around tunnel
-    if (pacman.x < 0) pacman.x = canvas.width;
-    else if (pacman.x > canvas.width) pacman.x = 0;
+    // Wrap around tunnel (only horizontally at specific rows - check if we're in a tunnel row)
+    // Tunnel rows would be ones where the leftmost and rightmost cells are 3 (empty space)
+    const currentRow = Math.floor(pacman.y / 30);
+    if (currentRow >= 0 && currentRow < maze.length) {
+        const leftCell = maze[currentRow][0];
+        const rightCell = maze[currentRow][maze[currentRow].length - 1];
+        
+        if (leftCell === 3 && rightCell === 3) { // Both sides are tunnels
+            if (pacman.x < -pacman.radius) pacman.x = canvas.width + pacman.radius;
+            else if (pacman.x > canvas.width + pacman.radius) pacman.x = -pacman.radius;
+        }
+    }
     
     // Handle dot collection
     dots.forEach(dot => {
@@ -305,9 +314,17 @@ function moveGhosts() {
             ghost.direction = possibleDirections[Math.floor(Math.random() * possibleDirections.length)];
         }
         
-        // Wrap around tunnel
-        if (ghost.x < 0) ghost.x = canvas.width;
-        else if (ghost.x > canvas.width) ghost.x = 0;
+        // Wrap around tunnel (only horizontally at specific rows - check if we're in a tunnel row)
+        const currentRow = Math.floor(ghost.y / 30);
+        if (currentRow >= 0 && currentRow < maze.length) {
+            const leftCell = maze[currentRow][0];
+            const rightCell = maze[currentRow][maze[currentRow].length - 1];
+            
+            if (leftCell === 3 && rightCell === 3) { // Both sides are tunnels
+                if (ghost.x < -10) ghost.x = canvas.width + 10;
+                else if (ghost.x > canvas.width + 10) ghost.x = -10;
+            }
+        }
     });
 }
 
@@ -325,7 +342,7 @@ function checkCollisions() {
             } else {
                 // Reset positions
                 pacman.x = 30;
-                pacman.y = 400;
+                pacman.y = 30;
                 ghosts[0].x = 300; ghosts[0].y = 200;
                 ghosts[1].x = 270; ghosts[1].y = 200;
                 ghosts[2].x = 330; ghosts[2].y = 200;
