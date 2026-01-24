@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maze Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Maze Game</h1>
+        <div class="game-info">
+            <div class="moves">Moves: <span id="move-count">0</span></div>
+            <button id="reset-btn">Reset Maze</button>
+        </div>
+        <canvas id="maze-canvas" width="600" height="400"></canvas>
+        <div class="instructions">
+            <p>Use arrow keys or WASD to navigate the maze. Find the path to the green destination!</p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
