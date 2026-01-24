@@ -30,6 +30,7 @@ This repository contains **5 exciting games** that you can play right in your br
 | 🐍 **Snake & Ladder** | Browser Game | HTML/CSS/JS | 1-4 | ✅ Ready |
 | 🪱 **Worm Game** | Browser Game | HTML/CSS/JS | 1 | ✅ Ready |
 | ✂️ **Rock Paper Scissors** | Browser Game | HTML/CSS/JS | 1 | ✅ Ready |
+| 🧩 **Maze Game** | Browser Game | HTML/CSS/JS | 1 | ✅ Ready |
 
 ---
 
@@ -799,6 +800,95 @@ For questions, issues, or feedback:
 
 ---
 
+### 🧩 Game 12: Maze Game - Classic Pathfinding Challenge
+
+**📍 Location**: `Game12/`
+
+#### 🎮 Game Overview
+A challenging maze game where you need to navigate through a randomly generated maze to find the path from the start to the destination. Test your spatial reasoning and problem-solving skills!
+
+#### ⭐ Features
+- 🧩 Randomly generated mazes using depth-first search algorithm
+- 🎯 Start and destination markers for clear objectives
+- 📊 Move counter to track your efficiency
+- 🔄 Reset functionality to generate new mazes
+- 📱 Responsive design that works on desktop and mobile
+- 🖱️ Keyboard controls (arrow keys or WASD) for precise movement
+- 📱 Touch controls for mobile (swipe to move)
+- 🎨 Colorful visuals with distinct start, path, wall, and destination areas
+- 🎉 Victory celebration when reaching the destination
+
+#### 🎮 How to Play
+
+##### 🎯 Game Objective
+Navigate from the yellow start point to the green destination by finding the correct path through the maze.
+
+##### 📋 Game Rules
+1. **Movement**
+   - Use arrow keys or WASD to move your character (blue circle)
+   - Move up, down, left, or right through the green pathways
+   - Avoid the red walls which block your path
+
+2. **Goal**
+   - Reach the green destination square in the bottom-right corner
+   - Find the path with as few moves as possible
+   - Your move count is displayed at the top of the screen
+
+3. **Controls**
+   - **Arrow Keys**: Move in four directions
+   - **WASD**: Alternative movement keys
+   - **Swipe** (mobile): Swipe in the direction you want to move
+   - **Reset Button**: Generate a new random maze
+
+4. **Victory**
+   - When you reach the destination, a congratulatory message appears
+   - Shows your total number of moves
+   - Option to play again with a new maze
+
+#### 🎨 Visual Elements
+
+| Element | Color | Description |
+|---------|-------|-------------|
+| Player | Blue Circle | Your character that moves through the maze |
+| Path | Green Squares | Valid walkways through the maze |
+| Wall | Red Squares | Impassable barriers that block movement |
+| Start | Yellow Square | Beginning position (top-left corner) |
+| Destination | Dark Green Square | Goal location (bottom-right corner) |
+
+#### 🛠️ Technical Details
+
+- **Maze Generation**: Uses recursive backtracking algorithm to create perfect mazes
+- **Canvas Rendering**: HTML5 Canvas for smooth graphics rendering
+- **Responsive Design**: Works on various screen sizes
+- **Touch Support**: Swipe gestures for mobile gameplay
+- **Performance**: Efficient algorithms for real-time gameplay
+
+#### 💡 Pro Tips & Strategies
+
+**Maze Solving Techniques:**
+1. **Wall Follower**: Keep one hand on a wall and follow it through the maze
+2. **Dead End Elimination**: Mark dead ends to avoid revisiting them
+3. **Visualization**: Look ahead to plan your route before moving
+4. **Efficiency**: Try to minimize backtracking for fewer moves
+
+**General Tips:**
+- Start by exploring systematically from the beginning
+- Pay attention to the layout before making moves
+- Remember that each maze is randomly generated
+- Try to find the most direct path to minimize moves
+
+#### 🌐 Browser Compatibility
+
+| Browser | Supported | Version |
+|---------|-----------|---------|
+| Chrome | ✅ | 90+ |
+| Firefox | ✅ | 88+ |
+| Safari | ✅ | 14+ |
+| Edge | ✅ | 90+ |
+| Opera | ✅ | 76+ |
+
+---
+
 <div align="center">
 
 ### 🎮 Ready to Play? Let's Begin! 🎮
@@ -808,6 +898,7 @@ For questions, issues, or feedback:
 - 🐍 [Snake & Ladder](Game3/) - Board game adventure
 - 🪱 [Worm](Game4/) - Action-packed gameplay
 - ✂️ [Rock Paper Scissors](Game6/) - Classic hand game
+- 🧩 [Maze Game](Game12/) - Pathfinding challenge
 
 
 **Made with 💖 using HTML5, CSS3, JavaScript, and Python**

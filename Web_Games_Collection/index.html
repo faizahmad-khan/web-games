@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Games Collection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #030014;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --primary-glow: #8b5cf6; /* Violet Glow */
+            --secondary-glow: #3b82f6; /* Blue Glow */
+            --text-main: #ffffff;
+            --text-secondary: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+            min-height: 100vh;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Subtle background glow */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3.5em;
+            font-weight: 700;
+            margin-bottom: 60px;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+        
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            padding-bottom: 40px;
+        }
+        
+        .game-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        /* The magical glow hover effect */
+        .game-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            padding: 2px;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.5;
+            transition: opacity 0.4s ease;
+            pointer-events: none; /* Ensures clicks pass through */
+        }
+        
+        .game-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(139, 92, 246, 0.3);
+            box-shadow: 0 20px 40px -15px rgba(139, 92, 246, 0.2);
+        }
+        
+        .game-card:hover::after {
+            opacity: 1;
+        }
+
+        .game-card a {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .game-header {
+            padding: 25px 25px 15px 25px;
+            background: transparent;
+        }
+        
+        .game-header h2 {
+            font-size: 1.6em;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+        }
+        
+        .game-body {
+            padding: 0 25px 25px 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        
+        .game-body p {
+            color: var(--text-secondary);
+            font-size: 0.95em;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+        
+        /* Converted to a display class rather than a button tag */
+        .play-button {
+            display: block;
+            width: 100%;
+            padding: 14px 0;
+            background: linear-gradient(90deg, #1e1b4b 0%, #312e81 100%);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            color: #c7d2fe;
+            border-radius: 12px;
+            font-weight: 600;
+            text-align: center; /* Needed for span/div */
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85em;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .game-card:hover .play-button {
+            background: var(--primary-glow);
+            color: white;
+            border-color: var(--primary-glow);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .footer {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid var(--card-border);
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            .games-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Web Games Collection</h1>
+        
+        <div class="games-grid">
+            <div class="game-card">
+                <a href="../Game4/index.html">
+                    <div class="game-header">
+                        <h2>🐛 Worm Game</h2>
+                    </div>
+                    <div class="game-body">
+                        <p>Guide your worm to collect food and grow as long as possible. Avoid walls and don't collide with yourself!</p>
+                        <span class="play-button">Play Now</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="game-card">
+                <a href="../Game3/index.html">
+                    <div class="game-header">
+                        <h2>🎲 Snake & Ladder</h2>
+                    </div>
+                    <div class="game-body">
+                        <p>A classic board game! Roll the dice and race to the top. Watch out for snakes and enjoy the ladders!</p>
+                        <span class="play-button">Play Now</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="game-card">
+                <a href="../Game2/index.html">
+                    <div class="game-header">
+                        <h2>🎯 Ludo Game</h2>
+                    </div>
+                    <div class="game-body">
+                        <p>The classic Indian board game. Race your tokens to the finish line and be the first to win!</p>
+                        <span class="play-button">Play Now</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="game-card">
+                <a href="../Game5/index.html">
+                    <div class="game-header">
+                        <h2>🐦 Flappy Bird</h2>
+                    </div>
+                    <div class="game-body">
+                        <p>Navigate through pipes without hitting them! Test your reflexes and aim for the highest score possible.</p>
+                        <span class="play-button">Play Now</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="game-card">
+                <a href="../Game6/index.html">
+                    <div class="game-header">
+                        <h2>✂️ Rock Paper Scissors</h2>
+                    </div>
+                    <div class="game-body">
+                        <p>Challenge the computer in the classic game of Rock, Paper, Scissors! Test your strategy and luck.</p>
+                        <span class="play-button">Play Now</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="game-card">
+                <a href="../Game8/index.html">
+                    <div class="game-header">
+                        <h2>🧩 Tetris</h2>
+                    </div>
+                    <div class="game-body">
+                        <p>The classic puzzle game! Arrange falling blocks to complete lines and earn points. How long can you survive?</p>
+                        <span class="play-button">Play Now</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="game-card">
+                <a href="../Game9/index.html">
+                    <div class="game-header">
+                        <h2>🟡 Pacman</h2>
+                    </div>
+                    <div class="game-body">
+                        <p>The classic arcade game! Navigate through the maze, eat all the dots, and avoid the ghosts. Use power pellets to turn the tables!</p>
+                        <span class="play-button">Play Now</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="game-card">
+                <a href="../Game10/index.html">
+                    <div class="game-header">
+                        <h2>🧠 Memory Card Game</h2>
+                    </div>
+                    <div class="game-body">
+                        <p>Test your memory skills! Find matching pairs of cards with the least number of moves. Perfect for sharpening your mind.</p>
+                        <span class="play-button">Play Now</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="game-card">
+                <a href="../Game11/index.html">
+                    <div class="game-header">
+                        <h2>❌ Tic Tac Toe</h2>
+                    </div>
+                    <div class="game-body">
+                        <p>The classic X and O game! Challenge a friend or play against the computer. Get three in a row to win!</p>
+                        <span class="play-button">Play Now</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="game-card">
+                <a href="../Game12/index.html">
+                    <div class="game-header">
+                        <h2>🧩 Maze Game</h2>
+                    </div>
+                    <div class="game-body">
+                        <p>Navigate through randomly generated mazes! Find the path from start to finish with the fewest moves possible.</p>
+                        <span class="play-button">Play Now</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Web Games Collection</strong></p>
+            <p>Designed by Faiz Ahmad Khan</p>
+        </div>
+    </div>
+</body>
+</html>
