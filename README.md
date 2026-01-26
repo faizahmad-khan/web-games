@@ -11,7 +11,11 @@
 **A collection of fun and interactive games built with modern web technologies and Python! 🎯**
 
 ## 🌐 Live Demo
+<<<<<<< HEAD
 **Play all games together on our live website: [https://web-games-collection.onrender.com](https://web-games-collection.onrender.com) 🚀**
+=======
+**Play all games together on our live website: (https://web-games-collections.onrender.com) 🚀**
+>>>>>>> 01034411b0912e7d6cd1cf1c5f7684c989b4a097
 
 [🎮 Games Overview](#-games-overview) • [📖 Quick Start](#-quick-start) • [🎯 Game Details](#-game-details) • [🛠️ Installation](#-installation) • [🤝 Contributing](#-contributing)
 
