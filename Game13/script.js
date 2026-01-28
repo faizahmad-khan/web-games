@@ -4,6 +4,7 @@ let guessedLetters = [];
 let incorrectGuesses = 0;
 const maxIncorrectGuesses = 6;
 let gameActive = true;
+let gamesWon = 0; // Track number of games won for level progression
 
 // Word bank for the game
 const wordBank = [
@@ -59,17 +60,51 @@ function updateWordDisplay() {
     // Check if the player has won
     if (!display.includes('_')) {
         gameActive = false;
-        gameMessage.textContent = 'Congratulations! You won!';
+        gamesWon++; // Increment the games won counter
+        gameMessage.textContent = `Congratulations! You won Level ${gamesWon}!`;
         gameMessage.classList.add('winner');
         
         // Disable all alphabet buttons
         disableAllAlphabetButtons();
+        
+        // Add next level button if not already added
+        addNextLevelButton();
     }
+}
+
+// Add next level button after winning
+function addNextLevelButton() {
+    // Remove any existing next level button
+    const existingNextBtn = document.getElementById('nextLevelButton');
+    if (existingNextBtn) {
+        existingNextBtn.remove();
+    }
+    
+    // Create next level button
+    const nextLevelButton = document.createElement('button');
+    nextLevelButton.id = 'nextLevelButton';
+    nextLevelButton.classList.add('next-level-btn');
+    nextLevelButton.textContent = 'Next Level';
+    nextLevelButton.addEventListener('click', startNextLevel);
+    
+    // Insert after the restart button
+    restartButton.insertAdjacentElement('afterend', nextLevelButton);
+}
+
+// Start next level
+function startNextLevel() {
+    // Remove the next level button
+    const nextLevelButton = document.getElementById('nextLevelButton');
+    if (nextLevelButton) {
+        nextLevelButton.remove();
+    }
+    // Keep the gamesWon counter and start a new game
+    initGame();
 }
 
 // Update the incorrect letters display
 function updateIncorrectLettersDisplay() {
-    incorrectLettersDisplay.textContent = guessedLetters.filter(letter => 
+    incorrectLettersDisplay.textContent = guessedLetters.filter(letter =>
         !word.includes(letter)
     ).join(', ');
 }
@@ -125,6 +160,9 @@ function handleLetterGuess(letter) {
             
             // Disable all alphabet buttons
             disableAllAlphabetButtons();
+            
+            // Add next level button after losing too
+            addNextLevelButton();
         }
     }
 }
@@ -220,7 +258,10 @@ function drawHangman() {
 }
 
 // Event listener for the restart button
-restartButton.addEventListener('click', initGame);
+restartButton.addEventListener('click', () => {
+    gamesWon = 0; // Reset the level counter when manually restarting
+    initGame();
+});
 
 // Initialize the game when the page loads
 window.onload = initGame;
