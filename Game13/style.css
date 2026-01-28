@@ -1,0 +1,175 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 15px;
+    padding: 30px;
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #ffcc00;
+    text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+}
+
+p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    color: #ddd;
+}
+
+.hangman-display {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+}
+
+#hangmanCanvas {
+    background: #111;
+    border-radius: 10px;
+    border: 2px solid #444;
+}
+
+.word-display {
+    margin: 30px 0;
+}
+
+#wordPlaceholder {
+    font-size: 2.5rem;
+    letter-spacing: 15px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.incorrect-letters {
+    font-size: 1.2rem;
+    margin: 20px 0;
+    color: #ff6b6b;
+}
+
+.alphabet-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    max-width: 600px;
+    margin: 30px auto;
+}
+
+.alphabet-btn {
+    background: linear-gradient(to bottom, #4a90e2, #2a5cb0);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.alphabet-btn:hover {
+    background: linear-gradient(to bottom, #5aa0f0, #3a6cc0);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+}
+
+.alphabet-btn:disabled {
+    background: #666;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.game-controls {
+    margin: 20px 0;
+}
+
+#restartButton {
+    background: linear-gradient(to bottom, #ff6b6b, #d32f2f);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+#restartButton:hover {
+    background: linear-gradient(to bottom, #ff7b7b, #e33e3e);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+}
+
+.message {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 20px;
+    min-height: 40px;
+    color: #4caf50;
+}
+
+.winner {
+    color: #4caf50;
+    animation: celebrate 0.5s ease infinite alternate;
+}
+
+.loser {
+    color: #f44336;
+    animation: shake 0.5s ease infinite alternate;
+}
+
+@keyframes celebrate {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(5px); }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    #wordPlaceholder {
+        font-size: 1.8rem;
+        letter-spacing: 10px;
+    }
+    
+    .alphabet-container {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
