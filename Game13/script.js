@@ -20,6 +20,60 @@ const wordBank = [
     'MINDFULNESS', 'VEGAN', 'CROWDFUNDING', 'DISRUPTIVE', 'ANALYTICS'
 ];
 
+// Hints for each word
+const wordHints = {
+    'JAVASCRIPT': 'A popular high-level programming language commonly used for web development, enabling interactive features on websites and running on both client and server sides.',
+    'PYTHON': 'A versatile and beginner-friendly programming language known for its clean syntax, widely used in data science, artificial intelligence, web development, and automation.',
+    'COMPUTER': 'An electronic device that processes data and performs calculations at high speeds, capable of storing information and executing programmed instructions.',
+    'PROGRAMMING': 'The process of creating instructions for computers to follow, involving writing code in various languages to build software applications and solve problems.',
+    'ALGORITHM': 'A step-by-step procedure or formula for solving a problem or completing a task, essential in computer science for efficient data processing and decision making.',
+    'FUNCTION': 'A reusable block of code designed to perform a specific task, which can accept input parameters and return output values in programming.',
+    'VARIABLE': 'A named storage location in programming that holds data which can be modified during program execution, with different types like numbers, strings, or booleans.',
+    'STRING': 'A data type representing a sequence of characters or text in programming, commonly used for storing and manipulating textual information.',
+    'ARRAY': 'A data structure that stores multiple elements of the same type in a contiguous memory location, accessible through index positions starting from zero.',
+    'OBJECT': 'A fundamental data structure in programming that groups related data and functions together, containing properties and methods that define its characteristics and behaviors.',
+    'HANGMAN': 'A classic word-guessing game where players try to figure out a hidden word by suggesting letters, with limited wrong guesses before losing.',
+    'GUESS': 'The act of estimating or attempting to identify something without complete information, often used in games and problem-solving scenarios.',
+    'LETTER': 'A character from an alphabet used in written language, serving as the basic unit for forming words and communicating ideas.',
+    'WORD': 'A unit of language consisting of one or more letters that conveys meaning, functioning as the building block of sentences and communication.',
+    'GAME': 'A structured activity or competition involving rules, challenges, and objectives, played for entertainment, education, or skill development.',
+    'DEVELOPER': 'A professional who designs, creates, and maintains software applications using programming languages and development tools to solve real-world problems.',
+    'CODE': 'Written instructions in a programming language that computers can interpret and execute to perform specific tasks or create applications.',
+    'SYNTAX': 'The set of rules that define how programs must be written in a specific programming language, including proper structure, punctuation, and keyword usage.',
+    'DEBUG': 'The process of identifying, analyzing, and removing errors or bugs from software code to ensure it runs correctly and efficiently.',
+    'LOOP': 'A programming construct that repeatedly executes a block of code until a specified condition is met, essential for automating repetitive tasks.',
+    'CONDITIONAL': 'A programming statement that executes different code blocks based on whether certain conditions are true or false, enabling decision-making in programs.',
+    'OPERATOR': 'A symbol or keyword in programming that performs operations on values or variables, such as arithmetic, comparison, or logical operations.',
+    'METHOD': 'A function associated with an object or class in programming that defines behaviors or actions that can be performed on that object.',
+    'CLASS': 'A blueprint or template in object-oriented programming that defines the structure and behavior of objects, including their properties and methods.',
+    'FRAMEWORK': 'A pre-built software platform providing structure and tools for developing applications more efficiently, offering reusable components and standardized patterns.',
+    'BLOCKCHAIN': 'A distributed digital ledger technology that records transactions across multiple computers in a secure, transparent, and immutable way, powering cryptocurrencies.',
+    'CHATBOT': 'An artificial intelligence program designed to simulate human conversation through text or voice, used for customer service, information retrieval, and automated assistance.',
+    'METAVERSE': 'A collective virtual shared space combining augmented reality, virtual reality, and the internet, where users interact through digital avatars in immersive environments.',
+    'CRYPTOCURRENCY': 'A digital or virtual currency secured by cryptography, operating independently of central banks and enabling decentralized peer-to-peer transactions.',
+    'ARTIFICIAL': 'Created by humans rather than occurring naturally, often used in the context of artificial intelligence which mimics human cognitive functions.',
+    'MACHINE': 'A device or system that performs tasks automatically or with mechanical power, in computing often refers to machine learning algorithms.',
+    'NEURAL': 'Related to nerve cells or neurons, commonly used in neural networks which are computing systems inspired by biological brain structures for pattern recognition.',
+    'QUANTUM': 'Related to the smallest units of energy and matter, in computing refers to quantum computers that use quantum mechanics for unprecedented processing power.',
+    'STARTUP': 'A newly established business venture typically focused on developing innovative products or services, often in the technology sector with high growth potential.',
+    'INNOVATION': 'The process of creating new ideas, methods, or products that bring positive change and improvement, driving progress in technology and society.',
+    'VIRAL': 'Content that spreads rapidly and widely across the internet through social sharing, capturing massive attention and engagement in a short time.',
+    'INFLUENCER': 'A person with significant social media following who shapes opinions and purchasing decisions of their audience through content creation and recommendations.',
+    'PODCAST': 'A digital audio series available for streaming or download, covering various topics through episodic content that listeners can enjoy on-demand.',
+    'STREAMING': 'The continuous transmission of audio or video content over the internet, allowing real-time consumption without downloading the entire file first.',
+    'SUSTAINABLE': 'Practices or products designed to meet present needs without compromising future generations, focusing on environmental protection and resource conservation.',
+    'ELECTRIC': 'Powered by electricity rather than fossil fuels, commonly referring to vehicles and devices that are more environmentally friendly and efficient.',
+    'AUTONOMOUS': 'Operating independently without human intervention, often describing self-driving vehicles and automated systems that make decisions using artificial intelligence.',
+    'BIOMETRIC': 'Biological measurements and characteristics used for identification and access control, including fingerprints, facial recognition, and iris scans.',
+    'CYBERSECURITY': 'The practice of protecting computer systems, networks, and data from digital attacks, unauthorized access, and security breaches.',
+    'WELLNESS': 'A holistic approach to health focusing on physical, mental, and emotional well-being through healthy lifestyle choices and self-care practices.',
+    'MINDFULNESS': 'The practice of being fully present and engaged in the current moment, paying attention to thoughts and feelings without judgment for mental clarity.',
+    'VEGAN': 'A lifestyle and diet that excludes all animal products, including meat, dairy, and eggs, often adopted for ethical, environmental, or health reasons.',
+    'CROWDFUNDING': 'A method of raising money for projects or ventures by collecting small contributions from a large number of people, typically through online platforms.',
+    'DISRUPTIVE': 'Innovation that significantly alters or replaces existing industries, technologies, or business models, creating new markets and value networks.',
+    'ANALYTICS': 'The systematic analysis of data using statistical and computational methods to discover patterns, trends, and insights for informed decision-making.'
+};
+
 // DOM elements
 const wordPlaceholder = document.getElementById('wordPlaceholder');
 const incorrectLettersDisplay = document.getElementById('incorrectLettersDisplay');
@@ -28,6 +82,7 @@ const restartButton = document.getElementById('restartButton');
 const gameMessage = document.getElementById('gameMessage');
 const canvas = document.getElementById('hangmanCanvas');
 const ctx = canvas.getContext('2d');
+const hintDisplay = document.getElementById('hintDisplay');
 
 // Initialize the game
 function initGame() {
@@ -49,6 +104,9 @@ function initGame() {
     
     // Display incorrect letters
     updateIncorrectLettersDisplay();
+    
+    // Display the hint for the current word
+    updateHintDisplay();
     
     // Generate alphabet buttons
     generateAlphabetButtons();
@@ -112,6 +170,13 @@ function updateIncorrectLettersDisplay() {
     incorrectLettersDisplay.textContent = guessedLetters.filter(letter =>
         !word.includes(letter)
     ).join(', ');
+}
+
+// Update the hint display
+function updateHintDisplay() {
+    if (hintDisplay && wordHints[word]) {
+        hintDisplay.textContent = wordHints[word];
+    }
 }
 
 // Generate alphabet buttons
