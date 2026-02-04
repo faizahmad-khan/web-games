@@ -25,7 +25,7 @@
 
 ## 🎮 Games Overview
 
-This repository contains **5 exciting games** that you can play right in your browser or on desktop:
+This repository contains **14 exciting games** that you can play right in your browser or on desktop:
 
 | Game | Type | Tech | Players | Status |
 |------|------|------|---------|--------|
@@ -33,7 +33,16 @@ This repository contains **5 exciting games** that you can play right in your br
 | 🎲 **Ludo Game** | Browser Game | HTML/CSS/JS | 2-4 | ✅ Ready |
 | 🐍 **Snake & Ladder** | Browser Game | HTML/CSS/JS | 1-4 | ✅ Ready |
 | 🪱 **Worm Game** | Browser Game | HTML/CSS/JS | 1 | ✅ Ready |
+| 🐦 **Flappy Bird** | Browser Game | HTML/CSS/JS | 1 | ✅ Ready |
 | ✂️ **Rock Paper Scissors** | Browser Game | HTML/CSS/JS | 1 | ✅ Ready |
+| 🎨 **Image Playground** | Browser Game | HTML/CSS/JS | 1 | ✅ Ready |
+| 🧱 **Tetris** | Browser Game | HTML/CSS/JS | 1 | ✅ Ready |
+| 👻 **Pac-Man** | Browser Game | HTML/CSS/JS | 1 | ✅ Ready |
+| 🃏 **Memory Card** | Browser Game | HTML/CSS/JS | 1 | ✅ Ready |
+| ❌ **Tic Tac Toe** | Browser Game | HTML/CSS/JS | 2 | ✅ Ready |
+| 🌀 **Maze Game** | Browser Game | HTML/CSS/JS | 1 | ✅ Ready |
+| 📝 **Hangman** | Browser Game | HTML/CSS/JS | 1 | ✅ Ready |
+| 🚀 **Space Invaders** | Browser Game | HTML/CSS/JS | 1 | ✅ Ready |
 
 ---
 
@@ -582,6 +591,148 @@ Game4/
 
 ---
 
+### 🚀 Game 14: Space Invaders
+
+**📍 Location**: `Game14/`
+
+#### 🎮 Game Overview
+A classic arcade shooter where you defend Earth from waves of alien invaders! Experience the nostalgia of one of gaming's most iconic titles, reimagined with modern web technologies.
+
+#### 📋 How to Play
+1. Open `index.html` in your browser
+2. Click "START GAME" button
+3. Use arrow keys to move your ship left and right
+4. Press SPACEBAR to shoot bullets at the aliens
+5. Destroy all aliens to advance to the next level
+6. Protect your ship and don't let aliens reach the bottom!
+
+#### ✨ Features
+
+**🎮 Classic Arcade Gameplay**
+- 🛸 **5 rows of aliens** - Different types worth 10, 20, and 30 points
+- 👾 **Progressive difficulty** - Game speeds up as you eliminate aliens
+- 🎯 **Level system** - Complete waves to advance through levels
+- ❤️ **Lives system** - 3 lives to defend Earth
+- 🛸 **Mystery ship** - Bonus ship worth 100 points appears randomly
+- 🛡️ **Defensive barriers** - 4 barriers that absorb damage
+
+**🎨 Visual Excellence**
+- Retro aesthetic with modern CSS effects
+- Animated starfield background
+- Smooth animations for all elements
+- Glowing effects and explosions
+- Color-coded aliens with emoji graphics
+
+**🏆 Scoring System**
+- Bottom Aliens 👾: 10 points
+- Middle Aliens 🛸: 20 points
+- Top Aliens 👽: 30 points
+- Mystery Ship 🛸: 100 points
+
+**📱 Mobile Support**
+- Touch controls - Tap to shoot
+- Swipe to move ship
+- Responsive design for all devices
+
+#### 🎮 Controls
+
+**Desktop:**
+- `←` `→` Arrow Keys - Move ship left/right
+- `SPACE` - Shoot bullets
+- `P` - Pause/Resume game
+
+**Mobile:**
+- Tap screen - Shoot
+- Swipe left/right - Move ship
+
+#### 🎯 Game Elements
+
+| Element | Description | Effect |
+|---------|-------------|--------|
+| 🚀 Player Ship | Your defense against invasion | Control with arrows |
+| 👾🛸👽 Aliens | Three types of invaders | 10-30 points each |
+| 🛸 Mystery Ship | Bonus ship at top | 100 points |
+| 🛡️ Barriers | Defensive shields | Absorb 3 hits |
+| 💥 Bullets | Player shoots cyan, aliens shoot magenta | Destroy enemies |
+
+#### 💡 Strategy Tips
+
+**Survival Tactics:**
+1. **Stay Mobile** - Constant movement avoids alien bullets
+2. **Use Barriers** - Hide behind them when overwhelmed
+3. **Shoot Continuously** - Keep pressure with 3-bullet maximum
+4. **Prioritize Threats** - Target closest aliens first
+5. **Hunt Mystery Ships** - Easy 100 points bonus
+6. **Save Barriers** - More valuable in later levels
+7. **Watch Patterns** - Learn alien bullet trajectories
+
+**Scoring Strategies:**
+- Focus on top aliens (30 pts) when possible
+- Time mystery ship appearances
+- Clear bottom rows to slow alien descent
+- Maintain all 3 lives for maximum attempts
+
+#### 🎚️ Difficulty Progression
+
+**Level 1-3:** Learn the basics
+- Standard alien speed
+- 1000ms between alien shots
+- 3 lives to practice
+
+**Level 4-7:** Intermediate challenge
+- Aliens move 20% faster per level
+- Shooting frequency increases
+- Barriers become critical
+
+**Level 8+:** Expert gameplay
+- Significantly faster aliens
+- Rapid alien fire rate
+- Requires mastery of controls
+
+#### 🛠️ Technical Details
+
+- **Built with:** HTML5 Canvas, CSS3, Vanilla JavaScript
+- **Performance:** Optimized 60 FPS gameplay
+- **Storage:** High scores saved in localStorage
+- **Compatibility:** All modern browsers
+- **Responsive:** Works on desktop, tablet, mobile
+
+#### 🐛 Troubleshooting
+
+**Game running too fast?**
+- Animation is capped at 60 FPS automatically
+- Try a different browser if issues persist
+
+**Touch controls delayed?**
+- Ensure you're using a modern mobile browser
+- Clear browser cache and reload
+
+**High score not saving?**
+- Check if localStorage is enabled
+- Private/Incognito mode may prevent saving
+
+#### 📁 File Structure
+```
+Game14/
+├── 📄 index.html          # Main HTML with game UI
+├── 🎨 style.css          # Retro arcade styling
+├── 🔧 script.js          # Complete game logic
+├── 📖 README.md          # Comprehensive documentation
+└── 📜 LICENSE            # MIT License
+```
+
+#### 🌟 Highlights
+
+- ✅ **Authentic classic** - True to original Space Invaders
+- ✅ **Modern polish** - Smooth animations and effects
+- ✅ **Progressive challenge** - Gets harder as you advance
+- ✅ **Mobile-friendly** - Play anywhere, anytime
+- ✅ **No dependencies** - Pure vanilla JavaScript
+- ✅ **Saves progress** - High score tracking
+- ✅ **Polished UI** - Professional overlays and screens
+
+---
+
 ## 🛠️ Installation
 
 ### For Web Games (Games 2, 3, 4)
@@ -811,6 +962,16 @@ For questions, issues, or feedback:
 - 🎲 [Ludo](Game2/) - Classic board game
 - 🐍 [Snake & Ladder](Game3/) - Board game adventure
 - 🪱 [Worm](Game4/) - Action-packed gameplay
+- 🐦 [Flappy Bird](Game5/) - Flying challenge
+- ✂️ [Rock Paper Scissors](Game6/) - Quick battle
+- 🎨 [Image Playground](Game7/) - Creative fun
+- 🧱 [Tetris](Game8/) - Puzzle classic
+- 👻 [Pac-Man](Game9/) - Maze arcade
+- 🃏 [Memory Card](Game10/) - Memory challenge
+- ❌ [Tic Tac Toe](Game11/) - Strategy game
+- 🌀 [Maze Game](Game12/) - Pathfinding puzzle
+- 📝 [Hangman](Game13/) - Word guessing
+- 🚀 [Space Invaders](Game14/) - Arcade shooter
 - ✂️ [Rock Paper Scissors](Game6/) - Classic hand game
 
 
