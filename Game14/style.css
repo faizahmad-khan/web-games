@@ -1,0 +1,381 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3a 50%, #0a0a1a 100%);
+    color: #00ff00;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Starfield background animation */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(2px 2px at 20% 30%, white, transparent),
+        radial-gradient(2px 2px at 60% 70%, white, transparent),
+        radial-gradient(1px 1px at 50% 50%, white, transparent),
+        radial-gradient(1px 1px at 80% 10%, white, transparent),
+        radial-gradient(2px 2px at 90% 60%, white, transparent),
+        radial-gradient(1px 1px at 33% 80%, white, transparent),
+        radial-gradient(1px 1px at 15% 90%, white, transparent);
+    background-size: 200% 200%;
+    animation: stars 120s linear infinite;
+    opacity: 0.5;
+    z-index: 0;
+}
+
+@keyframes stars {
+    from { background-position: 0 0; }
+    to { background-position: -200% -200%; }
+}
+
+.container {
+    max-width: 1200px;
+    width: 95%;
+    position: relative;
+    z-index: 1;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 3em;
+    color: #00ffff;
+    text-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff;
+    letter-spacing: 5px;
+    animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% { text-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff; }
+    50% { text-shadow: 0 0 30px #00ffff, 0 0 60px #00ffff, 0 0 80px #00ffff; }
+}
+
+.subtitle {
+    color: #ff00ff;
+    font-size: 1.2em;
+    margin-top: 10px;
+    text-shadow: 0 0 10px #ff00ff;
+}
+
+.game-wrapper {
+    background: rgba(0, 0, 0, 0.7);
+    border: 3px solid #00ffff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+}
+
+.info-panel {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    border: 2px solid #00ff00;
+}
+
+.stat-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 120px;
+}
+
+.stat-label {
+    font-size: 0.9em;
+    color: #00ffff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+.lives-container {
+    display: flex;
+    gap: 10px;
+    font-size: 1.5em;
+}
+
+.life {
+    transition: opacity 0.3s;
+}
+
+.life.lost {
+    opacity: 0.2;
+}
+
+.canvas-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    background: #000;
+    border: 3px solid #ff00ff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#gameCanvas {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.overlay.hidden {
+    display: none;
+}
+
+.overlay-content {
+    text-align: center;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 3px solid #00ffff;
+    border-radius: 15px;
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.5);
+}
+
+.overlay-content h2 {
+    font-size: 2.5em;
+    color: #00ffff;
+    margin-bottom: 20px;
+    text-shadow: 0 0 20px #00ffff;
+}
+
+.overlay-content h3 {
+    color: #ff00ff;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+.instructions {
+    color: #fff;
+    font-size: 1.1em;
+    margin: 20px 0;
+    line-height: 1.8;
+}
+
+.instructions p {
+    margin: 10px 0;
+}
+
+.instructions strong {
+    color: #00ff00;
+    background: rgba(0, 255, 0, 0.1);
+    padding: 2px 8px;
+    border-radius: 5px;
+}
+
+.alien-points {
+    color: #ffff00;
+    font-size: 0.95em;
+}
+
+.game-button {
+    background: linear-gradient(135deg, #00ff00, #00cc00);
+    color: #000;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.3em;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.game-button:hover {
+    background: linear-gradient(135deg, #00ffff, #00aaff);
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.8);
+}
+
+.game-button:active {
+    transform: scale(0.95);
+}
+
+.final-score, .final-level, .level-score, .next-level {
+    font-size: 1.5em;
+    margin: 15px 0;
+    color: #fff;
+}
+
+.final-score span, .final-level span, .level-score span, .next-level span {
+    color: #00ff00;
+    font-weight: bold;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+.controls-info {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    border: 2px solid #ff00ff;
+    flex-wrap: wrap;
+}
+
+.control-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+}
+
+.key {
+    background: linear-gradient(135deg, #333, #555);
+    color: #00ffff;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    border: 2px solid #00ffff;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    min-width: 50px;
+    text-align: center;
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #888;
+    font-size: 0.9em;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    header h1 {
+        font-size: 2em;
+    }
+
+    .subtitle {
+        font-size: 1em;
+    }
+
+    .info-panel {
+        gap: 10px;
+    }
+
+    .stat-box {
+        min-width: 80px;
+    }
+
+    .stat-value {
+        font-size: 1.4em;
+    }
+
+    .overlay-content {
+        padding: 25px;
+    }
+
+    .overlay-content h2 {
+        font-size: 1.8em;
+    }
+
+    .game-button {
+        padding: 12px 30px;
+        font-size: 1.1em;
+    }
+
+    .controls-info {
+        gap: 15px;
+    }
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 1.5em;
+        letter-spacing: 2px;
+    }
+
+    .info-panel {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .stat-box {
+        flex-direction: row;
+        gap: 10px;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .instructions {
+        font-size: 0.95em;
+    }
+
+    .game-button {
+        padding: 10px 25px;
+        font-size: 1em;
+    }
+
+    .controls-info {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* Animation for explosions and effects */
+@keyframes explode {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
