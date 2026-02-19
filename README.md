@@ -25,7 +25,7 @@
 
 ## 🎮 Games Overview
 
-This repository contains **14 exciting games** that you can play right in your browser or on desktop:
+This repository contains **15 exciting games** that you can play right in your browser or on desktop:
 
 | Game | Type | Tech | Players | Status |
 |------|------|------|---------|--------|
@@ -43,6 +43,7 @@ This repository contains **14 exciting games** that you can play right in your b
 | 🌀 **Maze Game** | Browser Game | HTML/CSS/JS | 1 | ✅ Ready |
 | 📝 **Hangman** | Browser Game | HTML/CSS/JS | 1 | ✅ Ready |
 | 🚀 **Space Invaders** | Browser Game | HTML/CSS/JS | 1 | ✅ Ready |
+| 🧱 **Brick Breaker** | Browser Game | HTML/CSS/JS | 1 | ✅ Ready |
 
 ---
 
@@ -733,6 +734,153 @@ Game14/
 
 ---
 
+### 🧱 Game 15: Brick Breaker
+
+**📍 Location**: `Game15/`
+
+#### 🎮 Game Overview
+A classic arcade-style brick breaker game where you control a paddle to bounce a ball and destroy all the bricks! Break through colorful layers of bricks, advance through challenging levels, and set high scores in this timeless arcade experience.
+
+#### 📋 How to Play
+1. Open `index.html` in your browser
+2. Click "START GAME" button
+3. Use arrow keys or mouse to move your paddle left and right
+4. Press SPACEBAR to launch the ball
+5. Break all bricks to complete the level
+6. Don't let the ball fall below your paddle!
+
+#### ✨ Features
+
+**🎮 Classic Arcade Gameplay**
+- 🧱 **6 rows of colorful bricks** - Different colors worth different points
+- 🎯 **Progressive difficulty** - Ball speed increases each level
+- ❤️ **Lives system** - 3 lives to master each level
+- 🏆 **High score tracking** - Saved in browser localStorage
+- ⚡ **Physics-based rebounds** - Angle changes based on paddle hit position
+- 🎚️ **Level progression** - Infinite levels with increasing challenge
+
+**🎨 Visual Excellence**
+- Modern gradient design with vibrant colors
+- Smooth animations and transitions
+- Glowing ball effects with shadows
+- Glossy brick appearance with shine effects
+- Professional UI with game statistics
+- Responsive layout for all screen sizes
+
+**🏆 Scoring System**
+- 🟥 Red Bricks: 50 points
+- 🟧 Orange Bricks: 40 points
+- 🟨 Yellow Bricks: 30 points
+- 🟩 Green Bricks: 20 points
+- 🟦 Blue Bricks: 10 points
+
+**📱 Multiple Control Options**
+- Keyboard arrow keys
+- Mouse movement
+- Responsive touch support
+
+#### 🎮 Controls
+
+**Desktop:**
+- `←` `→` Arrow Keys - Move paddle left/right
+- Mouse Movement - Direct paddle control
+- `SPACE` - Launch ball
+- `P` - Pause/Resume game
+
+#### 🎯 Game Elements
+
+| Element | Description | Points |
+|---------|-------------|--------|
+| 🟥 Red Brick | Top row | 50 pts |
+| 🟧 Orange Brick | Second row | 40 pts |
+| 🟨 Yellow Brick | Third row | 30 pts |
+| 🟩 Green Brick | Fourth row | 20 pts |
+| 🟦 Blue Brick | Fifth & sixth rows | 10 pts |
+| 🎯 Paddle | Player-controlled | Hit position matters |
+| ⚪ Ball | Destroys bricks | Speed increases per level |
+
+#### 💡 Strategy Tips
+
+**Mastering the Paddle:**
+1. **Angle Control** - Hit ball with paddle edges for sharper angles
+2. **Center Hits** - Paddle center gives more vertical bounces
+3. **Positioning** - Stay near ball's trajectory path
+4. **Combo Shots** - Aim for brick clusters for multiple hits
+5. **Top Rows First** - Red/orange bricks worth more points
+6. **Ball Speed** - Anticipate faster speeds in later levels
+7. **Corner Shots** - Use walls to reach difficult bricks
+
+**Scoring Strategies:**
+- Prioritize high-value bricks (red, orange)
+- Clear top rows early for maximum points
+- Create ball paths through brick columns
+- Maintain lives for bonus opportunities
+- Master paddle angles for precision shots
+
+#### 🎚️ Difficulty Progression
+
+**Level 1-3:** Learning phase
+- Base ball speed (4 units)
+- Clear brick patterns
+- Practice paddle control
+
+**Level 4-7:** Intermediate challenge
+- Ball speed increases by 0.5 per level
+- Faster reflexes required
+- Strategic positioning matters
+
+**Level 8+:** Expert gameplay
+- High ball speeds
+- Precision paddle control essential
+- Quick reaction times critical
+
+#### 🛠️ Technical Details
+
+- **Built with:** HTML5 Canvas, CSS3, Vanilla JavaScript
+- **Performance:** Optimized 60 FPS gameplay with requestAnimationFrame
+- **Storage:** High scores saved in localStorage
+- **Compatibility:** All modern browsers (Chrome, Firefox, Safari, Edge)
+- **Responsive:** Adapts to different screen sizes
+- **No Dependencies:** Pure vanilla JavaScript
+
+#### 🐛 Troubleshooting
+
+**Ball moving too fast?**
+- This is intentional progression - it speeds up each level
+- Practice paddle positioning and anticipation
+
+**Paddle not responding to mouse?**
+- Ensure cursor is over the game canvas
+- Try keyboard controls instead
+
+**High score not saving?**
+- Check if localStorage is enabled in browser
+- Private/Incognito mode may prevent saving
+- Clear browser cache and try again
+
+#### 📁 File Structure
+```
+Game15/
+├── 📄 index.html          # Main HTML with game UI
+├── 🎨 style.css          # Modern gradient styling
+├── 🔧 script.js          # Game physics and logic
+├── 📖 README.md          # Complete documentation
+└── 📜 LICENSE            # MIT License
+```
+
+#### 🌟 Highlights
+
+- ✅ **Authentic arcade** - Classic brick breaker gameplay
+- ✅ **Modern design** - Beautiful gradients and effects
+- ✅ **Physics-based** - Realistic ball mechanics
+- ✅ **Progressive** - Difficulty increases naturally
+- ✅ **Dual controls** - Keyboard or mouse
+- ✅ **Score tracking** - LocalStorage high scores
+- ✅ **No dependencies** - Pure vanilla JavaScript
+- ✅ **Responsive UI** - Works on all screen sizes
+
+---
+
 ## 🛠️ Installation
 
 ### For Web Games (Games 2, 3, 4)
@@ -786,24 +934,99 @@ web-games/
 │   ├── main.py                    # Number Guessing Game
 │   └── README.md                  # Game documentation
 ├── Game2/
-│   ├── ludo.html                  # Ludo Game (HTML)
+│   ├── index.html                 # Ludo Game
 │   ├── ludo.css                   # Ludo Game (Styles)
 │   ├── ludo.js                    # Ludo Game (Logic)
 │   ├── README.md                  # Game documentation
+│   ├── LICENSE                    # License file
 │   └── CONTRIBUTING.md            # Contribution guidelines
 ├── Game3/
-│   ├── snake_ladder.html          # Snake & Ladder (HTML)
+│   ├── index.html                 # Snake & Ladder
 │   ├── snake_ladder.css           # Snake & Ladder (Styles)
 │   ├── snake_ladder.js            # Snake & Ladder (Logic)
-│   └── README.md                  # Game documentation
+│   ├── README.md                  # Game documentation
+│   ├── LICENSE                    # License file
+│   └── CONTRIBUTING.md            # Contribution guidelines
 ├── Game4/
-│   ├── index.html                  # Worm Game (HTML)
+│   ├── index.html                 # Worm Game
 │   ├── worm.css                   # Worm Game (Styles)
 │   ├── worm.js                    # Worm Game (Logic)
 │   ├── README.md                  # Game documentation
 │   ├── FEATURES.md                # Detailed features
 │   ├── INSTALLATION.md            # Installation guide
-│   └── STRATEGIES.md              # Strategy guide
+│   ├── STRATEGIES.md              # Strategy guide
+│   └── assets/                    # Game assets
+├── Game5/
+│   ├── index.html                 # Flappy Bird
+│   ├── flappybird.css             # Flappy Bird (Styles)
+│   ├── flappybird.js              # Flappy Bird (Logic)
+│   ├── README.md                  # Game documentation
+│   ├── LICENSE                    # License file
+│   └── assets/                    # Game assets
+├── Game6/
+│   ├── index.html                 # Rock Paper Scissors
+│   ├── style.css                  # Styles
+│   ├── script.js                  # Game Logic
+│   ├── README.md                  # Game documentation
+│   ├── LICENSE                    # License file
+│   └── CONTRIBUTING.md            # Contribution guidelines
+├── Game7/
+│   ├── index.html                 # Image Playground
+│   ├── style.css                  # Styles
+│   ├── script.js                  # Game Logic
+│   ├── config.js                  # Configuration
+│   ├── README.md                  # Game documentation
+│   └── LICENSE                    # License file
+├── Game8/
+│   ├── index.html                 # Tetris
+│   ├── style.css                  # Styles
+│   ├── script.js                  # Game Logic
+│   ├── README.md                  # Game documentation
+│   └── LICENSE                    # License file
+├── Game9/
+│   ├── index.html                 # Pac-Man
+│   ├── style.css                  # Styles
+│   ├── script.js                  # Game Logic
+│   ├── README.md                  # Game documentation
+│   └── LICENSE                    # License file
+├── Game10/
+│   ├── index.html                 # Memory Card Game
+│   ├── style.css                  # Styles
+│   ├── script.js                  # Game Logic
+│   ├── README.md                  # Game documentation
+│   └── LICENSE                    # License file
+├── Game11/
+│   ├── index.html                 # Tic Tac Toe
+│   ├── style.css                  # Styles
+│   ├── script.js                  # Game Logic
+│   ├── README.md                  # Game documentation
+│   └── LICENSE                    # License file
+├── Game12/
+│   ├── index.html                 # Maze Game
+│   ├── style.css                  # Styles
+│   ├── script.js                  # Game Logic
+│   ├── README.md                  # Game documentation
+│   └── LICENSE                    # License file
+├── Game13/
+│   ├── index.html                 # Hangman
+│   ├── style.css                  # Styles
+│   ├── script.js                  # Game Logic
+│   ├── README.md                  # Game documentation
+│   └── LICENSE                    # License file
+├── Game14/
+│   ├── index.html                 # Space Invaders
+│   ├── style.css                  # Styles
+│   ├── script.js                  # Game Logic
+│   ├── README.md                  # Game documentation
+│   └── LICENSE                    # License file
+├── Game15/
+│   ├── index.html                 # Brick Breaker
+│   ├── style.css                  # Styles
+│   ├── script.js                  # Game Logic
+│   ├── README.md                  # Game documentation
+│   └── LICENSE                    # License file
+├── Web_Games_Collection/
+│   └── index.html                 # Collection portal
 ├── LICENSE                        # MIT License
 └── README.md                      # This file
 ```
@@ -972,7 +1195,7 @@ For questions, issues, or feedback:
 - 🌀 [Maze Game](Game12/) - Pathfinding puzzle
 - 📝 [Hangman](Game13/) - Word guessing
 - 🚀 [Space Invaders](Game14/) - Arcade shooter
-- ✂️ [Rock Paper Scissors](Game6/) - Classic hand game
+- 🧱 [Brick Breaker](Game15/) - Classic arcade game
 
 
 **Made with 💖 using HTML5, CSS3, JavaScript, and Python**
