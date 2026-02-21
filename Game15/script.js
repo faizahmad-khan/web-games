@@ -179,24 +179,18 @@ function update() {
     
     // Move paddle with keyboard
     if (keys['ArrowLeft'] || keys['a'] || keys['A']) {
-        paddle.dx = -paddle.speed;
+        paddle.x -= paddle.speed;
     } else if (keys['ArrowRight'] || keys['d'] || keys['D']) {
-        paddle.dx = paddle.speed;
+        paddle.x += paddle.speed;
     } else {
-        // Move paddle with mouse
+        // Move paddle with mouse (only when no keyboard input)
         const targetX = mouseX - paddle.width / 2;
         paddle.x = targetX;
     }
     
-    // Update paddle position
-    paddle.x += paddle.dx;
-    
     // Paddle boundaries
     if (paddle.x < 0) paddle.x = 0;
     if (paddle.x + paddle.width > canvas.width) paddle.x = canvas.width - paddle.width;
-    
-    // Reset paddle speed
-    paddle.dx = 0;
     
     // Update ball position
     if (ball.launched) {
