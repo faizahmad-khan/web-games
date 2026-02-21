@@ -301,39 +301,39 @@ function getPathInfo(row, col) {
     }
     
     // Home stretches (colored paths to center) - based on traditional Ludo layout
-    // Red home stretch (column 7, rows 2-6) - going UP towards center
-    if (col === 7 && row >= 2 && row <= 6) {
+    // Red home stretch (row 6, columns 1-6) - going RIGHT towards center
+    if (row === 6 && col >= 1 && col <= 6) {
         return {
             type: 'homeStretch',
             color: 'red',
-            homePosition: 6 - row
+            homePosition: col - 1
         };
     }
     
-    // Green home stretch (row 6, columns 7-11) - going RIGHT towards center
-    if (row === 6 && col >= 7 && col <= 11) {
+    // Green home stretch (column 7, rows 1-6) - going DOWN towards center
+    if (col === 7 && row >= 1 && row <= 6) {
         return {
             type: 'homeStretch',
             color: 'green',
-            homePosition: col - 7
+            homePosition: row - 1
         };
     }
     
-    // Yellow home stretch (column 6, rows 7-11) - going DOWN towards center
-    if (col === 6 && row >= 7 && row <= 11) {
+    // Yellow home stretch (row 8, columns 8-13) - going LEFT towards center
+    if (row === 8 && col >= 8 && col <= 13) {
         return {
             type: 'homeStretch',
             color: 'yellow',
-            homePosition: row - 7
+            homePosition: 13 - col
         };
     }
     
-    // Blue home stretch (row 7, columns 2-6) - going LEFT towards center
-    if (row === 7 && col >= 2 && col <= 6) {
+    // Blue home stretch (column 6, rows 8-13) - going UP towards center
+    if (col === 6 && row >= 8 && row <= 13) {
         return {
             type: 'homeStretch',
             color: 'blue',
-            homePosition: 6 - col
+            homePosition: 13 - row
         };
     }
     
@@ -420,7 +420,8 @@ function getMovablePieces(player, diceValue) {
         else if (!piece.isHome && !piece.finished) {
             // Check if move is valid
             if (piece.inHomeStretch) {
-                if (piece.homeStretchPosition + diceValue <= 5) {
+                // Can only move if it doesn't overshoot position 5 (center)
+                if (piece.homeStretchPosition + diceValue <= 6) {
                     movable.push(index);
                 }
             } else {
@@ -558,35 +559,30 @@ function animatePieceMovement(player, piece, pieceIndex, diceValue) {
             const homeEntry = HOME_STRETCH_ENTRY[player.color];
             let newPosition = piece.position + 1;
             
-            // Check if entering home stretch
-            if (piece.position < homeEntry && newPosition >= homeEntry) {
+            // Handle wrapping around the board
+            if (newPosition > 51) {
+                newPosition = 0;
+            }
+            
+            // Check if we should enter home stretch
+            if (piece.position === homeEntry) {
+                // This is the entry point to home stretch
                 piece.inHomeStretch = true;
                 piece.homeStretchPosition = 0;
-            } else if (newPosition > 51) {
-                newPosition = 0;
-                piece.position = newPosition;
+                showMessage(`${player.color.toUpperCase()} piece entering home stretch!`);
             } else {
+                // Normal movement on the board
                 piece.position = newPosition;
             }
         } else if (piece.inHomeStretch) {
-            // Check if the move would overshoot the home position (position 5)
-            const newPosition = piece.homeStretchPosition + stepsRemaining;
-            if (newPosition > 5) {
-                showMessage(`${player.color.toUpperCase()} piece cannot move, would overshoot home!`);
-                // Move back to the original position
-                piece.homeStretchPosition = piece.homeStretchPosition - diceValue + stepsRemaining;
-                updateBoard();
-                setTimeout(() => nextTurn(), 1500);
-                return;
-            } else {
-                piece.homeStretchPosition = newPosition;
-                
-                // Check if reached center (finished)
-                if (piece.homeStretchPosition >= 5) {
-                    piece.finished = true;
-                    showMessage(`${player.color.toUpperCase()} piece reached home! 🎉`);
-                    updateScoreBoard(); // Update score when a piece reaches home
-                }
+            // Move within home stretch
+            piece.homeStretchPosition++;
+            
+            // Check if reached center (finished)
+            if (piece.homeStretchPosition >= 6) {
+                piece.finished = true;
+                showMessage(`${player.color.toUpperCase()} piece reached home! 🎉`);
+                updateScoreBoard(); // Update score when a piece reaches home
             }
         }
         
@@ -650,6 +646,12 @@ function updateBoard() {
     // Clear all pieces from path cells
     document.querySelectorAll('.path-cell .piece').forEach(p => p.remove());
     
+    // Clear pieces from center
+    const centerStar = document.querySelector('.center-star');
+    if (centerStar) {
+        centerStar.querySelectorAll('.piece').forEach(p => p.remove());
+    }
+    
     // Reset all home pieces to visible first
     document.querySelectorAll('.home-pieces .piece').forEach(p => {
         p.style.display = 'block';
@@ -663,7 +665,15 @@ function updateBoard() {
             if (!homeElement) return;
             
             if (piece.finished) {
-                // Hide finished pieces
+                // Show finished pieces in the center star
+                if (centerStar) {
+                    const clone = homeElement.cloneNode(true);
+                    clone.classList.remove('selectable');
+                    clone.style.display = 'block';
+                    clone.style.width = 'clamp(15px, 3vmin, 25px)';
+                    clone.style.height = 'clamp(15px, 3vmin, 25px)';
+                    centerStar.appendChild(clone);
+                }
                 homeElement.style.display = 'none';
             } else if (piece.isHome) {
                 // Keep in home area
@@ -676,6 +686,8 @@ function updateBoard() {
                     clone.classList.remove('selectable');
                     homeElement.style.display = 'none';
                     homeStretchCell.appendChild(clone);
+                } else {
+                    console.log(`Home stretch cell not found for ${player.color} at position ${piece.homeStretchPosition}`);
                 }
             } else {
                 // Move to path position
