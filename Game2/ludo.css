@@ -527,11 +527,11 @@ h1 {
     box-shadow: inset 0 0 10px rgba(231, 76, 60, 0.3);
 }
 
-.path-cell.start-green::after {
+.path-cell.start-red::after {
     content: '→';
     position: absolute;
     font-size: 1.5em;
-    color: #2ecc71;
+    color: #e74c3c;
     font-weight: bold;
     opacity: 0.5;
     z-index: 1;
@@ -543,6 +543,16 @@ h1 {
     box-shadow: inset 0 0 10px rgba(46, 204, 113, 0.3);
 }
 
+.path-cell.start-green::after {
+    content: '↓';
+    position: absolute;
+    font-size: 1.5em;
+    color: #2ecc71;
+    font-weight: bold;
+    opacity: 0.5;
+    z-index: 1;
+}
+
 .path-cell.start-yellow {
     background: #ffffaa;
     border: 3px solid #f1c40f;
@@ -550,20 +560,10 @@ h1 {
 }
 
 .path-cell.start-yellow::after {
-    content: '↓';
+    content: '←';
     position: absolute;
     font-size: 1.5em;
     color: #f1c40f;
-    font-weight: bold;
-    opacity: 0.5;
-    z-index: 1;
-}
-
-.path-cell.start-red::after {
-    content: '↑';
-    position: absolute;
-    font-size: 1.5em;
-    color: #e74c3c;
     font-weight: bold;
     opacity: 0.5;
     z-index: 1;
@@ -576,7 +576,7 @@ h1 {
 }
 
 .path-cell.start-blue::after {
-    content: '←';
+    content: '↑';
     position: absolute;
     font-size: 1.5em;
     color: #3498db;
