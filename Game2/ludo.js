@@ -18,7 +18,7 @@ const START_POSITIONS = {
     blue: 39    // Blue start - arrow pointing UP (↑)
 };
 
-const SAFE_POSITIONS = [0, 9, 13, 22, 26, 35, 39, 48]; // Star positions on board - updated for traditional layout
+const SAFE_POSITIONS = [9, 22, 35, 48]; // Star positions on board (not including start positions)
 const HOME_STRETCH_ENTRY = {
     red: 51,    // Entry before position 0
     green: 12,  // Entry before position 13
