@@ -586,19 +586,23 @@ h1 {
 }
 
 .path-cell.home-stretch-red {
-    background: linear-gradient(to right, #ffcccc, #ff6666);
+    background: linear-gradient(to right, #ffcccc, #e74c3c, #ff6666);
+    border: 2px solid #e74c3c;
 }
 
 .path-cell.home-stretch-green {
-    background: linear-gradient(to bottom, #ccffcc, #66ff66);
+    background: linear-gradient(to bottom, #ccffcc, #2ecc71, #66ff66);
+    border: 2px solid #2ecc71;
 }
 
 .path-cell.home-stretch-yellow {
-    background: linear-gradient(to left, #ffffcc, #ffff66);
+    background: linear-gradient(to left, #ffffcc, #f1c40f, #ffff66);
+    border: 2px solid #f1c40f;
 }
 
 .path-cell.home-stretch-blue {
-    background: linear-gradient(to top, #cce5ff, #66b3ff);
+    background: linear-gradient(to top, #cce5ff, #3498db, #66b3ff);
+    border: 2px solid #3498db;
 }
 
 .path-cell .piece {
@@ -705,20 +709,34 @@ h1 {
     grid-column: 2;
     grid-row: 2;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    align-content: center;
+    gap: 3px;
     background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
     border-radius: 50%;
     margin: clamp(10px, 3vmin, 20px);
     position: relative;
     z-index: 5;
+    padding: 5px;
 }
 
 .star {
+    position: absolute;
     font-size: clamp(2em, 6vmin, 4em);
     color: gold;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0.5);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     animation: starRotate 3s linear infinite;
+    opacity: 0.3;
+    z-index: 1;
+}
+
+.center-star .piece {
+    position: relative !important;
+    z-index: 10;
+    margin: 2px;
+    transform: none !important;
 }
 
 @keyframes starRotate {
