@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whack-a-Mole - Classic Arcade Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔨 WHACK-A-MOLE 🐹</h1>
+            <p class="subtitle">Hit the moles before they disappear!</p>
+        </header>
+
+        <div class="game-wrapper">
+            <!-- Game Stats Panel -->
+            <div class="stats-panel">
+                <div class="stat-box">
+                    <span class="stat-label">Score</span>
+                    <span id="score" class="stat-value">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">High Score</span>
+                    <span id="highScore" class="stat-value">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">Time Left</span>
+                    <span id="timeLeft" class="stat-value">60</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">Level</span>
+                    <span id="level" class="stat-value">1</span>
+                </div>
+            </div>
+
+            <!-- Game Board -->
+            <div class="game-board" id="gameBoard">
+                <div class="hole" data-hole="0">
+                    <div class="mole"></div>
+                </div>
+                <div class="hole" data-hole="1">
+                    <div class="mole"></div>
+                </div>
+                <div class="hole" data-hole="2">
+                    <div class="mole"></div>
+                </div>
+                <div class="hole" data-hole="3">
+                    <div class="mole"></div>
+                </div>
+                <div class="hole" data-hole="4">
+                    <div class="mole"></div>
+                </div>
+                <div class="hole" data-hole="5">
+                    <div class="mole"></div>
+                </div>
+                <div class="hole" data-hole="6">
+                    <div class="mole"></div>
+                </div>
+                <div class="hole" data-hole="7">
+                    <div class="mole"></div>
+                </div>
+                <div class="hole" data-hole="8">
+                    <div class="mole"></div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls">
+                <button id="startButton" class="game-button">START GAME</button>
+                <button id="pauseButton" class="game-button secondary" disabled>PAUSE</button>
+            </div>
+
+            <!-- Start Screen -->
+            <div id="startScreen" class="overlay">
+                <div class="overlay-content">
+                    <h2>🎮 WHACK-A-MOLE 🎮</h2>
+                    <div class="instructions">
+                        <h3>How to Play</h3>
+                        <p>🐹 Click on the moles as they pop up!</p>
+                        <p>⏱️ Score as many points as you can before time runs out</p>
+                        <p>💯 Each mole is worth 10 points</p>
+                        <p>🎯 Hit golden moles for 50 points!</p>
+                        <p>⚠️ Avoid hitting bombs (-20 points)</p>
+                        <br>
+                        <p class="level-info">🏆 Every 100 points = Next Level</p>
+                        <p class="level-info">📈 Levels increase difficulty!</p>
+                    </div>
+                    <button id="startGameButton" class="game-button large">START GAME</button>
+                </div>
+            </div>
+
+            <!-- Game Over Screen -->
+            <div id="gameOverScreen" class="overlay hidden">
+                <div class="overlay-content">
+                    <h2>🎯 GAME OVER 🎯</h2>
+                    <p class="final-score">Final Score: <span id="finalScore">0</span></p>
+                    <p class="final-level">Level Reached: <span id="finalLevel">1</span></p>
+                    <p class="high-score-msg" id="highScoreMsg"></p>
+                    <button id="restartButton" class="game-button large">PLAY AGAIN</button>
+                </div>
+            </div>
+
+            <!-- Pause Screen -->
+            <div id="pauseScreen" class="overlay hidden">
+                <div class="overlay-content">
+                    <h2>⏸️ PAUSED</h2>
+                    <p>Game is paused</p>
+                    <button id="resumeButton" class="game-button">RESUME</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Section -->
+        <div class="info-section">
+            <div class="info-box">
+                <h3>🐹 Regular Mole</h3>
+                <p>10 points</p>
+            </div>
+            <div class="info-box golden">
+                <h3>✨ Golden Mole</h3>
+                <p>50 points</p>
+            </div>
+            <div class="info-box danger">
+                <h3>💣 Bomb</h3>
+                <p>-20 points</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
