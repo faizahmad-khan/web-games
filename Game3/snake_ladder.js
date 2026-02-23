@@ -6,7 +6,15 @@ let gameState = {
     boardSize: 100,
     cellSize: 60,
     canvas: null,
-    ctx: null
+    ctx: null,
+    soundEnabled: true,
+    darkMode: false,
+    stats: {
+        totalRolls: 0,
+        snakeBites: 0,
+        ladderClimbs: 0,
+        powerUpsCollected: 0
+    }
 };
 
 // Snake and Ladder positions
@@ -35,7 +43,15 @@ const ladders = {
     80: 100
 };
 
-// Available colors for players
+// Power-up positions (randomized each game)
+let powerUps = {};
+
+const powerUpTypes = {
+    extraTurn: { emoji: '⭐', name: 'Extra Turn', color: '#ffd700' },
+    shield: { emoji: '🛡️', name: 'Shield', color: '#4169e1' },
+    speedBoost: { emoji: '⚡', name: 'Speed Boost', color: '#ff4500' }
+};
+
 const availableColors = [
     { name: 'Red', color: '#ff4757' },
     { name: 'Blue', color: '#3742fa' },
@@ -47,6 +63,75 @@ const availableColors = [
     { name: 'Cyan', color: '#1e90ff' }
 ];
 
+// Sound effects (using Web Audio API)
+const soundEffects = {
+    diceRoll: () => playTone(200, 50),
+    move: () => playTone(400, 30),
+    snake: () => playTone(100, 200, 'sawtooth'),
+    ladder: () => playTone(600, 200, 'sine'),
+    powerUp: () => playTone(800, 100, 'square'),
+    win: () => {
+        [523, 659, 784, 1047].forEach((freq, i) => {
+            setTimeout(() => playTone(freq, 100), i * 100);
+        });
+    }
+};
+
+function playTone(frequency, duration, type = 'sine') {
+    if (!gameState.soundEnabled) return;
+    
+    try {
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.type = type;
+        oscillator.frequency.value = frequency;
+        
+        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration / 1000);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + duration / 1000);
+    } catch (e) {
+        console.log('Audio not supported');
+    }
+}
+
+// Dark Mode Toggle
+function toggleDarkMode() {
+    gameState.darkMode = !gameState.darkMode;
+    document.body.classList.toggle('dark-mode');
+    const btn = document.getElementById('darkModeToggle');
+    btn.textContent = gameState.darkMode ? '☀️' : '🌙';
+    
+    if (gameState.gameStarted) {
+        drawBoard();
+    }
+}
+
+// Sound Toggle
+function toggleSound() {
+    gameState.soundEnabled = !gameState.soundEnabled;
+    const btn = document.getElementById('soundToggle');
+    btn.textContent = gameState.soundEnabled ? '🔊' : '🔇';
+}
+
+// Initialize power-ups
+function initializePowerUps() {
+    powerUps = {};
+    const powerUpPositions = [13, 27, 45, 68, 82];
+    const types = Object.keys(powerUpTypes);
+    
+    powerUpPositions.forEach(pos => {
+        const type = types[Math.floor(Math.random() * types.length)];
+        powerUps[pos] = type;
+    });
+}
+
 // Setup Functions
 function setupPlayers() {
     const playerCount = parseInt(document.getElementById('playerCount').value);
@@ -56,14 +141,19 @@ function setupPlayers() {
         return;
     }
     
-    // Initialize players
+    // Initialize players with power-ups
     gameState.players = [];
     for (let i = 0; i < playerCount; i++) {
         gameState.players.push({
             id: i + 1,
             name: `Player ${i + 1}`,
             position: 0,
-            color: null
+            color: null,
+            unlocked: false,
+            powerUps: [],
+            totalRolls: 0,
+            snakesHit: 0,
+            laddersClimbed: 0
         });
     }
     
@@ -83,8 +173,24 @@ function renderColorSelection() {
         playerDiv.className = 'player-color-item';
         
         const label = document.createElement('label');
-        label.textContent = `${player.name}:`;
+        label.textContent = `Player ${index + 1}:`;
         playerDiv.appendChild(label);
+        
+        // Player name input
+        const nameInput = document.createElement('input');
+        nameInput.type = 'text';
+        nameInput.placeholder = `Enter name for Player ${index + 1}`;
+        nameInput.value = player.name;
+        nameInput.onchange = (e) => {
+            gameState.players[index].name = e.target.value || `Player ${index + 1}`;
+        };
+        playerDiv.appendChild(nameInput);
+        
+        // Color options
+        const colorLabel = document.createElement('label');
+        colorLabel.textContent = 'Choose color:';
+        colorLabel.style.marginTop = '10px';
+        playerDiv.appendChild(colorLabel);
         
         const colorOptions = document.createElement('div');
         colorOptions.className = 'color-options';
@@ -95,6 +201,13 @@ function renderColorSelection() {
             colorBtn.style.backgroundColor = colorObj.color;
             colorBtn.title = colorObj.name;
             colorBtn.onclick = () => selectColor(index, colorObj.color, colorBtn);
+            
+            // Pre-select first available color for each player
+            if (index === colorIndex) {
+                colorBtn.classList.add('selected');
+                gameState.players[index].color = colorObj.color;
+            }
+            
             colorOptions.appendChild(colorBtn);
         });
         
@@ -130,6 +243,17 @@ function startGame() {
     gameState.gameStarted = true;
     gameState.currentPlayerIndex = 0;
     
+    // Initialize power-ups
+    initializePowerUps();
+    
+    // Reset stats
+    gameState.stats = {
+        totalRolls: 0,
+        snakeBites: 0,
+        ladderClimbs: 0,
+        powerUpsCollected: 0
+    };
+    
     // Setup canvas
     gameState.canvas = document.getElementById('gameBoard');
     gameState.ctx = gameState.canvas.getContext('2d');
@@ -142,7 +266,8 @@ function startGame() {
     renderPlayersInfo();
     drawBoard();
     updateCurrentTurn();
-    addLog('Game started! Each player must roll 1 to unlock and start playing.');
+    updateStats();
+    addLog('🎮 Game started! Each player must roll 1 to unlock and start playing.');
 }
 
 // Rendering Functions
@@ -159,16 +284,43 @@ function renderPlayersInfo() {
             playerCard.classList.add('active');
         }
         
+        const powerUpsHtml = player.powerUps.length > 0 
+            ? `<div class="power-ups">${player.powerUps.map(p => powerUpTypes[p].emoji).join(' ')}</div>`
+            : '';
+        
         playerCard.innerHTML = `
             <h4>
                 <span class="player-token" style="background-color: ${player.color}"></span>
                 ${player.name}
             </h4>
-            <p>Position: ${player.position}</p>
+            <p>Position: ${player.position}${!player.unlocked ? ' (🔒 Locked)' : ''}</p>
+            ${powerUpsHtml}
         `;
         
         container.appendChild(playerCard);
     });
+}
+
+function updateStats() {
+    const statsContent = document.getElementById('statsContent');
+    statsContent.innerHTML = `
+        <div class="stat-item">
+            <span>Total Rolls:</span>
+            <span>${gameState.stats.totalRolls}</span>
+        </div>
+        <div class="stat-item">
+            <span>🐍 Snake Bites:</span>
+            <span>${gameState.stats.snakeBites}</span>
+        </div>
+        <div class="stat-item">
+            <span>🪜 Ladders Climbed:</span>
+            <span>${gameState.stats.ladderClimbs}</span>
+        </div>
+        <div class="stat-item">
+            <span>⭐ Power-ups:</span>
+            <span>${gameState.stats.powerUpsCollected}</span>
+        </div>
+    `;
 }
 
 function updateCurrentTurn() {
@@ -197,23 +349,35 @@ function drawBoard() {
     for (let i = 1; i <= 100; i++) {
         const pos = getCellPosition(i);
         
-        // Alternate colors for cells
+        // Alternate colors for cells (adapt to dark mode)
         const row = Math.floor((i - 1) / 10);
         const col = (i - 1) % 10;
         const isEven = (row + col) % 2 === 0;
-        ctx.fillStyle = isEven ? '#e8f5e9' : '#fff9c4';
+        
+        if (gameState.darkMode) {
+            ctx.fillStyle = isEven ? '#2d5016' : '#4a4016';
+        } else {
+            ctx.fillStyle = isEven ? '#e8f5e9' : '#fff9c4';
+        }
         
         ctx.fillRect(pos.x, pos.y, gameState.cellSize, gameState.cellSize);
-        ctx.strokeStyle = '#333';
+        ctx.strokeStyle = gameState.darkMode ? '#555' : '#333';
         ctx.lineWidth = 1;
         ctx.strokeRect(pos.x, pos.y, gameState.cellSize, gameState.cellSize);
         
         // Draw cell number
-        ctx.fillStyle = '#333';
+        ctx.fillStyle = gameState.darkMode ? '#ccc' : '#333';
         ctx.font = 'bold 14px Arial';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'top';
         ctx.fillText(i, pos.x + gameState.cellSize / 2, pos.y + 5);
+        
+        // Draw power-ups
+        if (powerUps[i]) {
+            const powerUpType = powerUpTypes[powerUps[i]];
+            ctx.font = '24px Arial';
+            ctx.fillText(powerUpType.emoji, pos.x + gameState.cellSize / 2, pos.y + gameState.cellSize / 2);
+        }
     }
     
     // Draw snakes
@@ -434,17 +598,23 @@ function rollDice() {
     const diceDisplay = document.getElementById('diceDisplay');
     diceDisplay.classList.add('rolling');
     
+    soundEffects.diceRoll();
+    
     // Animate dice roll
     let counter = 0;
     const rollInterval = setInterval(() => {
-        diceDisplay.textContent = Math.floor(Math.random() * 6) + 1;
+        const randomNum = Math.floor(Math.random() * 6) + 1;
+        showDiceFace(randomNum);
         counter++;
         
         if (counter > 10) {
             clearInterval(rollInterval);
             const finalRoll = Math.floor(Math.random() * 6) + 1;
-            diceDisplay.textContent = finalRoll;
+            showDiceFace(finalRoll);
             diceDisplay.classList.remove('rolling');
+            
+            gameState.stats.totalRolls++;
+            updateStats();
             
             movePlayer(finalRoll);
             
@@ -453,6 +623,27 @@ function rollDice() {
             }, 1000);
         }
     }, 100);
+}
+
+function showDiceFace(number) {
+    const diceFace = document.querySelector('.dice-face');
+    diceFace.innerHTML = '';
+    
+    const positions = {
+        1: [4],
+        2: [0, 8],
+        3: [0, 4, 8],
+        4: [0, 2, 6, 8],
+        5: [0, 2, 4, 6, 8],
+        6: [0, 2, 3, 5, 6, 8]
+    };
+    
+    positions[number].forEach(pos => {
+        const dot = document.createElement('div');
+        dot.className = 'dot';
+        dot.style.gridArea = `${Math.floor(pos / 3) + 1} / ${(pos % 3) + 1}`;
+        diceFace.appendChild(dot);
+    });
 }
 
 function movePlayer(steps) {
@@ -494,34 +685,75 @@ function movePlayer(steps) {
     }
     
     currentPlayer.position = newPosition;
+    currentPlayer.totalRolls++;
+    soundEffects.move();
     
     document.getElementById('diceMessage').textContent = 
         `${currentPlayer.name} rolled ${steps} and moved to ${newPosition}`;
     addLog(`${currentPlayer.name} rolled ${steps} and moved from ${oldPosition} to ${newPosition}.`);
     
-    // Check for snake
+    // Check for power-ups
+    if (powerUps[newPosition]) {
+        const powerUpType = powerUps[newPosition];
+        currentPlayer.powerUps.push(powerUpType);
+        delete powerUps[newPosition];
+        gameState.stats.powerUpsCollected++;
+        
+        soundEffects.powerUp();
+        showPowerUpNotification(powerUpTypes[powerUpType].emoji + ' ' + powerUpTypes[powerUpType].name);
+        addLog(`✨ ${currentPlayer.name} collected a ${powerUpTypes[powerUpType].name} power-up!`, 'power-up');
+        
+        updateStats();
+    }
+    
+    drawBoard();
+    renderPlayersInfo();
+    
+    // Check for snake (can be blocked by shield)
     if (snakes[newPosition]) {
-        const snakeEnd = snakes[newPosition];
-        setTimeout(() => {
-            currentPlayer.position = snakeEnd;
-            document.getElementById('diceMessage').textContent += 
-                ` 🐍 Snake! Slid down to ${snakeEnd}`;
-            addLog(`Oh no! ${currentPlayer.name} was bitten by a snake and slid down to ${snakeEnd}!`, 'snake');
-            drawBoard();
-            renderPlayersInfo();
-            checkWinner();
-        }, 1000);
+        const shieldIndex = currentPlayer.powerUps.indexOf('shield');
+        if (shieldIndex !== -1) {
+            // Shield protects from snake
+            currentPlayer.powerUps.splice(shieldIndex, 1);
+            setTimeout(() => {
+                soundEffects.powerUp();
+                document.getElementById('diceMessage').textContent += 
+                    ` 🛡️ Shield protected you from the snake!`;
+                addLog(`🛡️ ${currentPlayer.name}'s shield blocked the snake!`, 'power-up');
+                renderPlayersInfo();
+                checkWinner();
+            }, 1000);
+        } else {
+            const snakeEnd = snakes[newPosition];
+            setTimeout(() => {
+                currentPlayer.position = snakeEnd;
+                currentPlayer.snakesHit++;
+                gameState.stats.snakeBites++;
+                soundEffects.snake();
+                document.getElementById('diceMessage').textContent += 
+                    ` 🐍 Snake! Slid down to ${snakeEnd}`;
+                addLog(`Oh no! ${currentPlayer.name} was bitten by a snake and slid down to ${snakeEnd}!`, 'snake');
+                drawBoard();
+                renderPlayersInfo();
+                updateStats();
+                checkWinner();
+            }, 1000);
+        }
     }
     // Check for ladder
     else if (ladders[newPosition]) {
         const ladderEnd = ladders[newPosition];
         setTimeout(() => {
             currentPlayer.position = ladderEnd;
+            currentPlayer.laddersClimbed++;
+            gameState.stats.ladderClimbs++;
+            soundEffects.ladder();
             document.getElementById('diceMessage').textContent += 
                 ` 🪜 Ladder! Climbed up to ${ladderEnd}`;
             addLog(`Awesome! ${currentPlayer.name} found a ladder and climbed to ${ladderEnd}!`, 'ladder');
             drawBoard();
             renderPlayersInfo();
+            updateStats();
             checkWinner();
         }, 1000);
     } else {
@@ -529,9 +761,6 @@ function movePlayer(steps) {
             checkWinner();
         }, 500);
     }
-    
-    drawBoard();
-    renderPlayersInfo();
 }
 
 function checkWinner() {
@@ -542,9 +771,22 @@ function checkWinner() {
             showWinner(currentPlayer);
         }, 500);
     } else {
-        setTimeout(() => {
-            nextTurn();
-        }, 1500);
+        // Check for extra turn power-up
+        const extraTurnIndex = currentPlayer.powerUps.indexOf('extraTurn');
+        if (extraTurnIndex !== -1) {
+            currentPlayer.powerUps.splice(extraTurnIndex, 1);
+            setTimeout(() => {
+                soundEffects.powerUp();
+                document.getElementById('diceMessage').textContent = 
+                    `⭐ ${currentPlayer.name} gets an extra turn!`;
+                addLog(`⭐ ${currentPlayer.name} used Extra Turn power-up!`, 'power-up');
+                renderPlayersInfo();
+            }, 1500);
+        } else {
+            setTimeout(() => {
+                nextTurn();
+            }, 1500);
+        }
     }
 }
 
@@ -554,14 +796,54 @@ function nextTurn() {
     document.getElementById('diceMessage').textContent = '';
 }
 
+function showPowerUpNotification(message) {
+    const notification = document.getElementById('powerUpNotification');
+    notification.textContent = message;
+    notification.classList.remove('hidden');
+    
+    setTimeout(() => {
+        notification.classList.add('hidden');
+    }, 2000);
+}
+
 function showWinner(player) {
     const modal = document.getElementById('winnerModal');
     const winnerText = document.getElementById('winnerText');
+    const winnerStats = document.getElementById('winnerStats');
+    
+    soundEffects.win();
     
     winnerText.innerHTML = `<strong style="color: ${player.color}">${player.name}</strong> wins the game!`;
+    
+    winnerStats.innerHTML = `
+        <p>🎲 Rolls: ${player.totalRolls}</p>
+        <p>🐍 Snake Bites: ${player.snakesHit}</p>
+        <p>🪜 Ladders Climbed: ${player.laddersClimbed}</p>
+    `;
+    
     modal.classList.remove('hidden');
     
+    // Create confetti
+    createConfetti();
+    
     addLog(`🎉 ${player.name} has won the game! 🎉`);
+}
+
+function createConfetti() {
+    const container = document.getElementById('confettiContainer');
+    container.innerHTML = '';
+    
+    const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffa500'];
+    
+    for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDelay = Math.random() * 3 + 's';
+        confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        container.appendChild(confetti);
+    }
 }
 
 function addLog(message, type = '') {
@@ -584,8 +866,23 @@ function resetGame() {
     gameState.players.forEach(player => {
         player.position = 0;
         player.unlocked = false;
+        player.powerUps = [];
+        player.totalRolls = 0;
+        player.snakesHit = 0;
+        player.laddersClimbed = 0;
     });
     gameState.currentPlayerIndex = 0;
+    
+    // Reset stats
+    gameState.stats = {
+        totalRolls: 0,
+        snakeBites: 0,
+        ladderClimbs: 0,
+        powerUpsCollected: 0
+    };
+    
+    // Reinitialize power-ups
+    initializePowerUps();
     
     // Hide winner modal if visible
     document.getElementById('winnerModal').classList.add('hidden');
@@ -594,15 +891,16 @@ function resetGame() {
     document.getElementById('gameLog').innerHTML = '';
     
     // Reset dice
-    document.getElementById('diceDisplay').textContent = '?';
+    showDiceFace(1);
     document.getElementById('diceMessage').textContent = '';
     
     // Redraw board
     drawBoard();
     renderPlayersInfo();
     updateCurrentTurn();
+    updateStats();
     
-    addLog('Game reset! Each player needs to roll 1 to start. Good luck everyone!');
+    addLog('🔄 Game reset! Each player needs to roll 1 to start. Good luck everyone!');
 }
 
 function exitGame() {
@@ -615,7 +913,15 @@ function exitGame() {
             boardSize: 100,
             cellSize: 60,
             canvas: null,
-            ctx: null
+            ctx: null,
+            soundEnabled: gameState.soundEnabled,
+            darkMode: gameState.darkMode,
+            stats: {
+                totalRolls: 0,
+                snakeBites: 0,
+                ladderClimbs: 0,
+                powerUpsCollected: 0
+            }
         };
         
         // Show setup screen
@@ -631,5 +937,6 @@ function exitGame() {
 
 // Initialize on load
 window.addEventListener('load', () => {
-    console.log('Snake & Ladder Game loaded successfully!');
+    console.log('🎮 Snake & Ladder Game - Enhanced Edition loaded successfully!');
+    showDiceFace(1);
 });
