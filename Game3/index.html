@@ -3,12 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snake & Ladder Game</title>
+    <title>Snake & Ladder Game - Enhanced Edition</title>
     <link rel="stylesheet" href="snake_ladder.css">
 </head>
 <body>
     <div class="container">
-        <h1 class="game-title">🐍 Snake & Ladder 🪜</h1>
+        <div class="header">
+            <h1 class="game-title">🐍 Snake & Ladder 🪜</h1>
+            <div class="header-controls">
+                <button class="icon-btn" id="darkModeToggle" onclick="toggleDarkMode()" title="Toggle Dark Mode">🌙</button>
+                <button class="icon-btn" id="soundToggle" onclick="toggleSound()" title="Toggle Sound">🔊</button>
+            </div>
+        </div>
         
         <!-- Setup Screen -->
         <div id="setupScreen" class="setup-screen">
@@ -22,10 +28,10 @@
             </div>
         </div>
 
-        <!-- Player Color Selection Screen -->
+        <!-- Player Name & Color Selection Screen -->
         <div id="colorScreen" class="color-screen hidden">
             <div class="color-card">
-                <h2>Choose Player Colors</h2>
+                <h2>Customize Players</h2>
                 <div id="playerColorSelection"></div>
                 <button class="btn btn-primary" onclick="startGame()">Start Game</button>
             </div>
@@ -41,17 +47,40 @@
                     <button class="btn btn-danger" onclick="exitGame()">🚪 Exit Game</button>
                 </div>
                 <div class="dice-container">
-                    <div id="diceDisplay" class="dice">?</div>
+                    <div id="diceDisplay" class="dice">
+                        <div class="dice-face"></div>
+                    </div>
                     <p id="diceMessage"></p>
+                </div>
+                
+                <!-- Statistics Panel -->
+                <div class="stats-panel">
+                    <h4>📊 Game Stats</h4>
+                    <div id="statsContent"></div>
                 </div>
             </div>
 
             <div class="board-container">
                 <canvas id="gameBoard" width="600" height="600"></canvas>
+                <div id="powerUpNotification" class="power-up-notification hidden"></div>
             </div>
 
             <div class="game-info">
                 <h3>Current Turn: <span id="currentTurn"></span></h3>
+                <div class="legend">
+                    <div class="legend-item">
+                        <span class="legend-icon">⭐</span>
+                        <span>Extra Turn</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-icon">🛡️</span>
+                        <span>Shield</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-icon">⚡</span>
+                        <span>Speed Boost</span>
+                    </div>
+                </div>
                 <div id="gameLog" class="game-log"></div>
             </div>
         </div>
@@ -59,10 +88,14 @@
         <!-- Winner Modal -->
         <div id="winnerModal" class="modal hidden">
             <div class="modal-content">
+                <div class="confetti-container" id="confettiContainer"></div>
                 <h2>🎉 Congratulations! 🎉</h2>
                 <p id="winnerText"></p>
-                <button class="btn btn-primary" onclick="resetGame()">Play Again</button>
-                <button class="btn btn-danger" onclick="exitGame()">Exit</button>
+                <div class="winner-stats" id="winnerStats"></div>
+                <div class="modal-buttons">
+                    <button class="btn btn-primary" onclick="resetGame()">Play Again</button>
+                    <button class="btn btn-danger" onclick="exitGame()">Exit</button>
+                </div>
             </div>
         </div>
     </div>
