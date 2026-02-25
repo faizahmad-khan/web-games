@@ -27,6 +27,7 @@
 
 ## ⭐ Features
 
+### Core Features
 - 🎮 Classic worm/snake gameplay
 - 🎯 Progressive difficulty levels
 - 🎨 Colorful, vibrant graphics with animations
@@ -34,9 +35,16 @@
 - ⏱️ Time manipulation mechanics
 - 📱 Mobile-friendly controls
 - 🏆 Score tracking and level system
-- ⌨️ Keyboard controls (Arrow Keys / WASD)
+- ⌨️ Keyboard controls (Arrow Keys / WASD / IJKL)
 - 🎭 Smooth animations and visual effects
 - 🎮 Play/Pause functionality
+
+### 🆕 NEW Features!
+- 💾 **High Score Saving** - Your best score is saved automatically (localStorage)
+- 💎 **4 New Power-ups** - Speed Boost, Shield, Double Points, Invincibility
+- ◼️ **Dynamic Obstacles** - Obstacles appear every 3 levels for added challenge
+- 👥 **Local Multiplayer** - Play with a friend on the same keyboard!
+- 🎯 **Enhanced UI** - Power-up timers, shield indicator, and multiplayer stats
 
 ---
 
@@ -60,23 +68,53 @@ Guide your worm to eat food and grow longer without colliding with the walls or 
    - New food appears randomly after being eaten
 
 3. **Power-ups**
+   
+   **Original Power-up:**
    - **⭐ Bonus Food (Golden Star)** - Activates time-slow mode
    - When collected, the game slows down 2x for 5 seconds
    - Appears randomly (15% chance) after eating regular food
    - Perfect for dodging tight situations!
+   
+   **🆕 NEW Power-ups (12% spawn chance):**
+   - **⚡ Speed Boost** (Orange) - Move 2x faster for 5 seconds
+   - **🛡️ Shield** (Blue) - Survive one collision (shows in header)
+   - **💰 Double Points** (Green) - Earn 2x score for 5 seconds
+   - **⭐ Invincibility** (Gold) - Pass through walls & obstacles for 5 seconds
+   - Active power-ups show countdown timers on screen
 
-4. **Collision**
+4. **Obstacles**
+   - **◼️ Gray Blocks** appear starting at level 3
+   - 2 new obstacles spawn every 3 levels (max 15)
+   - Hitting obstacles causes game over (unless invincible or shielded)
+   - Adds strategic navigation challenge
+
+5. **Multiplayer Mode** 🆕
+   - Toggle 2-player mode before starting
+   - Player 1 (Green worm): Arrow Keys or WASD
+   - Player 2 (Pink worm): IJKL keys
+   - Player 2 scores based on worm length
+   - Collision with each other ends the game
+   - Winner declared when one player loses
+
+6. **Collision**
    - Avoid hitting the walls of the game area
    - Don't collide with your own body
    - Game ends on collision
 
-5. **Difficulty**
+7. **Difficulty**
    - Game speed increases as you level up (every 5 foods eaten)
    - Longer worms are harder to control
-   - Challenge yourself for high scores!
+   - Obstacles increase difficulty progressively
+   - Challenge yourself to beat your high score!
+
+8. **High Score System** 🆕
+   - Your best score is automatically saved
+   - High score persists between sessions
+   - "NEW HIGH SCORE" message when you break your record
 
 ### 🎮 Controls
 
+#### Player 1 Controls
 | Action | Key |
 |--------|-----|
 | Move Up | ↑ or W |
@@ -84,7 +122,20 @@ Guide your worm to eat food and grow longer without colliding with the walls or 
 | Move Left | ← or A |
 | Move Right | → or D |
 | Pause/Resume | P |
-| Start Game | Click "Start Game" button |
+
+#### Player 2 Controls (Multiplayer Mode) 🆕
+| Action | Key |
+|--------|-----|
+| Move Up | I |
+| Move Down | K |
+| Move Left | J |
+| Move Right | L |
+
+#### Game Controls
+| Action | Method |
+|--------|--------|
+| Start Game | Click "Start Game" button or press any movement key |
+| Enable Multiplayer | Check "2-Player Mode" before starting |
 | Restart | Click "Restart Game" button |
 
 ---
@@ -165,30 +216,56 @@ Game4/
 
 ## 🎨 Game Elements
 
-| Element | Description | Points |
-|---------|-------------|--------|
-| 🐛 Worm | Your player character that grows with each food | - |
-| 🍎 Red Food | Regular food to collect and grow | 10 × Level |
-| ⭐ Golden Food | Bonus food that slows time for 5 seconds | 50 × Level |
+| Element | Description | Points/Effect |
+|---------|-------------|---------------|
+| 🐛 Green Worm | Player 1 character that grows with each food | - |
+| 🐛 Pink Worm | Player 2 character (multiplayer mode only) 🆕 | - |
+| 🍎 Red Food | Regular food to collect and grow | 10 × Level × Multiplier |
+| ⭐ Golden Food | Bonus food that slows time for 5 seconds | 50 × Level × Multiplier |
+| ⚡ Speed Boost | Orange power-up - Move faster 🆕 | 5 seconds |
+| 🛡️ Shield | Blue power-up - Block one collision 🆕 | One-time use |
+| 💰 Double Points | Green power-up - 2x score 🆕 | 5 seconds |
+| ⭐ Invincibility | Gold power-up - Pass through obstacles 🆕 | 5 seconds |
+| ◼️ Obstacles | Gray blocks to avoid 🆕 | Game Over |
 | ⬜ Walls | Game boundaries - don't touch! | Game Over |
 | 📊 Score | Track your current score | Increases per food |
-| 🎚️ Level | Current difficulty level (increases every 5 foods) | - |
-| 🐛 Length | Current worm length | - |
+| 🏆 High Score | Your best score ever 🆕 | Saved automatically |
+| 🎚️ Level | Current difficulty level (every 5 foods) | - |
+| 🐛 Length | Current worm length | Display only |
 
 ---
 
 ## 💡 Pro Tips & Strategies
 
+### Basic Strategies
 1. **Plan Ahead** - Think about your next moves before making them
 2. **Keep Distance** - Maintain space between your head and body
-3. **Catch Bonus Food** - Look for golden stars ⭐ to get a time-slow boost
-4. **Use Time Slow Wisely** - Use the 5-second slow mode to escape tight situations
+3. **Slow and Steady** - In early levels, take your time to master controls
+4. **Corner Control** - Practice turning in tight spaces
+
+### Food & Scoring
 5. **Eat Efficiently** - Plan routes to collect food with minimal backtracking
-6. **Use Walls** - Sometimes walls can help you navigate safely
-7. **Slow and Steady** - In early levels, take your time to master controls
-8. **Corner Control** - Practice turning in tight spaces
-9. **Score Multiplier** - Longer worms and higher levels = higher scores per food!
-10. **Bonus Hunting** - Collect bonus food for a 5x score multiplier advantage!
+6. **Bonus Hunting** - Collect bonus food for a 5x score multiplier advantage!
+7. **Score Multiplier** - Longer worms and higher levels = higher scores per food!
+8. **Double Points Combo** 🆕 - Get Double Points power-up before eating bonus food for 100 × Level points!
+
+### Power-up Mastery 🆕
+9. **Shield First** - Grab Shield power-ups early for insurance
+10. **Time Slow Escape** - Use golden stars ⭐ to escape tight situations
+11. **Invincibility Rush** - Use Invincibility to navigate through obstacles safely
+12. **Speed Boost Timing** - Use Speed Boost in open areas to quickly collect food
+13. **Power-up Stacking** - Collect multiple power-ups for powerful combinations
+
+### Obstacle Navigation 🆕
+14. **Map Awareness** - Remember obstacle positions as they spawn
+15. **Safe Zones** - Keep track of open areas to retreat when needed
+16. **Invincible Override** - Save Invincibility power-ups for dense obstacle areas
+
+### Multiplayer Tips 👥 🆕
+17. **Territory Control** - Claim your side of the board early
+18. **Trap Opponent** - Use your body to limit opponent's movement
+19. **Food Competition** - Race to food spawns for growth advantage
+20. **Defensive Play** - Focus on survival over aggression in late game
 
 ---
 
@@ -247,16 +324,23 @@ Created with ❤️ by **Faiz Ahmad Khan**
 
 ## 🔮 Future Enhancements
 
-- [ ] Additional power-ups (speed boost, shield, etc.)
-- [ ] Multiple game modes (Classic, Endless, Timed)
-- [ ] Obstacle-filled levels
-- [ ] Sound effects and background music
-- [ ] Leaderboard system with local storage
+### ✅ Completed (New in Latest Update!)
+- [x] Additional power-ups (speed boost, shield, double points, invincibility)
+- [x] Obstacle-filled levels (progressive obstacles every 3 levels)
+- [x] Leaderboard system with local storage (high score saving)
+- [x] Multiplayer mode (local 2-player)
+
+### 🚀 Planned Features
+- [ ] Multiple game modes (Classic, Endless, Timed, Arcade)
+- [ ] Sound effects and background music toggle
 - [ ] Different worm skins and themes
 - [ ] Level progression with unique challenges
-- [ ] Difficulty settings (Easy, Normal, Hard)
-- [ ] Multiplayer mode
-- [ ] Mobile app version
+- [ ] Difficulty settings (Easy, Normal, Hard, Extreme)
+- [ ] Online multiplayer with WebSockets
+- [ ] Mobile touch controls
+- [ ] Customizable keybindings
+- [ ] Achievement system
+- [ ] Replay/playback feature
 
 ---
 
