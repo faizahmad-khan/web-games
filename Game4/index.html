@@ -23,6 +23,23 @@
                     <span class="label">Level:</span>
                     <span id="level">1</span>
                 </div>
+                <div class="stat">
+                    <span class="label">High Score:</span>
+                    <span id="highScore">0</span>
+                </div>
+                <div class="stat" id="shieldIndicator" style="display: none;">
+                    <span style="color: #2196F3; font-size: 1.3em;">🛡️ SHIELD</span>
+                </div>
+            </div>
+            <div class="stats" id="player2Info" style="display: none; margin-top: 10px; border-top: 2px solid #ff6b9d; padding-top: 10px;">
+                <div class="stat" style="color: #ff6b9d;">
+                    <span class="label" style="color: #ff6b9d;">Player 2 Score:</span>
+                    <span id="score2" style="color: #ff6b9d;">0</span>
+                </div>
+                <div class="stat" style="color: #ff6b9d;">
+                    <span class="label" style="color: #ff6b9d;">P2 Length:</span>
+                    <span id="length2" style="color: #ff6b9d;">3</span>
+                </div>
             </div>
         </header>
 
@@ -31,6 +48,7 @@
             <div id="gameOverScreen" class="game-over-screen hidden">
                 <div class="game-over-content">
                     <h2>Game Over!</h2>
+                    <p id="newHighScoreMsg" style="display: none; color: #FFD700; font-size: 1.5em; font-weight: bold; margin-bottom: 10px;">🎉 NEW HIGH SCORE! 🎉</p>
                     <p id="finalScore">Final Score: 0</p>
                     <p id="finalLength">Worm Length: 3</p>
                     <button id="restartBtn">Restart Game</button>
@@ -41,13 +59,26 @@
         <div class="instructions">
             <h3>📋 How to Play</h3>
             <ul>
-                <li><strong>Arrow Keys</strong> or <strong>WASD</strong> - Control the worm's direction</li>
+                <li><strong>Arrow Keys</strong> or <strong>WASD</strong> - Control the worm's direction (Player 1)</li>
+                <li><strong>IJKL</strong> - Control Player 2 worm (in multiplayer mode)</li>
                 <li>Eat the <span style="color: #ff6b6b;">🍎 red food</span> to grow and gain 10 points</li>
                 <li>Eat the <span style="color: #FFD700;">⭐ golden bonus food</span> to slow time for 5 seconds and gain 50 points</li>
-                <li>Don't hit the walls or yourself!</li>
+                <li><strong>NEW!</strong> Collect <span style="color: #FF9800;">⚡ Speed Boost</span> - Move faster temporarily</li>
+                <li><strong>NEW!</strong> Collect <span style="color: #2196F3;">🛡️ Shield</span> - Survive one collision</li>
+                <li><strong>NEW!</strong> Collect <span style="color: #4CAF50;">💰 Double Points</span> - 2x score for 5 seconds</li>
+                <li><strong>NEW!</strong> Collect <span style="color: #FFD700;">⭐ Invincibility</span> - Pass through walls & obstacles</li>
+                <li><strong>NEW!</strong> Watch out for <span style="color: #888;">◼️ obstacles</span> that appear every 3 levels!</li>
+                <li>Don't hit the walls, obstacles, or yourself!</li>
                 <li>Game gets faster as you level up</li>
                 <li><strong>P</strong> - Pause/Resume</li>
             </ul>
+        </div>
+
+        <div class="game-modes">
+            <label class="mode-toggle">
+                <input type="checkbox" id="multiplayerToggle">
+                <span>2-Player Mode</span>
+            </label>
         </div>
 
         <button id="pauseBtn" class="control-btn">Pause</button>
