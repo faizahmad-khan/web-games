@@ -105,10 +105,17 @@ class WormGame {
         this.setupEventListeners();
         this.setupAudioContext(); // Initialize audio context on user interaction
         this.updateHighScoreUI();
+        
+        console.log('Game constructed, worm:', this.worm);
+        console.log('Food:', this.food);
+        console.log('Canvas:', this.canvas);
+        console.log('Context:', this.ctx);
+        
         this.render();
         
         // Auto-start the game after a brief delay
         setTimeout(() => {
+            console.log('Auto-starting game...');
             this.startGame();
         }, 500);
     }
@@ -908,15 +915,21 @@ class WormGame {
     }
 
     render() {
-        // Clear canvas
-        this.ctx.fillStyle = '#1a1a2e';
-        this.ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        if (!this.ctx) {
+            console.error('Canvas context not available');
+            return;
+        }
+        
+        try {
+            // Clear canvas
+            this.ctx.fillStyle = '#1a1a2e';
+            this.ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-        // Draw grid (optional - for reference)
-        this.drawGrid();
+            // Draw grid (optional - for reference)
+            this.drawGrid();
 
-        // Draw obstacles
-        this.drawObstacles();
+            // Draw obstacles
+            this.drawObstacles();
 
         // Draw food
         this.drawFood();
@@ -951,6 +964,9 @@ class WormGame {
         if (this.state === GameState.PAUSED) {
             this.drawPauseScreen();
         }
+        } catch (error) {
+            console.error('Render error:', error);
+        }
     }
 
     drawGrid() {
@@ -973,6 +989,8 @@ class WormGame {
     }
 
     drawWorm() {
+        if (!this.ctx || !this.worm) return;
+        
         for (let i = 0; i < this.worm.length; i++) {
             const segment = this.worm[i];
             const x = segment.x * GRID_SIZE;
@@ -992,11 +1010,13 @@ class WormGame {
             }
 
             // Draw rounded rectangle
+            this.ctx.beginPath();
             this.drawRoundedRect(x + 2, y + 2, GRID_SIZE - 4, GRID_SIZE - 4, 3);
             this.ctx.fill();
 
             // Draw eyes on head
             if (i === 0) {
+                this.ctx.shadowBlur = 0;
                 this.ctx.fillStyle = 'white';
                 const eyeOffsetX = this.direction.x !== 0 ? (this.direction.x > 0 ? 6 : 2) : 4;
                 const eyeOffsetY = this.direction.y !== 0 ? (this.direction.y > 0 ? 6 : 2) : 4;
@@ -1005,9 +1025,12 @@ class WormGame {
         }
 
         this.ctx.shadowColor = 'transparent';
+        this.ctx.shadowBlur = 0;
     }
 
     drawFood() {
+        if (!this.ctx || !this.food) return;
+        
         const x = this.food.x * GRID_SIZE;
         const y = this.food.y * GRID_SIZE;
 
@@ -1021,11 +1044,13 @@ class WormGame {
 
         // Draw shine effect
         this.ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+        this.ctx.shadowBlur = 0;
         this.ctx.beginPath();
         this.ctx.arc(x + GRID_SIZE / 2 - 3, y + GRID_SIZE / 2 - 3, 3, 0, Math.PI * 2);
         this.ctx.fill();
 
         this.ctx.shadowColor = 'transparent';
+        this.ctx.shadowBlur = 0;
     }
 
     drawBonusFood() {
@@ -1149,6 +1174,8 @@ class WormGame {
     }
 
     drawObstacles() {
+        if (!this.ctx || !this.obstacles) return;
+        
         for (let obstacle of this.obstacles) {
             const x = obstacle.x * GRID_SIZE;
             const y = obstacle.y * GRID_SIZE;
@@ -1157,16 +1184,19 @@ class WormGame {
             this.ctx.fillStyle = '#555';
             this.ctx.shadowColor = 'rgba(85, 85, 85, 0.6)';
             this.ctx.shadowBlur = 8;
+            this.ctx.beginPath();
             this.drawRoundedRect(x + 1, y + 1, GRID_SIZE - 2, GRID_SIZE - 2, 2);
             this.ctx.fill();
 
             // Add highlight
             this.ctx.fillStyle = '#777';
             this.ctx.shadowBlur = 0;
+            this.ctx.beginPath();
             this.drawRoundedRect(x + 3, y + 3, GRID_SIZE - 10, GRID_SIZE - 10, 1);
             this.ctx.fill();
         }
         this.ctx.shadowColor = 'transparent';
+        this.ctx.shadowBlur = 0;
     }
 
     drawPowerUp(powerUp) {
