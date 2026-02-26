@@ -109,7 +109,14 @@ class WormGame {
         console.log('Game constructed, worm:', this.worm);
         console.log('Food:', this.food);
         console.log('Canvas:', this.canvas);
+        console.log('Canvas dimensions:', this.canvas.width, 'x', this.canvas.height);
         console.log('Context:', this.ctx);
+        
+        // Test immediate draw
+        console.log('Testing immediate canvas draw...');
+        this.ctx.fillStyle = 'yellow';
+        this.ctx.fillRect(50, 50, 100, 100);
+        console.log('Yellow test square drawn');
         
         this.render();
         
@@ -920,10 +927,20 @@ class WormGame {
             return;
         }
         
+        console.log('Render called, state:', this.state);
+        
         try {
             // Clear canvas
             this.ctx.fillStyle = '#1a1a2e';
             this.ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+            console.log('Canvas cleared');
+            
+            // Test: Draw colored rectangles to verify canvas is working
+            this.ctx.fillStyle = '#ff0000';
+            this.ctx.fillRect(10, 10, 30, 30);
+            this.ctx.fillStyle = '#00ff00';
+            this.ctx.fillRect(CANVAS_WIDTH - 40, 10, 30, 30);
+            console.log('Test squares drawn');
 
             // Draw grid (optional - for reference)
             this.drawGrid();
@@ -989,7 +1006,10 @@ class WormGame {
     }
 
     drawWorm() {
-        if (!this.ctx || !this.worm) return;
+        if (!this.ctx || !this.worm) {
+            console.error('DrawWorm: missing context or worm');
+            return;
+        }
         
         for (let i = 0; i < this.worm.length; i++) {
             const segment = this.worm[i];
@@ -1010,7 +1030,6 @@ class WormGame {
             }
 
             // Draw rounded rectangle
-            this.ctx.beginPath();
             this.drawRoundedRect(x + 2, y + 2, GRID_SIZE - 4, GRID_SIZE - 4, 3);
             this.ctx.fill();
 
@@ -1184,14 +1203,12 @@ class WormGame {
             this.ctx.fillStyle = '#555';
             this.ctx.shadowColor = 'rgba(85, 85, 85, 0.6)';
             this.ctx.shadowBlur = 8;
-            this.ctx.beginPath();
             this.drawRoundedRect(x + 1, y + 1, GRID_SIZE - 2, GRID_SIZE - 2, 2);
             this.ctx.fill();
 
             // Add highlight
             this.ctx.fillStyle = '#777';
             this.ctx.shadowBlur = 0;
-            this.ctx.beginPath();
             this.drawRoundedRect(x + 3, y + 3, GRID_SIZE - 10, GRID_SIZE - 10, 1);
             this.ctx.fill();
         }
