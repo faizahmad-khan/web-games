@@ -26,7 +26,17 @@ const PowerUpType = {
 class WormGame {
     constructor() {
         this.canvas = document.getElementById('gameCanvas');
+        if (!this.canvas) {
+            console.error('Canvas element not found!');
+            return;
+        }
+        
         this.ctx = this.canvas.getContext('2d');
+        if (!this.ctx) {
+            console.error('Could not get canvas context!');
+            return;
+        }
+        
         this.state = GameState.IDLE;
         this.score = 0;
         this.level = 1;
@@ -96,6 +106,11 @@ class WormGame {
         this.setupAudioContext(); // Initialize audio context on user interaction
         this.updateHighScoreUI();
         this.render();
+        
+        // Auto-start the game after a brief delay
+        setTimeout(() => {
+            this.startGame();
+        }, 500);
     }
 
     // High Score Management
@@ -449,9 +464,14 @@ class WormGame {
     startGame() {
         if (this.state === GameState.IDLE) {
             this.state = GameState.PLAYING;
-            document.getElementById('startBtn').style.display = 'none';
-            document.getElementById('pauseBtn').style.display = 'inline-block';
+            const startBtn = document.getElementById('startBtn');
+            const pauseBtn = document.getElementById('pauseBtn');
+            
+            if (startBtn) startBtn.style.display = 'none';
+            if (pauseBtn) pauseBtn.style.display = 'inline-block';
+            
             this.gameLoopInterval = setInterval(() => this.update(), this.gameSpeed);
+            console.log('Game started!');
         }
     }
 
@@ -1319,6 +1339,8 @@ class WormGame {
 }
 
 // Initialize game when DOM is ready
+let game; // Global variable to access the game instance
 document.addEventListener('DOMContentLoaded', () => {
-    new WormGame();
+    game = new WormGame();
+    console.log('Game initialized successfully');
 });
