@@ -105,24 +105,10 @@ class WormGame {
         this.setupEventListeners();
         this.setupAudioContext(); // Initialize audio context on user interaction
         this.updateHighScoreUI();
-        
-        console.log('Game constructed, worm:', this.worm);
-        console.log('Food:', this.food);
-        console.log('Canvas:', this.canvas);
-        console.log('Canvas dimensions:', this.canvas.width, 'x', this.canvas.height);
-        console.log('Context:', this.ctx);
-        
-        // Test immediate draw
-        console.log('Testing immediate canvas draw...');
-        this.ctx.fillStyle = 'yellow';
-        this.ctx.fillRect(50, 50, 100, 100);
-        console.log('Yellow test square drawn');
-        
         this.render();
         
         // Auto-start the game after a brief delay
         setTimeout(() => {
-            console.log('Auto-starting game...');
             this.startGame();
         }, 500);
     }
@@ -485,7 +471,6 @@ class WormGame {
             if (pauseBtn) pauseBtn.style.display = 'inline-block';
             
             this.gameLoopInterval = setInterval(() => this.update(), this.gameSpeed);
-            console.log('Game started!');
         }
     }
 
@@ -927,20 +912,10 @@ class WormGame {
             return;
         }
         
-        console.log('Render called, state:', this.state);
-        
         try {
             // Clear canvas
             this.ctx.fillStyle = '#1a1a2e';
             this.ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-            console.log('Canvas cleared');
-            
-            // Test: Draw colored rectangles to verify canvas is working
-            this.ctx.fillStyle = '#ff0000';
-            this.ctx.fillRect(10, 10, 30, 30);
-            this.ctx.fillStyle = '#00ff00';
-            this.ctx.fillRect(CANVAS_WIDTH - 40, 10, 30, 30);
-            console.log('Test squares drawn');
 
             // Draw grid (optional - for reference)
             this.drawGrid();
@@ -1006,19 +981,12 @@ class WormGame {
     }
 
     drawWorm() {
-        if (!this.ctx || !this.worm) {
-            console.error('DrawWorm: missing context or worm');
-            return;
-        }
-        
-        console.log('Drawing worm, segments:', this.worm.length);
+        if (!this.ctx || !this.worm) return;
         
         for (let i = 0; i < this.worm.length; i++) {
             const segment = this.worm[i];
             const x = segment.x * GRID_SIZE;
             const y = segment.y * GRID_SIZE;
-            
-            console.log(`Drawing segment ${i} at (${x}, ${y})`);
 
             if (i === 0) {
                 // Head
@@ -1056,8 +1024,6 @@ class WormGame {
         
         const x = this.food.x * GRID_SIZE;
         const y = this.food.y * GRID_SIZE;
-        
-        console.log(`Drawing food at (${x}, ${y})`);
 
         // Draw food with glow
         this.ctx.fillStyle = '#ff6b6b';
@@ -1395,5 +1361,4 @@ class WormGame {
 let game; // Global variable to access the game instance
 document.addEventListener('DOMContentLoaded', () => {
     game = new WormGame();
-    console.log('Game initialized successfully');
 });
