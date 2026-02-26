@@ -106,11 +106,6 @@ class WormGame {
         this.setupAudioContext(); // Initialize audio context on user interaction
         this.updateHighScoreUI();
         this.render();
-        
-        // Auto-start the game after a brief delay
-        setTimeout(() => {
-            this.startGame();
-        }, 500);
     }
 
     // High Score Management
