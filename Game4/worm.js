@@ -55,7 +55,19 @@ class WormGame {
         this.direction = { x: 1, y: 0 }; // Initial direction: right
         this.nextDirection = { x: 1, y: 0 };
 
-        // Food
+        // Multiplayer mode (new feature) - Initialize BEFORE food generation
+        this.multiplayerMode = false;
+        this.worm2 = null;
+        this.direction2 = null;
+        this.nextDirection2 = null;
+        this.score2 = 0;
+        this.worm2Active = true;
+
+        // Obstacles (new feature) - Initialize BEFORE food generation
+        this.obstacles = [];
+        this.maxObstacles = 0;
+
+        // Food - Initialize AFTER obstacles and multiplayer
         this.food = this.generateFood();
         this.bonusFood = null;
         this.bonusSpawnChance = 0.15; // 15% chance to spawn bonus after eating
@@ -81,18 +93,6 @@ class WormGame {
         this.doublePointsEndTime = 0;
         this.speedBoostActive = false;
         this.speedBoostEndTime = 0;
-
-        // Obstacles (new feature)
-        this.obstacles = [];
-        this.maxObstacles = 0;
-
-        // Multiplayer mode (new feature)
-        this.multiplayerMode = false;
-        this.worm2 = null;
-        this.direction2 = null;
-        this.nextDirection2 = null;
-        this.score2 = 0;
-        this.worm2Active = true;
 
         // Initialize audio object reference but don't create it yet
         this.gameOverAudio = null;
@@ -1011,10 +1011,14 @@ class WormGame {
             return;
         }
         
+        console.log('Drawing worm, segments:', this.worm.length);
+        
         for (let i = 0; i < this.worm.length; i++) {
             const segment = this.worm[i];
             const x = segment.x * GRID_SIZE;
             const y = segment.y * GRID_SIZE;
+            
+            console.log(`Drawing segment ${i} at (${x}, ${y})`);
 
             if (i === 0) {
                 // Head
@@ -1052,6 +1056,8 @@ class WormGame {
         
         const x = this.food.x * GRID_SIZE;
         const y = this.food.y * GRID_SIZE;
+        
+        console.log(`Drawing food at (${x}, ${y})`);
 
         // Draw food with glow
         this.ctx.fillStyle = '#ff6b6b';
