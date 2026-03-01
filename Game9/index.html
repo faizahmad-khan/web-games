@@ -2,35 +2,60 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pacman Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Pac-Man</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="game-container">
-        <h1>PACMAN</h1>
-        <div class="game-info">
-            <div class="score">Score: <span id="score">0</span></div>
-            <div class="lives">Lives: <span id="lives">3</span></div>
-            <div class="level">Level: <span id="level">1</span></div>
-        </div>
-        <canvas id="gameCanvas" width="540" height="660"></canvas>
-        <div id="gameOverScreen" class="game-over-screen hidden">
-            <h2>Game Over</h2>
-            <p>Final Score: <span id="finalScore">0</span></p>
-            <button id="restartButton">Play Again</button>
-        </div>
-        <div id="startScreen" class="start-screen">
-            <h2>PACMAN</h2>
-            <p>Use arrow keys to move</p>
-            <p>Avoid ghosts or eat power pellets to eat them!</p>
-            <button id="startButton">Start Game</button>
-        </div>
-        <div id="pauseScreen" class="pause-screen hidden">
-            <h2>PAUSED</h2>
-            <p>Press SPACE to resume</p>
-        </div>
+<div class="game-wrapper">
+  <div class="game-container">
+    <h1 class="title">PAC-MAN</h1>
+    <div class="game-info">
+      <div class="info-box"><span class="label">SCORE</span><span id="score">0</span></div>
+      <div class="info-box"><span class="label">HIGH SCORE</span><span id="highScore">0</span></div>
+      <div class="info-box"><span class="label">LEVEL</span><span id="level">1</span></div>
     </div>
-    <script src="script.js"></script>
+    <div class="canvas-wrapper">
+      <canvas id="gameCanvas" width="540" height="660"></canvas>
+      <div id="gameOverScreen" class="overlay hidden">
+        <h2>GAME OVER</h2>
+        <p>Score: <span id="finalScore">0</span></p>
+        <p id="highScoreMsg" class="high-score-msg"></p>
+        <button id="restartButton" class="btn">Play Again</button>
+      </div>
+      <div id="startScreen" class="overlay">
+        <h2>PAC-MAN</h2>
+        <p>&#127918; Arrow Keys / WASD to move</p>
+        <p>&#128123; Eat power pellets to hunt ghosts!</p>
+        <p>&#127826; Bonus fruit appears mid-level!</p>
+        <p class="small">SPACE to pause</p>
+        <button id="startButton" class="btn">Start Game</button>
+      </div>
+      <div id="pauseScreen" class="overlay hidden">
+        <h2>PAUSED</h2>
+        <p>Press SPACE or tap to resume</p>
+        <button id="resumeButton" class="btn">Resume</button>
+      </div>
+      <div id="levelScreen" class="overlay hidden">
+        <h2 id="levelTitle">LEVEL 2</h2>
+        <p id="levelMsg">Get Ready!</p>
+      </div>
+    </div>
+    <div class="lives-bar">
+      <span class="lives-label">LIVES:</span>
+      <span id="livesDisplay"></span>
+    </div>
+    <div class="dpad">
+      <button class="dpad-btn" id="btnUp">&#9650;</button>
+      <div class="dpad-row">
+        <button class="dpad-btn" id="btnLeft">&#9664;</button>
+        <div class="dpad-center"></div>
+        <button class="dpad-btn" id="btnRight">&#9654;</button>
+      </div>
+      <button class="dpad-btn" id="btnDown">&#9660;</button>
+    </div>
+  </div>
+</div>
+<script src="script.js"></script>
 </body>
 </html>
