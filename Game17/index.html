@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Castle Defenders - Tower Defense RPG</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- ==================== MAIN MENU ==================== -->
+    <div id="main-menu" class="screen active">
+        <div class="menu-bg-animation"></div>
+        <div class="menu-content">
+            <div class="game-logo">
+                <div class="castle-icon">🏰</div>
+                <h1 class="game-title">Castle Defenders</h1>
+                <p class="game-subtitle">Tower Defense RPG</p>
+            </div>
+            <div class="menu-buttons">
+                <button id="btn-new-game" class="menu-btn primary">⚔️ New Campaign</button>
+                <button id="btn-endless" class="menu-btn">🔄 Endless Mode</button>
+                <button id="btn-tutorial" class="menu-btn">📖 Tutorial</button>
+                <button id="btn-settings" class="menu-btn">⚙️ Settings</button>
+            </div>
+            <div class="hero-select-preview">
+                <p class="select-label">Choose Your Hero</p>
+                <div class="hero-roster" id="hero-roster">
+                    <div class="hero-card selected" data-hero="knight">
+                        <div class="hero-portrait">🛡️</div>
+                        <span class="hero-name">Knight</span>
+                        <span class="hero-trait">+20% Tower HP</span>
+                    </div>
+                    <div class="hero-card" data-hero="mage">
+                        <div class="hero-portrait">🧙</div>
+                        <span class="hero-name">Mage</span>
+                        <span class="hero-trait">+15% Magic Dmg</span>
+                    </div>
+                    <div class="hero-card" data-hero="ranger">
+                        <div class="hero-portrait">🏹</div>
+                        <span class="hero-name">Ranger</span>
+                        <span class="hero-trait">+25% Range</span>
+                    </div>
+                    <div class="hero-card" data-hero="engineer">
+                        <div class="hero-portrait">⚒️</div>
+                        <span class="hero-name">Engineer</span>
+                        <span class="hero-trait">-15% Build Cost</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== TUTORIAL SCREEN ==================== -->
+    <div id="tutorial-screen" class="screen">
+        <div class="tutorial-overlay">
+            <div class="tutorial-panel">
+                <h2>📖 How to Play</h2>
+                <div class="tutorial-pages" id="tutorial-pages">
+                    <div class="tutorial-page active" data-page="0">
+                        <div class="tutorial-icon">🏰</div>
+                        <h3>Defend Your Castle</h3>
+                        <p>Enemies march along the path toward your castle. Place towers along the route to stop them before they reach the gates!</p>
+                    </div>
+                    <div class="tutorial-page" data-page="1">
+                        <div class="tutorial-icon">🗼</div>
+                        <h3>Build Towers</h3>
+                        <p>Click empty grid cells to place towers. Each tower type has unique abilities — Archer towers attack fast, Mage towers deal area damage, Cannon towers hit hard!</p>
+                    </div>
+                    <div class="tutorial-page" data-page="2">
+                        <div class="tutorial-icon">⬆️</div>
+                        <h3>Upgrade & Evolve</h3>
+                        <p>Click existing towers to upgrade them. At level 3, towers can evolve into powerful specializations with unique abilities!</p>
+                    </div>
+                    <div class="tutorial-page" data-page="3">
+                        <div class="tutorial-icon">⚡</div>
+                        <h3>Hero Abilities</h3>
+                        <p>Your hero has 3 special abilities on cooldown. Use them wisely — a well-timed spell can turn the tide of battle!</p>
+                    </div>
+                    <div class="tutorial-page" data-page="4">
+                        <div class="tutorial-icon">💰</div>
+                        <h3>Economy & Strategy</h3>
+                        <p>Earn gold from defeated enemies. Balance between building new towers, upgrading existing ones, and saving for powerful abilities.</p>
+                    </div>
+                </div>
+                <div class="tutorial-nav">
+                    <button id="tutorial-prev" class="tutorial-btn" disabled>← Previous</button>
+                    <div class="tutorial-dots" id="tutorial-dots"></div>
+                    <button id="tutorial-next" class="tutorial-btn">Next →</button>
+                </div>
+                <button id="tutorial-close" class="menu-btn">✕ Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SETTINGS SCREEN ==================== -->
+    <div id="settings-screen" class="screen">
+        <div class="settings-overlay">
+            <div class="settings-panel">
+                <h2>⚙️ Settings</h2>
+                <div class="setting-row">
+                    <label>Master Volume</label>
+                    <input type="range" id="setting-volume" min="0" max="100" value="70">
+                    <span id="volume-val">70%</span>
+                </div>
+                <div class="setting-row">
+                    <label>SFX Volume</label>
+                    <input type="range" id="setting-sfx" min="0" max="100" value="80">
+                    <span id="sfx-val">80%</span>
+                </div>
+                <div class="setting-row">
+                    <label>Game Speed</label>
+                    <div class="speed-toggle">
+                        <button class="speed-btn active" data-speed="1">1x</button>
+                        <button class="speed-btn" data-speed="2">2x</button>
+                        <button class="speed-btn" data-speed="3">3x</button>
+                    </div>
+                </div>
+                <div class="setting-row">
+                    <label>Show Grid</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="setting-grid" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="setting-row">
+                    <label>Show Ranges</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="setting-ranges">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="setting-row">
+                    <label>Particles</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="setting-particles" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <button id="settings-close" class="menu-btn primary">✔ Save & Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== GAME SCREEN ==================== -->
+    <div id="game-screen" class="screen">
+        <!-- Top HUD -->
+        <div class="game-hud top-hud">
+            <div class="hud-left">
+                <div class="hud-item gold-display">
+                    <span class="hud-icon">💰</span>
+                    <span id="hud-gold">500</span>
+                </div>
+                <div class="hud-item lives-display">
+                    <span class="hud-icon">❤️</span>
+                    <span id="hud-lives">20</span>
+                </div>
+                <div class="hud-item wave-display">
+                    <span class="hud-icon">🌊</span>
+                    <span>Wave</span>
+                    <span id="hud-wave">0</span>
+                    <span>/</span>
+                    <span id="hud-total-waves">30</span>
+                </div>
+                <div class="hud-item score-display">
+                    <span class="hud-icon">⭐</span>
+                    <span id="hud-score">0</span>
+                </div>
+            </div>
+            <div class="hud-center">
+                <div class="wave-progress-bar">
+                    <div class="wave-progress-fill" id="wave-progress-fill"></div>
+                    <span class="wave-progress-text" id="wave-progress-text">Preparing...</span>
+                </div>
+            </div>
+            <div class="hud-right">
+                <button id="btn-pause" class="hud-btn" title="Pause (Space)">⏸️</button>
+                <button id="btn-fast" class="hud-btn" title="Speed (F)">⏩</button>
+                <button id="btn-next-wave" class="hud-btn pulse" title="Next Wave (N)">▶️ Send Wave</button>
+            </div>
+        </div>
+
+        <!-- Game Canvas Area -->
+        <div class="game-area">
+            <canvas id="game-canvas"></canvas>
+
+            <!-- Floating Tower Info Panel -->
+            <div id="tower-info-panel" class="tower-info-panel hidden">
+                <div class="tower-info-header">
+                    <span class="tower-info-icon" id="tower-info-icon">🏹</span>
+                    <div>
+                        <h3 id="tower-info-name">Archer Tower</h3>
+                        <span id="tower-info-level" class="tower-level-badge">Lv 1</span>
+                    </div>
+                    <button id="tower-info-close" class="info-close-btn">✕</button>
+                </div>
+                <div class="tower-info-stats">
+                    <div class="stat-row"><span>⚔️ Damage</span><span id="tower-stat-dmg">10</span></div>
+                    <div class="stat-row"><span>⏱️ Speed</span><span id="tower-stat-spd">1.0s</span></div>
+                    <div class="stat-row"><span>📏 Range</span><span id="tower-stat-rng">120</span></div>
+                    <div class="stat-row"><span>🎯 Kills</span><span id="tower-stat-kills">0</span></div>
+                    <div class="stat-row"><span>💰 Value</span><span id="tower-stat-value">50</span></div>
+                </div>
+                <div class="tower-info-actions">
+                    <button id="btn-upgrade-tower" class="action-btn upgrade-btn">
+                        ⬆️ Upgrade <span id="upgrade-cost">75g</span>
+                    </button>
+                    <button id="btn-sell-tower" class="action-btn sell-btn">
+                        💰 Sell <span id="sell-value">35g</span>
+                    </button>
+                    <button id="btn-evolve-tower" class="action-btn evolve-btn hidden">
+                        ✨ Evolve <span id="evolve-cost">200g</span>
+                    </button>
+                </div>
+                <div id="evolve-options" class="evolve-options hidden">
+                    <p>Choose Evolution:</p>
+                    <div id="evolve-choices"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom HUD - Tower Build Bar -->
+        <div class="game-hud bottom-hud">
+            <div class="tower-build-bar" id="tower-build-bar">
+                <div class="tower-slot" data-tower="archer" title="Archer Tower (50g) - Fast single target">
+                    <div class="tower-icon">🏹</div>
+                    <span class="tower-label">Archer</span>
+                    <span class="tower-cost">50g</span>
+                    <div class="tower-hotkey">1</div>
+                </div>
+                <div class="tower-slot" data-tower="mage" title="Mage Tower (80g) - AoE magic damage">
+                    <div class="tower-icon">🔮</div>
+                    <span class="tower-label">Mage</span>
+                    <span class="tower-cost">80g</span>
+                    <div class="tower-hotkey">2</div>
+                </div>
+                <div class="tower-slot" data-tower="cannon" title="Cannon Tower (100g) - High damage, slow">
+                    <div class="tower-icon">💣</div>
+                    <span class="tower-label">Cannon</span>
+                    <span class="tower-cost">100g</span>
+                    <div class="tower-hotkey">3</div>
+                </div>
+                <div class="tower-slot" data-tower="frost" title="Frost Tower (70g) - Slows enemies">
+                    <div class="tower-icon">❄️</div>
+                    <span class="tower-label">Frost</span>
+                    <span class="tower-cost">70g</span>
+                    <div class="tower-hotkey">4</div>
+                </div>
+                <div class="tower-slot" data-tower="lightning" title="Lightning Tower (120g) - Chain damage">
+                    <div class="tower-icon">⚡</div>
+                    <span class="tower-label">Lightning</span>
+                    <span class="tower-cost">120g</span>
+                    <div class="tower-hotkey">5</div>
+                </div>
+                <div class="tower-slot" data-tower="poison" title="Poison Tower (90g) - DoT damage">
+                    <div class="tower-icon">☠️</div>
+                    <span class="tower-label">Poison</span>
+                    <span class="tower-cost">90g</span>
+                    <div class="tower-hotkey">6</div>
+                </div>
+                <div class="tower-slot" data-tower="holy" title="Holy Tower (150g) - Heals & buffs">
+                    <div class="tower-icon">✝️</div>
+                    <span class="tower-label">Holy</span>
+                    <span class="tower-cost">150g</span>
+                    <div class="tower-hotkey">7</div>
+                </div>
+                <div class="tower-slot" data-tower="necro" title="Necro Tower (200g) - Summons undead">
+                    <div class="tower-icon">💀</div>
+                    <span class="tower-label">Necro</span>
+                    <span class="tower-cost">200g</span>
+                    <div class="tower-hotkey">8</div>
+                </div>
+            </div>
+
+            <!-- Hero Abilities Bar -->
+            <div class="hero-abilities-bar" id="hero-abilities-bar">
+                <div class="hero-portrait-hud" id="hero-portrait-hud">🛡️</div>
+                <div class="hero-level-hud">
+                    <span id="hero-level-text">Lv 1</span>
+                    <div class="hero-xp-bar">
+                        <div class="hero-xp-fill" id="hero-xp-fill"></div>
+                    </div>
+                </div>
+                <div class="ability-slot" data-ability="0" title="Ability 1 (Q)">
+                    <div class="ability-icon" id="ability-icon-0">⚔️</div>
+                    <div class="ability-cooldown" id="ability-cd-0"></div>
+                    <div class="ability-hotkey">Q</div>
+                </div>
+                <div class="ability-slot" data-ability="1" title="Ability 2 (W)">
+                    <div class="ability-icon" id="ability-icon-1">🛡️</div>
+                    <div class="ability-cooldown" id="ability-cd-1"></div>
+                    <div class="ability-hotkey">W</div>
+                </div>
+                <div class="ability-slot" data-ability="2" title="Ability 3 (E)">
+                    <div class="ability-icon" id="ability-icon-2">💥</div>
+                    <div class="ability-cooldown" id="ability-cd-2"></div>
+                    <div class="ability-hotkey">E</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== PAUSE OVERLAY ==================== -->
+    <div id="pause-overlay" class="overlay hidden">
+        <div class="overlay-panel">
+            <h2>⏸️ Paused</h2>
+            <button id="btn-resume" class="menu-btn primary">▶️ Resume</button>
+            <button id="btn-restart" class="menu-btn">🔄 Restart</button>
+            <button id="btn-quit" class="menu-btn">🏠 Main Menu</button>
+        </div>
+    </div>
+
+    <!-- ==================== WAVE COMPLETE OVERLAY ==================== -->
+    <div id="wave-complete-overlay" class="overlay hidden">
+        <div class="overlay-panel wave-complete-panel">
+            <h2 id="wave-complete-title">🌊 Wave 1 Complete!</h2>
+            <div class="wave-rewards">
+                <div class="reward-item">
+                    <span>💰 Gold Earned</span>
+                    <span id="wave-gold-reward">+50</span>
+                </div>
+                <div class="reward-item">
+                    <span>⭐ Score</span>
+                    <span id="wave-score-reward">+200</span>
+                </div>
+                <div class="reward-item">
+                    <span>✨ Hero XP</span>
+                    <span id="wave-xp-reward">+25</span>
+                </div>
+            </div>
+            <button id="btn-wave-continue" class="menu-btn primary">Continue</button>
+        </div>
+    </div>
+
+    <!-- ==================== GAME OVER OVERLAY ==================== -->
+    <div id="game-over-overlay" class="overlay hidden">
+        <div class="overlay-panel game-over-panel">
+            <h2 id="game-over-title">💀 Castle Fallen!</h2>
+            <div class="game-over-stats">
+                <div class="final-stat"><span>🌊 Waves Survived</span><span id="final-waves">0</span></div>
+                <div class="final-stat"><span>⭐ Final Score</span><span id="final-score">0</span></div>
+                <div class="final-stat"><span>🗼 Towers Built</span><span id="final-towers">0</span></div>
+                <div class="final-stat"><span>💀 Enemies Slain</span><span id="final-kills">0</span></div>
+                <div class="final-stat"><span>👑 Hero Level</span><span id="final-hero-level">1</span></div>
+            </div>
+            <button id="btn-retry" class="menu-btn primary">🔄 Retry</button>
+            <button id="btn-back-menu" class="menu-btn">🏠 Main Menu</button>
+        </div>
+    </div>
+
+    <!-- ==================== VICTORY OVERLAY ==================== -->
+    <div id="victory-overlay" class="overlay hidden">
+        <div class="overlay-panel victory-panel">
+            <h2>🎉 Victory!</h2>
+            <p class="victory-subtitle">The kingdom is saved!</p>
+            <div class="star-rating" id="star-rating">
+                <span class="star">⭐</span>
+                <span class="star">⭐</span>
+                <span class="star">⭐</span>
+            </div>
+            <div class="game-over-stats">
+                <div class="final-stat"><span>⭐ Final Score</span><span id="victory-score">0</span></div>
+                <div class="final-stat"><span>❤️ Lives Remaining</span><span id="victory-lives">0</span></div>
+                <div class="final-stat"><span>💀 Total Kills</span><span id="victory-kills">0</span></div>
+                <div class="final-stat"><span>👑 Hero Level</span><span id="victory-hero-level">1</span></div>
+            </div>
+            <button id="btn-victory-menu" class="menu-btn primary">🏠 Main Menu</button>
+        </div>
+    </div>
+
+    <!-- Floating Damage Numbers Container -->
+    <div id="float-numbers" class="float-numbers-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
