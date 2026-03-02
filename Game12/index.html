@@ -7,17 +7,120 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Victory confetti canvas -->
+    <canvas id="confetti-canvas"></canvas>
+
     <div class="container">
         <h1>Maze Game</h1>
-        <div class="game-info">
-            <div class="moves">Moves: <span id="move-count">0</span></div>
-            <button id="reset-btn">Reset Maze</button>
+
+        <!-- Top controls row -->
+        <div class="top-controls">
+            <div class="difficulty-selector">
+                <label for="difficulty">Difficulty:</label>
+                <select id="difficulty">
+                    <option value="easy">Easy</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+            <div class="toggle-group">
+                <label class="toggle-label">
+                    <input type="checkbox" id="fog-toggle">
+                    <span class="toggle-text">Fog of War</span>
+                </label>
+                <label class="toggle-label">
+                    <input type="checkbox" id="trail-toggle" checked>
+                    <span class="toggle-text">Show Trail</span>
+                </label>
+            </div>
         </div>
-        <canvas id="maze-canvas" width="600" height="400"></canvas>
+
+        <!-- Stats bar -->
+        <div class="game-info">
+            <div class="stat">
+                <span class="stat-icon">🚶</span>
+                <span>Moves: <strong id="move-count">0</strong></span>
+            </div>
+            <div class="stat">
+                <span class="stat-icon">⏱️</span>
+                <span>Time: <strong id="timer">00:00</strong></span>
+            </div>
+            <div class="stat">
+                <span class="stat-icon">⭐</span>
+                <span>Stars: <strong id="star-count">0</strong>/<strong id="star-total">0</strong></span>
+            </div>
+            <div class="stat">
+                <span class="stat-icon">🏆</span>
+                <span>Score: <strong id="score">0</strong></span>
+            </div>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="action-buttons">
+            <button id="hint-btn" class="btn btn-hint" title="Show solution path briefly (3 per game)">
+                💡 Hint (<span id="hint-count">3</span>)
+            </button>
+            <button id="reset-btn" class="btn btn-reset">🔄 New Maze</button>
+        </div>
+
+        <!-- Game canvas -->
+        <canvas id="maze-canvas"></canvas>
+
+        <!-- Minimap -->
+        <canvas id="minimap-canvas" title="Minimap"></canvas>
+
+        <!-- Mobile D-Pad controls -->
+        <div class="dpad-container" id="dpad">
+            <button class="dpad-btn dpad-up" data-dir="up">▲</button>
+            <button class="dpad-btn dpad-left" data-dir="left">◀</button>
+            <button class="dpad-btn dpad-center" disabled></button>
+            <button class="dpad-btn dpad-right" data-dir="right">▶</button>
+            <button class="dpad-btn dpad-down" data-dir="down">▼</button>
+        </div>
+
+        <!-- Best Scores -->
+        <div class="best-scores">
+            <h3>🏅 Best Scores</h3>
+            <div class="scores-grid">
+                <div class="score-card">
+                    <div class="score-difficulty">Easy</div>
+                    <div class="score-value" id="best-easy">--</div>
+                </div>
+                <div class="score-card">
+                    <div class="score-difficulty">Medium</div>
+                    <div class="score-value" id="best-medium">--</div>
+                </div>
+                <div class="score-card">
+                    <div class="score-difficulty">Hard</div>
+                    <div class="score-value" id="best-hard">--</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions -->
         <div class="instructions">
-            <p>Use arrow keys or WASD to navigate the maze. Find the path to the green destination!</p>
+            <p>Use <kbd>Arrow keys</kbd> or <kbd>WASD</kbd> to navigate. Collect ⭐ stars for bonus points. Reach the green exit!</p>
+            <p class="hint-info">Press <kbd>H</kbd> for a hint. Toggle fog of war for an extra challenge!</p>
         </div>
     </div>
+
+    <!-- Victory modal -->
+    <div class="modal-overlay" id="victory-modal">
+        <div class="modal">
+            <h2>🎉 Maze Complete!</h2>
+            <div class="modal-stats">
+                <div class="modal-stat"><span>Moves:</span><strong id="modal-moves">0</strong></div>
+                <div class="modal-stat"><span>Time:</span><strong id="modal-time">00:00</strong></div>
+                <div class="modal-stat"><span>Stars:</span><strong id="modal-stars">0/0</strong></div>
+                <div class="modal-stat"><span>Score:</span><strong id="modal-score">0</strong></div>
+                <div class="modal-stat best" id="modal-best-row" style="display:none">
+                    <span>🏆 New Best!</span><strong id="modal-best">0</strong>
+                </div>
+            </div>
+            <button id="modal-next-btn" class="btn btn-reset">Next Maze →</button>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
