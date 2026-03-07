@@ -33,11 +33,13 @@ Experience the nostalgia of the classic Space Invaders arcade game, reimagined f
 
 ### 🎨 Visual Excellence
 - **Retro aesthetic** with modern CSS gradients and effects
-- **Animated starfield** background for space atmosphere
+- **Twinkling starfield** background with varied star sizes and brightness
 - **Smooth animations** for all game elements
-- **Glowing effects** for text and UI elements
-- **Explosion effects** when aliens are destroyed
-- **Color-coded aliens** with emoji graphics
+- **Glowing effects** for text, UI elements, and bullets
+- **Particle explosion system** with animated debris when enemies are destroyed
+- **Floating score text** (+10, +30, +100) rises from destroyed enemies
+- **Color-coded aliens** with emoji graphics and subtle wobble animation
+- **Pulsing mystery ship** with red glow effect and point label
 
 ### 🎯 Game Elements
 - **Player Ship** 🚀 - Your defense against the invasion
@@ -65,8 +67,12 @@ Experience the nostalgia of the classic Space Invaders arcade game, reimagined f
 - **Pause functionality** - Press 'P' to pause/resume
 - **Level progression** - Increasing speed and challenge
 - **Multiple screens** - Start, pause, game over, level complete
-- **Barrier degradation** - Barriers lose health when hit
-- **Smart alien AI** - Aliens shoot randomly and move strategically
+- **Barrier degradation** - Barriers lose health visually (4 hits to destroy)
+- **Smart alien AI** - Bottom-row aliens preferentially shoot for realistic attacks
+- **Player invulnerability** - Brief 1.5s blink period after losing a life
+- **Shoot cooldown** - 200ms between shots prevents bullet spam
+- **Mystery ship from both sides** - Randomly spawns from left or right
+- **Screen shake & flash CSS** - Visual feedback for hits and level completion
 
 ---
 
@@ -100,13 +106,13 @@ Destroy all alien invaders before they reach Earth or eliminate your ship!
 
 3. **Use Barriers Strategically**
    - 4 barriers provide temporary protection
-   - Barriers degrade with each hit (3 hits to destroy)
+   - Barriers degrade with each hit (4 hits to destroy)
    - Both player and alien bullets damage barriers
 
 4. **Watch for Mystery Ships**
-   - Bonus ships appear randomly at the top
-   - Worth 100 points when destroyed
-   - They fly across the screen and disappear
+   - Bonus ships appear randomly at the top from either side
+   - Worth 100 points when destroyed (shown with a "100" label)
+   - They fly across the screen with a pulsing red glow
 
 5. **Survive the Invasion**
    - Aliens move side-to-side and descend
@@ -167,13 +173,15 @@ Game14/
 
 ### Shooting Mechanics
 - Player can have up to 3 bullets on screen simultaneously
-- Aliens shoot randomly at intervals
+- 200ms cooldown between shots for balanced gameplay
+- Bottom-row aliens preferentially shoot (smarter AI)
 - Shooting frequency increases with level difficulty
 
 ### Barrier System
 - 4 destructible barriers protect the player
-- Each barrier can take 3 hits before being destroyed
-- Visual degradation shows remaining health
+- Each barrier can take 4 hits before being destroyed
+- Stable pre-generated block pattern (no visual flickering)
+- Glowing border shows remaining health
 - Both player and alien bullets damage barriers
 
 ### Level Progression
@@ -192,9 +200,10 @@ Game14/
 2. **Use Barriers** - Hide behind them when overwhelmed
 3. **Shoot Continuously** - Maximum of 3 bullets keeps pressure on aliens
 4. **Prioritize Threats** - Target aliens closest to you first
-5. **Hunt Mystery Ships** - Easy 100 points when they appear
-6. **Save Barriers** - They become more valuable in later levels
-7. **Watch Patterns** - Alien bullets have predictable trajectories
+5. **Hunt Mystery Ships** - Easy 100 points when they appear from either side
+6. **Save Barriers** - They last 4 hits and become more valuable in later levels
+7. **Watch Patterns** - Bottom-row aliens shoot more often
+8. **Use Invulnerability** - After losing a life, reposition during the 1.5s blink window
 
 ---
 
@@ -234,9 +243,10 @@ The game can be easily customized by modifying:
 - ✅ Mobile browsers (iOS Safari, Chrome Mobile)
 
 ### Performance
-- Optimized canvas rendering
-- Efficient collision detection
-- Memory-conscious object management
+- Optimized canvas rendering with pre-generated barrier patterns
+- Efficient Set-based collision detection (no index-shifting bugs)
+- Proper `cancelAnimationFrame` cleanup prevents stacking game loops
+- Twinkling star positions generated once, reused every frame
 - Smooth 60 FPS on modern devices
 
 ---
@@ -248,6 +258,21 @@ The game can be easily customized by modifying:
 
 **Issue**: Touch controls delayed on some mobile devices  
 **Solution**: Passive event listeners disabled for better response
+
+**Fixed**: Barrier blocks flickered every frame due to per-frame `Math.random()` calls  
+**Solution**: Block patterns are now pre-generated once at barrier creation
+
+**Fixed**: Bullets sometimes passed through aliens (collision missed)  
+**Solution**: Replaced `splice()` inside `forEach` with Set-based marking for clean removal
+
+**Fixed**: Multiple game loops stacking on restart/level transitions  
+**Solution**: `cancelAnimationFrame()` called before each new loop starts
+
+**Fixed**: Alien jitter at screen edges  
+**Solution**: Boundary check now uses leftmost/rightmost alive alien before moving
+
+**Fixed**: Game over could trigger multiple times  
+**Solution**: Guard check prevents duplicate `gameOver()` calls
 
 ---
 
