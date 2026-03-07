@@ -379,3 +379,25 @@ footer {
         opacity: 0.5;
     }
 }
+
+/* Screen shake on hit */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+}
+
+.canvas-container.shake {
+    animation: shake 0.15s ease-in-out;
+}
+
+/* Level complete flash */
+@keyframes levelFlash {
+    0% { border-color: #ff00ff; }
+    50% { border-color: #00ff00; box-shadow: 0 0 40px rgba(0, 255, 0, 0.8); }
+    100% { border-color: #ff00ff; }
+}
+
+.canvas-container.level-flash {
+    animation: levelFlash 0.5s ease-in-out 3;
+}
