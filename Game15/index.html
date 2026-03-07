@@ -28,6 +28,10 @@
                     <span class="stat-label">Level</span>
                     <span id="level" class="stat-value">1</span>
                 </div>
+                <div class="stat-box combo-box">
+                    <span class="stat-label">Combo</span>
+                    <span id="combo" class="stat-value"></span>
+                </div>
                 <div class="stat-box lives-box">
                     <span class="stat-label">Lives</span>
                     <div id="lives" class="lives-container">
@@ -55,6 +59,13 @@
                             <p class="brick-points">🟥 Red = 50 pts | 🟧 Orange = 40 pts</p>
                             <p class="brick-points">🟨 Yellow = 30 pts | 🟩 Green = 20 pts</p>
                             <p class="brick-points">🟦 Blue = 10 pts</p>
+                            <br>
+                            <h3>Power-Ups</h3>
+                            <p class="powerup-legend"><span class="pu-icon pu-wide">↔</span> Wide Paddle</p>
+                            <p class="powerup-legend"><span class="pu-icon pu-life">❤</span> Extra Life</p>
+                            <p class="powerup-legend"><span class="pu-icon pu-multi">⊕</span> Multi Ball</p>
+                            <p class="powerup-legend"><span class="pu-icon pu-slow">⏳</span> Slow Ball</p>
+                            <p class="powerup-legend"><span class="pu-icon pu-fire">🔥</span> Fire Ball</p>
                         </div>
                         <button id="startButton" class="game-button">START GAME</button>
                     </div>
@@ -66,6 +77,8 @@
                         <h2>GAME OVER</h2>
                         <p class="final-score">Final Score: <span id="finalScore">0</span></p>
                         <p class="final-level">Level Reached: <span id="finalLevel">1</span></p>
+                        <p class="final-combo">Best Combo: <span id="finalCombo">0</span></p>
+                        <p class="final-bricks">Bricks Destroyed: <span id="finalBricks">0</span></p>
                         <button id="restartButton" class="game-button">PLAY AGAIN</button>
                     </div>
                 </div>
