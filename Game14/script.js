@@ -19,6 +19,7 @@ const player = {
     speed: 5,
     moveLeft: false,
     moveRight: false,
+    shooting: false,
     invulnerable: false,
     invulnerableTimer: 0
 };
@@ -323,6 +324,10 @@ function updatePlayer() {
     }
     if (player.moveRight && player.x < canvas.width - player.width) {
         player.x += player.speed;
+    }
+    // Continuous firing while holding space
+    if (player.shooting) {
+        shoot();
     }
     // Invulnerability timer
     if (player.invulnerable) {
@@ -695,6 +700,7 @@ function startGame() {
 
     player.x = canvas.width / 2 - 20;
     player.invulnerable = false;
+    player.shooting = false;
     bullets = [];
     alienBullets = [];
     createAliens();
@@ -735,7 +741,7 @@ document.addEventListener('keydown', (e) => {
             e.preventDefault();
             break;
         case ' ':
-            if (gameState === 'playing') shoot();
+            if (gameState === 'playing') player.shooting = true;
             e.preventDefault();
             break;
         case 'p':
@@ -753,6 +759,9 @@ document.addEventListener('keyup', (e) => {
             break;
         case 'ArrowRight':
             player.moveRight = false;
+            break;
+        case ' ':
+            player.shooting = false;
             break;
     }
 });
