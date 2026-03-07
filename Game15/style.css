@@ -79,6 +79,25 @@ header h1 {
     background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
 }
 
+.combo-box {
+    background: linear-gradient(135deg, #f5af19 0%, #f12711 100%);
+}
+
+.combo-hot {
+    animation: comboPulse 0.3s ease-in-out infinite alternate;
+    color: #ffe066;
+    text-shadow: 0 0 10px rgba(255,224,102,0.8);
+}
+
+.combo-warm {
+    color: #ffd700;
+}
+
+@keyframes comboPulse {
+    from { transform: scale(1); }
+    to   { transform: scale(1.15); }
+}
+
 .lives-container {
     display: flex;
     justify-content: center;
@@ -201,15 +220,43 @@ header h1 {
     transform: translateY(0);
 }
 
-.final-score, .final-level, .level-score, .next-level {
+.final-score, .final-level, .level-score, .next-level, .final-combo, .final-bricks {
     font-size: 1.5rem;
     margin: 15px 0;
 }
 
-.final-score span, .final-level span, .level-score span, .next-level span {
+.final-score span, .final-level span, .level-score span, .next-level span,
+.final-combo span, .final-bricks span {
     color: #f093fb;
     font-weight: bold;
 }
+
+/* Power-up legend */
+.powerup-legend {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 6px 0;
+    font-size: 1rem;
+}
+
+.pu-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+}
+
+.pu-wide  { background: #3498db; }
+.pu-life  { background: #e74c3c; }
+.pu-multi { background: #f39c12; }
+.pu-slow  { background: #27ae60; }
+.pu-fire  { background: #ff6b35; }
 
 .controls-info {
     display: flex;
