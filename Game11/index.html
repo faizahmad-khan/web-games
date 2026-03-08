@@ -7,8 +7,31 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <canvas id="confetti-canvas"></canvas>
+
     <div class="container">
         <h1>Tic Tac Toe</h1>
+
+        <!-- Mode & Difficulty -->
+        <div class="top-controls">
+            <div class="mode-selector">
+                <label for="game-mode">Mode:</label>
+                <select id="game-mode">
+                    <option value="pvp">Player vs Player</option>
+                    <option value="ai">Player vs AI</option>
+                </select>
+            </div>
+            <div class="difficulty-selector hidden" id="difficulty-group">
+                <label for="difficulty">AI:</label>
+                <select id="difficulty">
+                    <option value="easy">Easy</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Turn & Scores -->
         <div class="game-info">
             <div class="current-player">Player <span id="current-player">X</span>'s Turn</div>
             <div class="score">
@@ -23,6 +46,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- Board -->
         <div class="game-board">
             <div class="cell" data-index="0"></div>
             <div class="cell" data-index="1"></div>
@@ -34,16 +59,24 @@
             <div class="cell" data-index="7"></div>
             <div class="cell" data-index="8"></div>
         </div>
+
+        <!-- Controls -->
         <div class="controls">
             <button id="reset-btn">Reset Game</button>
             <button id="new-game-btn">New Game</button>
         </div>
+
+        <!-- Keyboard hint -->
+        <p class="keyboard-hint">Use keys <kbd>1</kbd>–<kbd>9</kbd> to play &nbsp;|&nbsp; <kbd>R</kbd> to reset</p>
+
+        <!-- Win / Draw overlay -->
         <div id="message" class="message hidden">
             <div class="message-text">X Wins!</div>
             <button id="another-round-btn" class="another-round-btn">Another Round</button>
         </div>
     </div>
-    <footer style="text-align:center; padding:15px; margin-top:20px; color:#ccc; font-size:16px; font-weight:bold;">
+
+    <footer>
         <p>Developed by Faiz Ahmad Khan</p>
     </footer>
 
