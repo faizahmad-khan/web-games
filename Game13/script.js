@@ -1,23 +1,68 @@
-// Hangman game variables
+// ── State ──────────────────────────────────────────────────
 let word;
 let guessedLetters = [];
 let incorrectGuesses = 0;
 const maxIncorrectGuesses = 6;
 let gameActive = true;
-let gamesWon = 0; // Track number of games won for level progression
+let gamesWon = 0;
+let streak = 0;
+let timerInterval = null;
+let secondsLeft = 0;
+let difficulty = 'medium';
+let category = 'all';
 
-// Word bank for the game
+// ── Word bank with categories ──────────────────────────────
 const wordBank = [
-    'JAVASCRIPT', 'PYTHON', 'COMPUTER', 'PROGRAMMING', 'ALGORITHM',
-    'FUNCTION', 'VARIABLE', 'STRING', 'ARRAY', 'OBJECT',
-    'HANGMAN', 'GUESS', 'LETTER', 'WORD', 'GAME',
-    'DEVELOPER', 'CODE', 'SYNTAX', 'DEBUG', 'LOOP',
-    'CONDITIONAL', 'OPERATOR', 'METHOD', 'CLASS', 'FRAMEWORK',
-    'BLOCKCHAIN', 'CHATBOT', 'METAVERSE', 'CRYPTOCURRENCY', 'ARTIFICIAL',
-    'MACHINE', 'NEURAL', 'QUANTUM', 'STARTUP', 'INNOVATION',
-    'VIRAL', 'INFLUENCER', 'PODCAST', 'STREAMING', 'SUSTAINABLE',
-    'ELECTRIC', 'AUTONOMOUS', 'BIOMETRIC', 'CYBERSECURITY', 'WELLNESS',
-    'MINDFULNESS', 'VEGAN', 'CROWDFUNDING', 'DISRUPTIVE', 'ANALYTICS'
+    { word: 'JAVASCRIPT',     cat: 'tech' },
+    { word: 'PYTHON',         cat: 'tech' },
+    { word: 'COMPUTER',       cat: 'tech' },
+    { word: 'PROGRAMMING',    cat: 'tech' },
+    { word: 'ALGORITHM',      cat: 'tech' },
+    { word: 'FUNCTION',       cat: 'tech' },
+    { word: 'VARIABLE',       cat: 'tech' },
+    { word: 'STRING',         cat: 'tech' },
+    { word: 'ARRAY',          cat: 'tech' },
+    { word: 'OBJECT',         cat: 'tech' },
+    { word: 'DEVELOPER',      cat: 'tech' },
+    { word: 'CODE',           cat: 'tech' },
+    { word: 'SYNTAX',         cat: 'tech' },
+    { word: 'DEBUG',          cat: 'tech' },
+    { word: 'LOOP',           cat: 'tech' },
+    { word: 'CONDITIONAL',    cat: 'tech' },
+    { word: 'OPERATOR',       cat: 'tech' },
+    { word: 'METHOD',         cat: 'tech' },
+    { word: 'CLASS',          cat: 'tech' },
+    { word: 'FRAMEWORK',      cat: 'tech' },
+    { word: 'BLOCKCHAIN',     cat: 'tech' },
+    { word: 'CHATBOT',        cat: 'tech' },
+    { word: 'METAVERSE',      cat: 'tech' },
+    { word: 'CRYPTOCURRENCY', cat: 'tech' },
+    { word: 'ARTIFICIAL',     cat: 'tech' },
+    { word: 'MACHINE',        cat: 'tech' },
+    { word: 'NEURAL',         cat: 'tech' },
+    { word: 'QUANTUM',        cat: 'tech' },
+    { word: 'CYBERSECURITY',  cat: 'tech' },
+    { word: 'ANALYTICS',      cat: 'tech' },
+    { word: 'STARTUP',        cat: 'lifestyle' },
+    { word: 'INNOVATION',     cat: 'lifestyle' },
+    { word: 'VIRAL',          cat: 'lifestyle' },
+    { word: 'INFLUENCER',     cat: 'lifestyle' },
+    { word: 'PODCAST',        cat: 'lifestyle' },
+    { word: 'STREAMING',      cat: 'lifestyle' },
+    { word: 'SUSTAINABLE',    cat: 'lifestyle' },
+    { word: 'ELECTRIC',       cat: 'lifestyle' },
+    { word: 'AUTONOMOUS',     cat: 'lifestyle' },
+    { word: 'BIOMETRIC',      cat: 'lifestyle' },
+    { word: 'WELLNESS',       cat: 'lifestyle' },
+    { word: 'MINDFULNESS',    cat: 'lifestyle' },
+    { word: 'VEGAN',          cat: 'lifestyle' },
+    { word: 'CROWDFUNDING',   cat: 'lifestyle' },
+    { word: 'DISRUPTIVE',     cat: 'lifestyle' },
+    { word: 'HANGMAN',        cat: 'gaming' },
+    { word: 'GUESS',          cat: 'gaming' },
+    { word: 'LETTER',         cat: 'gaming' },
+    { word: 'WORD',           cat: 'gaming' },
+    { word: 'GAME',           cat: 'gaming' }
 ];
 
 // Hints for each word
@@ -74,7 +119,7 @@ const wordHints = {
     'ANALYTICS': 'The systematic analysis of data using statistical and computational methods to discover patterns, trends, and insights for informed decision-making.'
 };
 
-// DOM elements
+// ── DOM ────────────────────────────────────────────────────
 const wordPlaceholder = document.getElementById('wordPlaceholder');
 const incorrectLettersDisplay = document.getElementById('incorrectLettersDisplay');
 const alphabetContainer = document.querySelector('.alphabet-container');
@@ -83,108 +128,262 @@ const gameMessage = document.getElementById('gameMessage');
 const canvas = document.getElementById('hangmanCanvas');
 const ctx = canvas.getContext('2d');
 const hintDisplay = document.getElementById('hintDisplay');
+const levelDisplay = document.getElementById('levelDisplay');
+const streakDisplay = document.getElementById('streakDisplay');
+const timerDisplay = document.getElementById('timerDisplay');
+const livesDisplay = document.getElementById('livesDisplay');
+const difficultySelect = document.getElementById('difficulty');
+const categorySelect = document.getElementById('category');
+const confettiCanvas = document.getElementById('confetti-canvas');
+const confettiCtx = confettiCanvas.getContext('2d');
 
-// Initialize the game
+// ── Audio helpers (Web Audio API) ──────────────────────────
+const AudioCtx = window.AudioContext || window.webkitAudioContext;
+let audioCtx;
+
+function ensureAudio() {
+    if (!audioCtx) audioCtx = new AudioCtx();
+}
+
+function playTone(freq, dur, type = 'sine') {
+    ensureAudio();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = type;
+    osc.frequency.value = freq;
+    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
+    osc.connect(gain).connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + dur);
+}
+
+function sfxCorrect() { playTone(660, 0.12, 'triangle'); }
+function sfxWrong()   { playTone(220, 0.25, 'sawtooth'); }
+function sfxWin()     { [523, 659, 784, 1047].forEach((f, i) => setTimeout(() => playTone(f, 0.3), i * 120)); }
+function sfxLose()    { [300, 250, 200].forEach((f, i) => setTimeout(() => playTone(f, 0.35, 'sawtooth'), i * 150)); }
+
+// ── Confetti ───────────────────────────────────────────────
+let confettiPieces = [];
+let confettiRunning = false;
+
+function resizeConfettiCanvas() {
+    confettiCanvas.width = window.innerWidth;
+    confettiCanvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeConfettiCanvas);
+resizeConfettiCanvas();
+
+function launchConfetti() {
+    confettiPieces = [];
+    const colors = ['#ff6b6b', '#54a0ff', '#2ed573', '#ffa502', '#a55eea', '#00d2d3', '#ff6348'];
+    for (let i = 0; i < 150; i++) {
+        confettiPieces.push({
+            x: Math.random() * confettiCanvas.width,
+            y: Math.random() * confettiCanvas.height - confettiCanvas.height,
+            w: Math.random() * 8 + 4,
+            h: Math.random() * 6 + 3,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            vx: (Math.random() - 0.5) * 4,
+            vy: Math.random() * 3 + 2,
+            rot: Math.random() * 360,
+            rotV: (Math.random() - 0.5) * 10
+        });
+    }
+    if (!confettiRunning) {
+        confettiRunning = true;
+        animateConfetti();
+    }
+}
+
+function animateConfetti() {
+    confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+    let alive = false;
+    confettiPieces.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.04;
+        p.rot += p.rotV;
+        if (p.y < confettiCanvas.height + 20) {
+            alive = true;
+            confettiCtx.save();
+            confettiCtx.translate(p.x, p.y);
+            confettiCtx.rotate((p.rot * Math.PI) / 180);
+            confettiCtx.fillStyle = p.color;
+            confettiCtx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+            confettiCtx.restore();
+        }
+    });
+    if (alive) {
+        requestAnimationFrame(animateConfetti);
+    } else {
+        confettiRunning = false;
+        confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+    }
+}
+
+// ── Timer ──────────────────────────────────────────────────
+function getTimerSeconds() {
+    if (difficulty === 'easy') return 0; // no timer
+    if (difficulty === 'medium') return 90;
+    return 45; // hard
+}
+
+function startTimer() {
+    clearInterval(timerInterval);
+    secondsLeft = getTimerSeconds();
+    if (secondsLeft === 0) {
+        timerDisplay.textContent = '--';
+        return;
+    }
+    updateTimerDisplay();
+    timerInterval = setInterval(() => {
+        secondsLeft--;
+        updateTimerDisplay();
+        if (secondsLeft <= 0) {
+            clearInterval(timerInterval);
+            if (gameActive) {
+                gameActive = false;
+                gameMessage.textContent = `Time's up! The word was: ${word}`;
+                gameMessage.classList.add('loser');
+                streak = 0;
+                updateStatsDisplay();
+                disableAllAlphabetButtons();
+                sfxLose();
+            }
+        }
+    }, 1000);
+}
+
+function updateTimerDisplay() {
+    if (secondsLeft === 0 && difficulty === 'easy') {
+        timerDisplay.textContent = '--';
+        return;
+    }
+    const m = String(Math.floor(secondsLeft / 60)).padStart(2, '0');
+    const s = String(secondsLeft % 60).padStart(2, '0');
+    timerDisplay.textContent = `${m}:${s}`;
+}
+
+// ── Word selection with difficulty & category ──────────────
+function getFilteredWords() {
+    let filtered = wordBank;
+    if (category !== 'all') {
+        filtered = filtered.filter(w => w.cat === category);
+    }
+    if (difficulty === 'easy') {
+        filtered = filtered.filter(w => w.word.length <= 6);
+    } else if (difficulty === 'hard') {
+        filtered = filtered.filter(w => w.word.length >= 8);
+    }
+    // fallback: if no words match, use all
+    return filtered.length > 0 ? filtered : wordBank;
+}
+
+// ── Stats ──────────────────────────────────────────────────
+function loadStats() {
+    const saved = localStorage.getItem('hangman_stats');
+    if (saved) {
+        const data = JSON.parse(saved);
+        gamesWon = data.gamesWon || 0;
+        streak = data.streak || 0;
+    }
+}
+
+function saveStats() {
+    localStorage.setItem('hangman_stats', JSON.stringify({ gamesWon, streak }));
+}
+
+function updateStatsDisplay() {
+    levelDisplay.textContent = gamesWon + 1;
+    streakDisplay.textContent = streak;
+    livesDisplay.textContent = maxIncorrectGuesses - incorrectGuesses;
+    saveStats();
+}
+
+// ── Init ───────────────────────────────────────────────────
 function initGame() {
-    // Select a random word from the word bank
-    word = wordBank[Math.floor(Math.random() * wordBank.length)];
+    const candidates = getFilteredWords();
+    word = candidates[Math.floor(Math.random() * candidates.length)].word;
     guessedLetters = [];
     incorrectGuesses = 0;
     gameActive = true;
-    
-    // Clear the game message
+
     gameMessage.textContent = '';
     gameMessage.className = 'message';
-    
-    // Draw the initial hangman state
+
     drawHangman();
-    
-    // Display the word placeholder
     updateWordDisplay();
-    
-    // Display incorrect letters
     updateIncorrectLettersDisplay();
-    
-    // Display the hint for the current word
     updateHintDisplay();
-    
-    // Generate alphabet buttons
     generateAlphabetButtons();
+    updateStatsDisplay();
+    startTimer();
+
+    // Remove stale next-level button
+    const existing = document.getElementById('nextLevelButton');
+    if (existing) existing.remove();
 }
 
-// Update the word display with correct guesses and underscores
+// ── Word display ───────────────────────────────────────────
 function updateWordDisplay() {
-    const display = word.split('').map(letter => 
+    const display = word.split('').map(letter =>
         guessedLetters.includes(letter) ? letter : '_'
     ).join(' ');
-    
+
     wordPlaceholder.textContent = display;
-    
-    // Check if the player has won
+
     if (!display.includes('_')) {
         gameActive = false;
-        gamesWon++; // Increment the games won counter
-        gameMessage.textContent = `Congratulations! You won Level ${gamesWon}!`;
+        clearInterval(timerInterval);
+        gamesWon++;
+        streak++;
+        updateStatsDisplay();
+        gameMessage.textContent = `🎉 You won Level ${gamesWon}!`;
         gameMessage.classList.add('winner');
-        
-        // Disable all alphabet buttons
         disableAllAlphabetButtons();
-        
-        // Add next level button if not already added
         addNextLevelButton();
+        sfxWin();
+        launchConfetti();
     }
 }
 
-// Add next level button after winning
+// ── Next level button ──────────────────────────────────────
 function addNextLevelButton() {
-    // Remove any existing next level button
-    const existingNextBtn = document.getElementById('nextLevelButton');
-    if (existingNextBtn) {
-        existingNextBtn.remove();
-    }
-    
-    // Create next level button
-    const nextLevelButton = document.createElement('button');
-    nextLevelButton.id = 'nextLevelButton';
-    nextLevelButton.classList.add('next-level-btn');
-    nextLevelButton.textContent = 'Next Level';
-    nextLevelButton.addEventListener('click', startNextLevel);
-    
-    // Insert after the restart button
-    restartButton.insertAdjacentElement('afterend', nextLevelButton);
+    const existing = document.getElementById('nextLevelButton');
+    if (existing) existing.remove();
+
+    const btn = document.createElement('button');
+    btn.id = 'nextLevelButton';
+    btn.classList.add('next-level-btn');
+    btn.textContent = 'Next Level';
+    btn.addEventListener('click', startNextLevel);
+    restartButton.insertAdjacentElement('afterend', btn);
 }
 
-// Start next level
 function startNextLevel() {
-    // Remove the next level button
-    const nextLevelButton = document.getElementById('nextLevelButton');
-    if (nextLevelButton) {
-        nextLevelButton.remove();
-    }
-    // Keep the gamesWon counter and start a new game
+    const btn = document.getElementById('nextLevelButton');
+    if (btn) btn.remove();
     initGame();
 }
 
-// Update the incorrect letters display
+// ── Incorrect letters ──────────────────────────────────────
 function updateIncorrectLettersDisplay() {
-    incorrectLettersDisplay.textContent = guessedLetters.filter(letter =>
-        !word.includes(letter)
-    ).join(', ');
+    incorrectLettersDisplay.textContent = guessedLetters
+        .filter(letter => !word.includes(letter))
+        .join(', ');
 }
 
-// Update the hint display
+// ── Hint ───────────────────────────────────────────────────
 function updateHintDisplay() {
     if (hintDisplay && wordHints[word]) {
         hintDisplay.textContent = wordHints[word];
     }
 }
 
-// Generate alphabet buttons
+// ── Alphabet buttons ───────────────────────────────────────
 function generateAlphabetButtons() {
-    // Clear the alphabet container
     alphabetContainer.innerHTML = '';
-    
-    // Create buttons for each letter of the alphabet
     for (let i = 65; i <= 90; i++) {
         const letter = String.fromCharCode(i);
         const button = document.createElement('button');
@@ -195,143 +394,148 @@ function generateAlphabetButtons() {
     }
 }
 
-// Handle a letter guess
+// ── Letter guess ───────────────────────────────────────────
 function handleLetterGuess(letter) {
-    if (!gameActive || guessedLetters.includes(letter)) {
-        return;
-    }
-    
-    // Add the letter to guessed letters
+    if (!gameActive || guessedLetters.includes(letter)) return;
+
     guessedLetters.push(letter);
-    
-    // Get the button element and disable it
+
     const button = Array.from(alphabetContainer.children).find(btn => btn.textContent === letter);
-    button.disabled = true;
-    
-    // Check if the letter is in the word
+    if (button) button.disabled = true;
+
     if (word.includes(letter)) {
-        // Update the word display
+        if (button) button.classList.add('correct');
+        sfxCorrect();
         updateWordDisplay();
     } else {
-        // Increment incorrect guesses
+        if (button) button.classList.add('wrong');
+        sfxWrong();
         incorrectGuesses++;
-        
-        // Draw the updated hangman
         drawHangman();
-        
-        // Update incorrect letters display
         updateIncorrectLettersDisplay();
-        
-        // Check if the player has lost
+        updateStatsDisplay();
+
         if (incorrectGuesses >= maxIncorrectGuesses) {
             gameActive = false;
+            clearInterval(timerInterval);
+            streak = 0;
+            updateStatsDisplay();
             gameMessage.textContent = `Game Over! The word was: ${word}`;
             gameMessage.classList.add('loser');
-            
-            // Disable all alphabet buttons
             disableAllAlphabetButtons();
-            
-            // Add next level button after losing too
             addNextLevelButton();
+            sfxLose();
         }
     }
 }
 
-// Disable all alphabet buttons
 function disableAllAlphabetButtons() {
-    const buttons = document.querySelectorAll('.alphabet-btn');
-    buttons.forEach(button => {
-        button.disabled = true;
-    });
+    document.querySelectorAll('.alphabet-btn').forEach(btn => { btn.disabled = true; });
 }
 
-// Draw the hangman based on incorrect guesses
+// ── Draw hangman (colored body parts) ──────────────────────
 function drawHangman() {
-    // Clear the canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    // Draw stand
-    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 3;
+    ctx.lineCap = 'round';
+
+    // Stand (always visible)
+    ctx.strokeStyle = 'rgba(255,255,255,0.5)';
     ctx.lineWidth = 4;
-    
     // Base
-    ctx.beginPath();
-    ctx.moveTo(50, 250);
-    ctx.lineTo(250, 250);
-    ctx.stroke();
-    
+    ctx.beginPath(); ctx.moveTo(50, 250); ctx.lineTo(250, 250); ctx.stroke();
     // Pole
-    ctx.beginPath();
-    ctx.moveTo(100, 250);
-    ctx.lineTo(100, 50);
-    ctx.stroke();
-    
+    ctx.beginPath(); ctx.moveTo(100, 250); ctx.lineTo(100, 50); ctx.stroke();
     // Top bar
-    ctx.beginPath();
-    ctx.moveTo(100, 50);
-    ctx.lineTo(200, 50);
-    ctx.stroke();
-    
+    ctx.beginPath(); ctx.moveTo(100, 50); ctx.lineTo(200, 50); ctx.stroke();
     // Rope
-    ctx.beginPath();
-    ctx.moveTo(200, 50);
-    ctx.lineTo(200, 80);
-    ctx.stroke();
-    
-    // Draw hangman parts based on incorrect guesses
+    ctx.beginPath(); ctx.moveTo(200, 50); ctx.lineTo(200, 80); ctx.stroke();
+
+    ctx.lineWidth = 3;
+
     if (incorrectGuesses >= 1) {
         // Head
+        ctx.strokeStyle = '#ff6b6b';
         ctx.beginPath();
         ctx.arc(200, 100, 20, 0, Math.PI * 2);
         ctx.stroke();
+        // Face
+        ctx.fillStyle = '#ff6b6b';
+        ctx.beginPath(); ctx.arc(193, 96, 2, 0, Math.PI * 2); ctx.fill(); // left eye
+        ctx.beginPath(); ctx.arc(207, 96, 2, 0, Math.PI * 2); ctx.fill(); // right eye
+        if (incorrectGuesses >= maxIncorrectGuesses) {
+            // Sad mouth
+            ctx.strokeStyle = '#ff6b6b';
+            ctx.beginPath(); ctx.arc(200, 112, 6, Math.PI, 0); ctx.stroke();
+        }
     }
-    
+
     if (incorrectGuesses >= 2) {
         // Body
-        ctx.beginPath();
-        ctx.moveTo(200, 120);
-        ctx.lineTo(200, 180);
-        ctx.stroke();
+        ctx.strokeStyle = '#54a0ff';
+        ctx.beginPath(); ctx.moveTo(200, 120); ctx.lineTo(200, 180); ctx.stroke();
     }
-    
+
     if (incorrectGuesses >= 3) {
         // Left arm
-        ctx.beginPath();
-        ctx.moveTo(200, 140);
-        ctx.lineTo(170, 160);
-        ctx.stroke();
+        ctx.strokeStyle = '#2ed573';
+        ctx.beginPath(); ctx.moveTo(200, 140); ctx.lineTo(170, 165); ctx.stroke();
     }
-    
+
     if (incorrectGuesses >= 4) {
         // Right arm
-        ctx.beginPath();
-        ctx.moveTo(200, 140);
-        ctx.lineTo(230, 160);
-        ctx.stroke();
+        ctx.strokeStyle = '#ffa502';
+        ctx.beginPath(); ctx.moveTo(200, 140); ctx.lineTo(230, 165); ctx.stroke();
     }
-    
+
     if (incorrectGuesses >= 5) {
         // Left leg
-        ctx.beginPath();
-        ctx.moveTo(200, 180);
-        ctx.lineTo(170, 220);
-        ctx.stroke();
+        ctx.strokeStyle = '#a55eea';
+        ctx.beginPath(); ctx.moveTo(200, 180); ctx.lineTo(170, 220); ctx.stroke();
     }
-    
+
     if (incorrectGuesses >= 6) {
         // Right leg
-        ctx.beginPath();
-        ctx.moveTo(200, 180);
-        ctx.lineTo(230, 220);
-        ctx.stroke();
+        ctx.strokeStyle = '#ff6348';
+        ctx.beginPath(); ctx.moveTo(200, 180); ctx.lineTo(230, 220); ctx.stroke();
     }
 }
 
-// Event listener for the restart button
+// ── Keyboard support ───────────────────────────────────────
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        gamesWon = 0;
+        streak = 0;
+        initGame();
+        return;
+    }
+    const key = e.key.toUpperCase();
+    if (/^[A-Z]$/.test(key)) {
+        handleLetterGuess(key);
+    }
+});
+
+// ── Control listeners ──────────────────────────────────────
 restartButton.addEventListener('click', () => {
-    gamesWon = 0; // Reset the level counter when manually restarting
+    gamesWon = 0;
+    streak = 0;
     initGame();
 });
 
-// Initialize the game when the page loads
+difficultySelect.addEventListener('change', () => {
+    difficulty = difficultySelect.value;
+    gamesWon = 0;
+    streak = 0;
+    initGame();
+});
+
+categorySelect.addEventListener('change', () => {
+    category = categorySelect.value;
+    gamesWon = 0;
+    streak = 0;
+    initGame();
+});
+
+// ── Boot ───────────────────────────────────────────────────
+loadStats();
 window.onload = initGame;
