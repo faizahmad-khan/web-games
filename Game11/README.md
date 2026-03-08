@@ -1,52 +1,59 @@
 # Tic Tac Toe Game
 
-A classic Tic Tac Toe game implemented in HTML, CSS, and JavaScript. Two players take turns placing X's and O's on a 3x3 grid, with the goal of getting three of their marks in a row.
+A feature-rich Tic Tac Toe game built with HTML, CSS, and JavaScript. Play against a friend or challenge the AI across three difficulty levels, complete with sound effects, confetti celebrations, and keyboard controls.
 
 ## Features
 
-- Classic Tic Tac Toe gameplay
-- Visual indication of the current player
-- Score tracking for both players and draws
-- Responsive design that works on different screen sizes
-- Smooth animations and transitions
-- Win detection and draw detection
-- Reset and New Game functionality
+- **Player vs Player** and **Player vs AI** game modes
+- **AI difficulty levels**: Easy (random moves), Medium (mixed strategy), Hard (unbeatable minimax algorithm)
+- Score tracking for X, O, and draws
+- Winning cells highlight with a pulsing glow animation
+- Confetti celebration effect on win
+- Sound effects via Web Audio API (place, win, draw)
+- Keyboard support — keys 1–9 (numpad layout) to place marks, R to reset
+- Modern dark glassmorphism UI with gradient accents
+- Fully responsive design for mobile and desktop
+- Smooth cell pop and overlay fade-in animations
 
 ## How to Play
 
-1. The game starts with Player X's turn
-2. Players take turns clicking on empty squares to place their mark (X or O)
-3. The first player to get 3 of their marks in a row (horizontally, vertically, or diagonally) wins
-4. If all squares are filled with no winner, the game ends in a draw
-5. Use the "Reset Game" button to clear the board and start a new round
-6. Use the "Another Round" button after a game ends to continue playing without resetting scores
-7. Use the "New Game" button to reset scores and start completely fresh
+1. Select a game mode: **Player vs Player** or **Player vs AI**
+2. If playing vs AI, choose a difficulty: Easy, Medium, or Hard
+3. Player X always goes first — click a cell or press a number key (1–9)
+4. Get three marks in a row (horizontally, vertically, or diagonally) to win
+5. If all cells are filled with no winner, the game ends in a draw
+6. Click **Another Round** to keep scores and play again
+7. Click **Reset Game** (or press R) to clear the board
+8. Click **New Game** to reset all scores
 
-## Controls
+## Keyboard Controls
 
-- Click on any empty cell to place your mark
-- Use "Reset Game" to clear the current board
-- Use "New Game" to reset scores and start over
+| Key | Action |
+|-----|--------|
+| 1–9 | Place mark (numpad layout: 7=top-left, 9=top-right, 1=bottom-left) |
+| R   | Reset the current board |
 
 ## Technologies Used
 
 - HTML5
-- CSS3 (with Flexbox, Grid, and animations)
-- JavaScript (ES6)
+- CSS3 (Flexbox, Grid, animations, backdrop-filter)
+- JavaScript ES6 (minimax AI, Web Audio API, Canvas confetti)
 
 ## Files
 
-- `index.html`: Main HTML structure
-- `style.css`: Styling and animations
-- `script.js`: Game logic and interactions
+- `index.html` — Game structure and layout
+- `style.css` — Dark theme styling, animations, and responsive breakpoints
+- `script.js` — Game logic, AI engine, sound, confetti, and keyboard handling
 
 ## Game Elements
 
-- **Game Board**: 3x3 grid where players place their marks
-- **Current Player Indicator**: Shows whose turn it is
-- **Score Tracker**: Keeps track of wins for both players and draws
-- **Message Display**: Shows win/draw messages
-- **Control Buttons**: Reset, Another Round, and New Game buttons
+- **Game Board** — 3×3 grid with hover effects and placement animations
+- **Mode & Difficulty Selectors** — Switch between PvP and AI modes on the fly
+- **Current Player Indicator** — Gradient badge showing whose turn it is
+- **Score Tracker** — Persistent win/draw counters
+- **Win Overlay** — Full-panel message with Another Round button
+- **Confetti Canvas** — Particle celebration on victory
+- **Sound Effects** — Tonal feedback for every action
 
 ## Implementation Details
 
