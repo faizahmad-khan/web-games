@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Tetris Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -10,20 +10,65 @@
     <div class="game-container">
         <h1>TETRIS</h1>
         <div class="game-info">
-            <div class="score">Score: <span id="score">0</span></div>
-            <div class="level">Level: <span id="level">1</span></div>
-            <div class="lines">Lines: <span id="lines">0</span></div>
+            <div class="info-box"><span class="label">SCORE</span><span id="score">0</span></div>
+            <div class="info-box"><span class="label">LEVEL</span><span id="level">1</span></div>
+            <div class="info-box"><span class="label">LINES</span><span id="lines">0</span></div>
         </div>
-        <canvas id="tetris" width="200" height="400"></canvas>
-        <div class="controls">
-            <p>Controls:</p>
-            <p>← → : Move</p>
-            <p>↑ : Rotate</p>
-            <p>↓ : Soft Drop</p>
-            <p>Space : Hard Drop</p>
-            <p>P : Pause</p>
+        <div class="play-area">
+            <div class="side-panel left-panel">
+                <div class="panel-box">
+                    <span class="panel-label">HOLD</span>
+                    <canvas id="holdCanvas" width="80" height="80"></canvas>
+                </div>
+                <div class="panel-box controls-box">
+                    <p>← → Move</p>
+                    <p>↑ Rotate</p>
+                    <p>↓ Soft Drop</p>
+                    <p>⎵ Hard Drop</p>
+                    <p>C Hold</p>
+                    <p>P Pause</p>
+                </div>
+            </div>
+            <div class="canvas-wrapper">
+                <canvas id="tetris" width="240" height="480"></canvas>
+                <div id="overlayStart" class="overlay">
+                    <h2>TETRIS</h2>
+                    <p>🎮 Arrow Keys to move</p>
+                    <p>⬆ Rotate &nbsp; ⎵ Hard Drop</p>
+                    <p>C to Hold piece</p>
+                    <button id="start-button" class="btn">Start Game</button>
+                </div>
+                <div id="overlayPause" class="overlay hidden">
+                    <h2>PAUSED</h2>
+                    <button id="resume-button" class="btn">Resume</button>
+                </div>
+                <div id="overlayGameOver" class="overlay hidden">
+                    <h2>GAME OVER</h2>
+                    <p>Score: <span id="finalScore">0</span></p>
+                    <p id="highScoreMsg"></p>
+                    <button id="restart-button" class="btn">Play Again</button>
+                </div>
+            </div>
+            <div class="side-panel right-panel">
+                <div class="panel-box">
+                    <span class="panel-label">NEXT</span>
+                    <canvas id="nextCanvas" width="80" height="80"></canvas>
+                </div>
+                <div class="panel-box">
+                    <span class="panel-label">HIGH SCORE</span>
+                    <span id="highScore" class="hs-value">0</span>
+                </div>
+            </div>
         </div>
-        <button id="start-button">Start Game</button>
+        <div class="dpad">
+            <button class="dpad-btn" id="btnRotate">↻</button>
+            <div class="dpad-row">
+                <button class="dpad-btn" id="btnLeft">◀</button>
+                <button class="dpad-btn" id="btnDrop">▼▼</button>
+                <button class="dpad-btn" id="btnRight">▶</button>
+            </div>
+            <button class="dpad-btn" id="btnDown">▼</button>
+        </div>
     </div>
     <footer style="text-align:center; padding:15px; margin-top:20px; color:#ccc; font-size:16px; font-weight:bold;">
         <p>Developed by Faiz Ahmad Khan</p>
