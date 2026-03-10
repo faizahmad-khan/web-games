@@ -2,19 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Memory Card Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Memory Card Game</h1>
+        <h1>🧠 Memory Match</h1>
+        <div class="toolbar">
+            <div class="difficulty-bar">
+                <button class="diff-btn active" data-size="easy">Easy (4×3)</button>
+                <button class="diff-btn" data-size="medium">Medium (4×4)</button>
+                <button class="diff-btn" data-size="hard">Hard (5×4)</button>
+            </div>
+        </div>
         <div class="game-info">
-            <div class="moves">Moves: <span id="moves">0</span></div>
-            <div class="matches">Matches: <span id="matches">0</span>/<span id="total-matches">8</span></div>
+            <div class="stat"><span class="stat-label">MOVES</span><span id="moves">0</span></div>
+            <div class="stat"><span class="stat-label">MATCHES</span><span><span id="matches">0</span>/<span id="total-matches">6</span></span></div>
+            <div class="stat"><span class="stat-label">TIME</span><span id="timer">0:00</span></div>
+            <div class="stat"><span class="stat-label">BEST</span><span id="bestScore">—</span></div>
         </div>
         <div class="game-board" id="game-board"></div>
-        <button class="reset-btn" id="reset-btn">Reset Game</button>
+        <div id="winOverlay" class="win-overlay hidden">
+            <div class="win-box">
+                <h2>🎉 You Win!</h2>
+                <p>Moves: <span id="winMoves"></span></p>
+                <p>Time: <span id="winTime"></span></p>
+                <p id="newBestMsg" class="new-best hidden">⭐ New Best!</p>
+                <button class="reset-btn" id="play-again-btn">Play Again</button>
+            </div>
+        </div>
+        <button class="reset-btn" id="reset-btn">🔄 Reset Game</button>
     </div>
     <footer style="text-align:center; padding:15px; margin-top:20px; color:#ccc; font-size:16px; font-weight:bold;">
         <p>Developed by Faiz Ahmad Khan</p>
