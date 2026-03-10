@@ -80,10 +80,10 @@ function init(full){
   pac = {x:center(9),y:center(15),r:11,spd:sp,dir:'left',next:'left',mouth:0.1,md:1};
   const gs = Math.min(1.6+(level-1)*0.15, 3);
   ghosts = [
-    {x:center(8),y:center(9),col:'#FF0000',dir:'left', spd:gs,mode:'chase',type:0},
-    {x:center(9),y:center(9),col:'#FFB8FF',dir:'up',   spd:gs,mode:'chase',type:1},
-    {x:center(10),y:center(9),col:'#00FFFF',dir:'down', spd:gs,mode:'chase',type:2},
-    {x:center(9),y:center(10),col:'#FFB852',dir:'right',spd:gs,mode:'chase',type:3}
+    {x:center(8),y:center(9),col:'#FF0000',dir:'left', spd:gs,mode:'chase',type:0,decX:-1,decY:-1},
+    {x:center(9),y:center(9),col:'#FFB8FF',dir:'up',   spd:gs,mode:'chase',type:1,decX:-1,decY:-1},
+    {x:center(10),y:center(9),col:'#00FFFF',dir:'down', spd:gs,mode:'chase',type:2,decX:-1,decY:-1},
+    {x:center(9),y:center(10),col:'#FFB852',dir:'right',spd:gs,mode:'chase',type:3,decX:-1,decY:-1}
   ];
   frightTimer=0; eatMul=1;
   ui();
@@ -92,7 +92,7 @@ function init(full){
 function resetPos(){
   pac.x=center(9); pac.y=center(15); pac.dir='left'; pac.next='left';
   const positions = [[8,9],[9,9],[10,9],[9,10]];
-  ghosts.forEach((g,i)=>{g.x=center(positions[i][0]);g.y=center(positions[i][1]);g.mode='chase';});
+  ghosts.forEach((g,i)=>{g.x=center(positions[i][0]);g.y=center(positions[i][1]);g.mode='chase';g.decX=-1;g.decY=-1;});
   frightTimer=0;
 }
 
@@ -195,8 +195,10 @@ function moveGhost(g){
   if(g.mode==='eaten') return;
   const gc=cell(g.x), gr=cell(g.y);
   const cx=center(gc), cy=center(gr);
-  if(Math.abs(g.x-cx)<=g.spd+1 && Math.abs(g.y-cy)<=g.spd+1){
+  const atCenter = Math.abs(g.x-cx)<=g.spd+1 && Math.abs(g.y-cy)<=g.spd+1;
+  if(atCenter && (gc!==g.decX || gr!==g.decY)){
     g.x=cx; g.y=cy;
+    g.decX=gc; g.decY=gr;
     let dirs=validDirs(gc,gr,g.dir);
     if(!dirs.length) dirs=validDirs(gc,gr,''); // u-turn
     if(dirs.length) g.dir=pickDir(g,dirs,gc,gr);
@@ -224,7 +226,7 @@ function collisions(){
         const pts=200*eatMul; score+=pts; eatMul*=2;
         popup(g.x,g.y,pts); g.mode='eaten';
         const gg=g;
-        setTimeout(()=>{gg.x=center(9);gg.y=center(9);gg.mode='chase';},1500);
+        setTimeout(()=>{gg.x=center(9);gg.y=center(9);gg.mode='chase';gg.decX=-1;gg.decY=-1;},1500);
         ui();
       } else {
         lives--; ui();
