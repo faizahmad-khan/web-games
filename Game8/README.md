@@ -1,48 +1,69 @@
 # Tetris Game
 
-A classic Tetris game implemented in HTML, CSS, and JavaScript. The game features the traditional gameplay where players arrange falling tetrominoes to complete horizontal lines.
+A feature-rich Tetris game built with HTML5 Canvas, CSS, and vanilla JavaScript. Arrange falling tetrominoes, clear lines, and chase high scores!
 
-## Features
+## 🎮 Features
 
-- Classic Tetris gameplay with 7 different tetromino shapes
-- Score tracking with level progression
-- Increasing difficulty as the level increases
-- Responsive controls for moving, rotating, and dropping pieces
-- Visual styling with a retro aesthetic
+- **Classic Tetris gameplay** — 7 tetromino shapes (I, J, L, O, S, T, Z) with wall-kick rotation
+- **Next piece preview** — see the upcoming piece in the side panel
+- **Hold piece** — press C to stash a piece for later use
+- **Ghost piece** — translucent shadow shows exactly where the piece will land
+- **Hard drop bonus** — earn 2 extra points per row dropped instantly
+- **Line-clear particles** — colourful particle burst effect when rows are cleared
+- **Scoring system** — single (100), double (300), triple (500), Tetris (800), multiplied by level
+- **Level progression** — speed increases every 10 lines; drop interval scales from 1000 ms down to 100 ms
+- **High score** — persisted in localStorage across sessions
+- **Start / Pause / Game Over overlays** — clean in-game screens (no alert popups)
+- **Neon retro aesthetic** — cyan glow theme with grid lines and block highlights
+- **Mobile support** — on-screen D-pad and touch-swipe controls
+- **Responsive layout** — side panels collapse on smaller screens
 
-## Controls
+## 🕹️ Controls
 
-- **Left Arrow** → Move piece left
-- **Right Arrow** → Move piece right
-- **Down Arrow** → Soft drop (move piece down faster)
-- **Up Arrow** → Rotate piece
-- **Space** → Hard drop (instantly drop piece)
-- **P** → Pause/resume game
+| Input | Action |
+|-------|--------|
+| **← / A** | Move piece left |
+| **→ / D** | Move piece right |
+| **↓ / S** | Soft drop |
+| **↑ / W** | Rotate piece |
+| **Space** | Hard drop (instant) |
+| **C** | Hold piece |
+| **P** | Pause / Resume |
+| **D-pad** | Move (mobile) |
+| **Swipe** | Move / rotate / drop (touch) |
 
-## Game Elements
+## 📊 Game Elements
 
-- **Score**: Points earned by completing lines (100 points per line × current level)
-- **Level**: Increases every 10 completed lines, making the game faster
-- **Lines**: Total number of completed lines
+| Element | Description |
+|---------|-------------|
+| Score | Points from line clears & hard drops |
+| Level | Increases every 10 lines, speeds up drops |
+| Lines | Total completed lines |
+| High Score | Best score saved to localStorage |
+| Next | Preview of the upcoming piece |
+| Hold | Stashed piece you can swap in |
 
-## Implementation
+## 🏗️ Implementation
 
-The game uses HTML5 Canvas for rendering and implements the core Tetris mechanics including:
-- Piece generation and rotation
-- Collision detection
-- Line clearing
-- Gravity system
-- Level progression
+Built entirely with **HTML5 Canvas** and vanilla JS:
 
-## Files
+- `requestAnimationFrame` delta-time game loop
+- Wall-kick rotation with collision offset
+- Ghost piece calculated by projecting downward until collision
+- Particle system for line-clear effects
+- Preview canvases for Next and Hold pieces
+- localStorage for high score persistence
 
-- `index.html`: Main game page structure
-- `style.css`: Visual styling and layout
-- `script.js`: Game logic and mechanics
+## 📁 Files
 
-## How to Play
+- `index.html` — Game page with overlays, side panels & D-pad
+- `style.css` — Neon retro theme, responsive layout
+- `script.js` — Game engine, controls & rendering
 
-1. Click the "Start Game" button to begin
-2. Arrange the falling tetrominoes to complete horizontal lines
-3. Complete lines to earn points and advance levels
-4. The game ends when the stack of tetrominoes reaches the top of the playing field
+## 🚀 How to Play
+
+1. Click **Start Game**
+2. Arrange falling tetrominoes to complete horizontal lines
+3. Use **Hold** (C) to save a tricky piece for later
+4. Clear multiple lines at once for bonus points
+5. Game ends when pieces stack to the top
