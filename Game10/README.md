@@ -1,28 +1,47 @@
 # Memory Card Game
 
-A classic memory matching game where players flip cards to find matching pairs. The objective is to find all pairs with the fewest moves possible.
+A polished memory matching game built with HTML5, CSS3, and vanilla JavaScript. Flip cards, find pairs, beat the clock, and set new personal bests!
 
-## How to Play
-1. Click on cards to flip them over and reveal their symbols
-2. Try to find matching pairs of symbols
-3. When two matching cards are found, they remain face up
-4. Complete the game by finding all pairs
-5. Try to finish with the lowest number of moves
+## 🎮 Features
 
-## Features
-- Visual card flipping animation
-- Move counter to track your progress
-- Match counter showing completed pairs
-- Responsive design that works on different screen sizes
-- Gradient backgrounds and smooth animations
-- Reset button to restart the game
+- **3 difficulty levels** — Easy (4×3, 6 pairs), Medium (4×4, 8 pairs), Hard (5×4, 10 pairs)
+- **3D card-flip animation** — smooth CSS perspective transforms
+- **Match pop effect** — cards pulse when a pair is found
+- **Timer** — starts on first flip, stops on win
+- **Best score tracking** — moves & time saved per difficulty in localStorage
+- **Win overlay** — animated results screen with new-best indicator
+- **Move & match counters** — real-time stats during play
+- **Dark neon theme** — purple gradient background with glow accents
+- **Responsive design** — works on desktop and mobile
 
-## Technologies Used
-- HTML5
-- CSS3 (with Grid layout and animations)
-- JavaScript (ES6)
+## 🕹️ How to Play
 
-## Files
-- `index.html`: Main HTML structure
-- `style.css`: Styling and animations
-- `script.js`: Game logic and interactions
+1. Choose a difficulty (Easy / Medium / Hard)
+2. Click a card to flip it and reveal its emoji
+3. Click a second card — if symbols match, both stay face-up
+4. If they don't match, both flip back after a brief delay
+5. Find all pairs to win
+6. Try to finish with the fewest moves and fastest time!
+
+## 📊 Game Elements
+
+| Element | Description |
+|---------|-------------|
+| Moves | Number of two-card flip attempts |
+| Matches | Pairs found so far / total pairs |
+| Timer | Elapsed time since first flip |
+| Best | Best moves / time for current difficulty |
+
+## 🏗️ Implementation
+
+- **CSS Grid** layout that adapts columns per difficulty
+- **Fisher-Yates shuffle** for fair card randomisation
+- **Board lock** prevents extra flips during mismatch delay
+- **localStorage** persistence for per-difficulty best scores
+- **No external dependencies** — pure HTML, CSS & JS
+
+## 📁 Files
+
+- `index.html` — Game page with difficulty selector, stats bar & win overlay
+- `style.css` — Dark theme, card animations, responsive grid
+- `script.js` — Game logic, timer, scoring & difficulty management
