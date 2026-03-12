@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNO Card Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- ==================== MAIN MENU ==================== -->
+    <div id="main-menu" class="screen active">
+        <div class="menu-bg">
+            <div class="floating-card" style="--delay:0s;--x:10%;--y:20%">🟥</div>
+            <div class="floating-card" style="--delay:1s;--x:80%;--y:15%">🟦</div>
+            <div class="floating-card" style="--delay:2s;--x:30%;--y:70%">🟩</div>
+            <div class="floating-card" style="--delay:3s;--x:70%;--y:60%">🟨</div>
+        </div>
+        <div class="menu-content">
+            <h1 class="game-title">🃏 UNO</h1>
+            <p class="game-subtitle">The Classic Card Game</p>
+            <div class="menu-buttons">
+                <div class="player-select">
+                    <label for="num-bots">Number of Opponents:</label>
+                    <select id="num-bots">
+                        <option value="1">1 (2 Players)</option>
+                        <option value="2">2 (3 Players)</option>
+                        <option value="3" selected>3 (4 Players)</option>
+                    </select>
+                </div>
+                <button id="btn-play" class="menu-btn primary">▶ Play Game</button>
+                <button id="btn-rules" class="menu-btn">📖 How to Play</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== RULES SCREEN ==================== -->
+    <div id="rules-screen" class="screen">
+        <div class="rules-content">
+            <h2>📖 How to Play UNO</h2>
+            <div class="rules-body">
+                <h3>🎯 Objective</h3>
+                <p>Be the first player to get rid of all your cards.</p>
+
+                <h3>🃏 Card Types</h3>
+                <ul>
+                    <li><strong>Number Cards (0-9):</strong> Match by color or number.</li>
+                    <li><strong>Skip ⊘:</strong> Next player loses their turn.</li>
+                    <li><strong>Reverse ⇄:</strong> Reverses direction of play.</li>
+                    <li><strong>Draw Two +2:</strong> Next player draws 2 cards and loses their turn.</li>
+                    <li><strong>Wild 🌈:</strong> Play on any card. Choose the next color.</li>
+                    <li><strong>Wild Draw Four +4:</strong> Next player draws 4 cards. Choose the next color.</li>
+                </ul>
+
+                <h3>🕹️ How to Play</h3>
+                <ul>
+                    <li>Click a card in your hand to play it (must match color, number, or symbol).</li>
+                    <li>If you can't play, click the draw pile to draw a card.</li>
+                    <li>When you have 1 card left, click the UNO button!</li>
+                    <li>If you forget to call UNO, you draw 2 penalty cards.</li>
+                </ul>
+            </div>
+            <button id="btn-back-menu" class="menu-btn">← Back to Menu</button>
+        </div>
+    </div>
+
+    <!-- ==================== GAME SCREEN ==================== -->
+    <div id="game-screen" class="screen">
+        <!-- Top opponent(s) -->
+        <div id="opponents-area" class="opponents-area">
+            <!-- Opponent hands injected by JS -->
+        </div>
+
+        <!-- Center play area -->
+        <div class="play-area">
+            <div class="pile-section">
+                <div id="draw-pile" class="card card-back draw-pile" title="Draw a card">
+                    <span class="card-back-text">UNO</span>
+                </div>
+                <div id="discard-pile" class="card discard-pile">
+                    <!-- Current top card rendered by JS -->
+                </div>
+            </div>
+            <div class="game-info">
+                <div id="direction-indicator" class="direction">↻</div>
+                <div id="current-color" class="current-color"></div>
+                <div id="game-message" class="game-message"></div>
+            </div>
+        </div>
+
+        <!-- UNO button -->
+        <button id="uno-btn" class="uno-btn hidden">UNO!</button>
+
+        <!-- Player hand -->
+        <div id="player-hand" class="player-hand">
+            <!-- Player cards injected by JS -->
+        </div>
+
+        <!-- Color picker modal -->
+        <div id="color-picker" class="modal hidden">
+            <div class="modal-content">
+                <h3>Choose a Color</h3>
+                <div class="color-options">
+                    <button class="color-btn" data-color="red" style="background:#E74C3C;">Red</button>
+                    <button class="color-btn" data-color="blue" style="background:#3498DB;">Blue</button>
+                    <button class="color-btn" data-color="green" style="background:#2ECC71;">Green</button>
+                    <button class="color-btn" data-color="yellow" style="background:#F1C40F;color:#333;">Yellow</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game over modal -->
+        <div id="game-over" class="modal hidden">
+            <div class="modal-content game-over-content">
+                <h2 id="winner-text"></h2>
+                <div id="final-scores"></div>
+                <div class="game-over-buttons">
+                    <button id="btn-play-again" class="menu-btn primary">🔄 Play Again</button>
+                    <button id="btn-main-menu" class="menu-btn">🏠 Main Menu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
