@@ -11,11 +11,7 @@
 **A collection of fun and interactive games built with modern web technologies and Python! 🎯**
 
 ## 🌐 Live Demo
-<<<<<<< HEAD
 **Play all games together on our live website: [https://web-games-collection.onrender.com](https://web-games-collection.onrender.com) 🚀**
-=======
-**Play all games together on our live website: (https://web-games-collections.onrender.com) 🚀**
->>>>>>> 01034411b0912e7d6cd1cf1c5f7684c989b4a097
 
 [🎮 Games Overview](#-games-overview) • [📖 Quick Start](#-quick-start) • [🎯 Game Details](#-game-details) • [🛠️ Installation](#-installation) • [🤝 Contributing](#-contributing)
 
@@ -25,7 +21,7 @@
 
 ## 🎮 Games Overview
 
-This repository contains **15 exciting games** that you can play right in your browser or on desktop:
+This repository contains **18 exciting games** that you can play right in your browser or on desktop:
 
 | Game | Type | Tech | Players | Status |
 |------|------|------|---------|--------|
@@ -44,6 +40,9 @@ This repository contains **15 exciting games** that you can play right in your b
 | 📝 **Hangman** | Browser Game | HTML/CSS/JS | 1 | ✅ Ready |
 | 🚀 **Space Invaders** | Browser Game | HTML/CSS/JS | 1 | ✅ Ready |
 | 🧱 **Brick Breaker** | Browser Game | HTML/CSS/JS | 1 | ✅ Ready |
+| 🔨 **Whack-a-Mole** | Browser Game | HTML/CSS/JS | 1 | ✅ Ready |
+| 🏰 **Castle Defenders** | Browser Game | HTML/CSS/JS | 1 | ✅ Ready |
+| 🃏 **UNO Card Game** | Browser Game | HTML/CSS/JS | 2-4 | ✅ Ready |
 
 ---
 
@@ -1025,6 +1024,24 @@ web-games/
 │   ├── script.js                  # Game Logic
 │   ├── README.md                  # Game documentation
 │   └── LICENSE                    # License file
+├── Game16/
+│   ├── index.html                 # Whack-a-Mole
+│   ├── style.css                  # Styles
+│   ├── script.js                  # Game Logic
+│   ├── README.md                  # Game documentation
+│   └── LICENSE                    # License file
+├── Game17/
+│   ├── index.html                 # Castle Defenders
+│   ├── style.css                  # Styles
+│   ├── script.js                  # Game Logic
+│   ├── README.md                  # Game documentation
+│   └── LICENSE                    # License file
+├── Game18/
+│   ├── index.html                 # UNO Card Game
+│   ├── style.css                  # Styles
+│   ├── script.js                  # Game Logic
+│   ├── README.md                  # Game documentation
+│   └── LICENSE                    # License file
 ├── Web_Games_Collection/
 │   └── index.html                 # Collection portal
 ├── LICENSE                        # MIT License
@@ -1196,6 +1213,9 @@ For questions, issues, or feedback:
 - 📝 [Hangman](Game13/) - Word guessing
 - 🚀 [Space Invaders](Game14/) - Arcade shooter
 - 🧱 [Brick Breaker](Game15/) - Classic arcade game
+- 🔨 [Whack-a-Mole](Game16/) - Reflex arcade challenge
+- 🏰 [Castle Defenders](Game17/) - Tower defense RPG
+- 🃏 [UNO Card Game](Game18/) - Classic card strategy game
 
 
 **Made with 💖 using HTML5, CSS3, JavaScript, and Python**
