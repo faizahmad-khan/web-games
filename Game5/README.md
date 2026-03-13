@@ -1,6 +1,6 @@
-# Simple Flappy Bird Game
+# Flappy Bird Plus
 
-A clean and visually appealing implementation of the classic Flappy Bird game using HTML, CSS, and JavaScript.
+An upgraded and visually polished implementation of the classic Flappy Bird game using HTML, CSS, and JavaScript.
 
 ## Play Now
 
@@ -12,20 +12,29 @@ A clean and visually appealing implementation of the classic Flappy Bird game us
 
 ## Features
 
-- Simple and intuitive gameplay
-- Attractive visual design with gradients and animations
-- Responsive layout that works on different screen sizes
-- Score tracking system
-- Start and restart functionality
-- Mobile-friendly controls (tap to flap)
+- Simple and intuitive core gameplay
+- Dynamic difficulty that ramps every 5 points
+- Pause and resume support (`P`, `Esc`, or Pause button)
+- Achievement unlock system with toast notifications
+- Medal rewards (`Bronze`, `Silver`, `Gold`, `Platinum`)
+- Particle effects, score pop animation, and collision impact feedback
+- Persistent progress via `localStorage`:
+  - Best score
+  - Total runs
+  - Total flaps
+  - Unlocked medals
+  - Unlocked achievements
+- Responsive layout and touch-friendly controls
 
 ## How to Play
 
 1. Click the "Start Game" button to begin
 2. Press SPACEBAR or tap/click to make the bird flap and avoid pipes
 3. Navigate through the gaps in the pipes to earn points
-4. The game ends when the bird collides with a pipe or the ground
-5. Click "Play Again" to restart after game over
+4. Difficulty increases every 5 points as pipes move faster and gaps narrow
+5. The game ends when the bird collides with a pipe or the ground
+6. Earn medals and unlock achievements based on your performance
+7. Click "Play Again" to restart after game over
 
 ## Files
 
@@ -35,8 +44,37 @@ A clean and visually appealing implementation of the classic Flappy Bird game us
 
 ## Controls
 
-- **Desktop**: Spacebar or mouse click to flap
-- **Mobile**: Tap the screen to flap
+- **Desktop**:
+  - `Space` to flap
+  - `P` or `Esc` to pause/resume
+  - Mouse click to flap
+- **Mobile**:
+  - Tap to flap
+  - Pause button for pause/resume
+
+## Progression Rules
+
+- Every 5 points:
+  - Pipe speed increases slightly
+  - Pipe gap decreases slightly
+- Difficulty tiers shown in HUD:
+  - Easy
+  - Medium
+  - Hard
+
+## Medals
+
+- Bronze: score `>= 10`
+- Silver: score `>= 20`
+- Gold: score `>= 35`
+- Platinum: score `>= 50`
+
+## Achievements
+
+- First Flight: play 1 game
+- Getting Warm: score 10
+- Sky Master: score 25
+- Persistent: play 10 games
 
 ## Requirements
 
