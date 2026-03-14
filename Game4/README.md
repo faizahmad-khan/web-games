@@ -7,7 +7,7 @@
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
-**A fun and addictive browser-based Worm game with smooth animations!**
+**A fun and addictive browser-based Worm game with smooth animations, power-ups, and multiplayer support!**
 
 [🎮 Play Now](#how-to-run) • [⭐ Features](#features) • [📖 How to Play](#how-to-play) • [🛠️ Installation](#installation)
 
@@ -15,13 +15,9 @@
 
 ---
 
-## 🎮 Live Preview
+## 🌙 Dark Mode Support
 
-<div align="center">
-
-> 📌 **Try the game directly or [open in fullscreen](https://htmlpreview.github.io/?https://github.com/faizahmad-khan/web-games/blob/main/Game4/index.html)**
-
-</div>
+This game now supports **system dark mode preferences**! Your game will automatically adapt to your device's theme settings for a comfortable gaming experience.
 
 ---
 
