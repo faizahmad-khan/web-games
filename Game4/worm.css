@@ -236,6 +236,12 @@ canvas {
     transform: translateY(0);
 }
 
+.control-btn:focus {
+    outline: 3px solid #667eea;
+    outline-offset: 2px;
+    box-shadow: 0 0 12px rgba(102, 126, 234, 0.5);
+}
+
 .game-modes {
     margin-bottom: 15px;
     text-align: center;
