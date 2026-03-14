@@ -215,12 +215,19 @@ button {
     margin: 10px;
     transition: all 0.3s;
     pointer-events: auto;
+    outline: 3px solid transparent;
+    outline-offset: 2px;
 }
 
 button:hover {
     background: #45a049;
     transform: scale(1.05);
     box-shadow: 0 0 15px rgba(76, 175, 80, 0.7);
+}
+
+button:focus {
+    outline: 3px solid #FFD700;
+    outline-offset: 2px;
 }
 
 .hidden {
