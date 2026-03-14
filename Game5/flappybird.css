@@ -250,6 +250,55 @@ button:hover {
     }
 }
 
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: linear-gradient(to bottom, #1a1a2e, #0f0f1e);
+    }
+
+    #start-screen, #game-over, #pause-overlay {
+        background: rgba(0, 0, 0, 0.85);
+    }
+
+    #start-screen h1, #game-over h2 {
+        color: #FFD700;
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+    }
+
+    #start-screen p {
+        color: #b0b0b8;
+    }
+
+    #pause-overlay h2 {
+        color: #FFE082;
+    }
+
+    #pause-overlay p {
+        color: #b0b0b8;
+    }
+
+    button {
+        background: #1b5e20;
+        box-shadow: 0 0 10px rgba(76, 175, 80, 0.4);
+    }
+
+    button:hover {
+        background: #2e7d32;
+        box-shadow: 0 0 15px rgba(76, 175, 80, 0.6);
+    }
+
+    #difficulty-value {
+        color: #FFB74D;
+    }
+}
+
 @media (max-width: 500px) {
     #game-container {
         width: 100%;
