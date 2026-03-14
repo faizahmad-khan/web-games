@@ -269,6 +269,61 @@ canvas {
     font-size: 1em;
 }
 
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    }
+
+    .container {
+        background: rgba(30, 30, 50, 0.95);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+    }
+
+    header {
+        border-bottom-color: #667eea;
+    }
+
+    h1 {
+        color: #e8e8f0;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .label {
+        color: #667eea;
+    }
+
+    .instructions {
+        background: rgba(50, 50, 70, 0.8);
+        border-left-color: #667eea;
+    }
+
+    .instructions h3,
+    .instructions li {
+        color: #d0d0d8;
+    }
+
+    .game-over-content {
+        background: #1e1e32;
+        color: #e8e8f0;
+    }
+
+    .game-over-content h2 {
+        color: #ff8a8a;
+    }
+
+    .game-over-content p {
+        color: #c0c0c8;
+    }
+}
+
 @media (max-width: 600px) {
     .container {
         padding: 20px;
