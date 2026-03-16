@@ -931,3 +931,58 @@ h1 {
         font-size: 0.9em;
     }
 }
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        color: #e8e8f0;
+    }
+
+    .player-selection, .game-board, .game-controls, .game-info {
+        background: #2d3748;
+        color: #e8e8f0;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .player-selection h2, .player-selection h3, .game-board h2 {
+        color: #e8e8f0;
+    }
+
+    .player-color-row {
+        background: #374151;
+    }
+
+    .player-color-row label {
+        color: #e8e8f0;
+    }
+
+    #gameMessage {
+        color: #e8e8f0;
+    }
+
+    .score-board {
+        color: #e8e8f0;
+    }
+
+    .dice-face, .dice-result {
+        color: #ff8a8a;
+    }
+
+    .roll-btn {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+    }
+}
+
+button:focus, input:focus {
+    outline: 3px solid #667eea;
+    outline-offset: 2px;
+}
