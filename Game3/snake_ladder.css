@@ -715,3 +715,31 @@ body.dark-mode .player-card.active {
         font-size: 1.8em;
     }
 }
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-gradient-start: #1a1a2e;
+        --bg-gradient-end: #16213e;
+        --card-bg: #2d3748;
+        --text-color: #e2e8f0;
+        --title-color: #ffd700;
+        --border-color: #4a5568;
+        --cell-even: #2d5016;
+        --cell-odd: #4a4016;
+        --log-bg: #1a202c;
+        --player-card-bg: #374151;
+    }
+}
+
+button:focus, input:focus, .icon-btn:focus {
+    outline: 3px solid #667eea;
+    outline-offset: 2px;
+}
