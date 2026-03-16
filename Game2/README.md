@@ -7,7 +7,7 @@
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
-**A fully functional, browser-based Ludo game with beautiful animations and multiplayer support!**
+**A fully functional, browser-based Ludo game with beautiful animations, dark mode support, and multiplayer gameplay!**
 
 [🎮 Play Now](#how-to-run ) • [📖 Features](#features) • [🎯 How to Play](#how-to-play) • [🛠️ Installation](#installation)
 
@@ -15,11 +15,13 @@
 
 ---
 
-## 🎮 Live Preview
+## 🌙 Dark Mode & Accessibility
 
-> <a href="https://render.com/deploy?repo=https://github.com/faizahmad-khan/web-games/tree/main/Game3" target="_blank" style="display: inline-block; padding: 10px 20px; font-size: 1.2em; color: white; background-color: #6e00ff; border-radius: 10px; text-decoration: none; margin-top: 20px;">
-  <img src="https://render.com/images/deploy-to-render-button.svg" alt="Deploy to Render" style="height: 2.5em; vertical-align: middle; margin-right: 100px;">
-</a>
+This game now includes:
+- **🌙 Automatic Dark Mode** - Respects your system's theme preferences
+- **♿ Full Accessibility Support** - Keyboard navigation, ARIA labels, and focus indicators
+- **⌨️ Accessible Buttons** - Enhanced focus states for keyboard users
+- **⚡ Motion-Friendly** - Respects `prefers-reduced-motion` for users who prefer minimal animations
 
 ---
 
