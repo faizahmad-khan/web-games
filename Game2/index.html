@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
-    <title>Ludo Game</title>
+    <meta name="description" content="Play Ludo Game! A fun multiplayer board game with 2-4 players. Choose your color and race to victory!">
+    <meta name="theme-color" content="#667eea">
+    <meta name="color-scheme" content="light dark">
+    <title>🎲 Ludo Game - Classic Board Game</title>
     <link rel="stylesheet" href="ludo.css">
 </head>
 <body>
@@ -16,15 +19,15 @@
         <div id="playerSelection" class="player-selection">
             <h2>Select Number of Players</h2>
             <div class="player-count-options">
-                <button class="player-count-btn" data-players="2">2 Players</button>
-                <button class="player-count-btn" data-players="3">3 Players</button>
-                <button class="player-count-btn" data-players="4">4 Players</button>
+                <button class="player-count-btn" data-players="2" aria-label="Select 2 players">2 Players</button>
+                <button class="player-count-btn" data-players="3" aria-label="Select 3 players">3 Players</button>
+                <button class="player-count-btn" data-players="4" aria-label="Select 4 players">4 Players</button>
             </div>
             
             <div id="colorSelection" class="color-selection" style="display: none;">
                 <h3>Select Colors for Each Player</h3>
                 <div id="colorSelectionContainer"></div>
-                <button id="startGameBtn" class="start-game-btn">Start Game</button>
+                <button id="startGameBtn" class="start-game-btn" aria-label="Start the game">Start Game</button>
             </div>
         </div>
 
@@ -40,7 +43,7 @@
                     <div id="dice" class="dice">
                         <div class="dice-face">?</div>
                     </div>
-                    <button id="rollDiceBtn" class="roll-btn">Roll Dice</button>
+                    <button id="rollDiceBtn" class="roll-btn" aria-label="Roll the dice">Roll Dice</button>
                     <div id="diceResult" class="dice-result"></div>
                 </div>
                 <div class="game-status">
@@ -109,12 +112,13 @@
                 </div>
             </div>
 
-            <button id="resetGameBtn" class="reset-btn">Reset Game</button>
+            <button id="resetGameBtn" class="reset-btn" aria-label="Reset the game">Reset Game</button>
         </div>
     </div>
 
-    <footer style="text-align:center; padding:15px; margin-top:20px; color:#ccc; font-size:16px; font-weight:bold;">
-        <p>Developed by Faiz Ahmad Khan</p>
+    <footer style="text-align:center; padding:15px; margin-top:20px; color:#999; font-size:16px; font-weight:bold;">
+        <p>🎲 Ludo Game | Developed by Faiz Ahmad Khan</p>
+        <p style="font-size:12px; margin-top:5px;">Made with ❤️ using HTML5, CSS3 & JavaScript</p>
     </footer>
 
     <script src="ludo.js"></footer>
