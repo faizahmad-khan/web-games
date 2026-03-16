@@ -1,32 +1,25 @@
-# 🎲 Snake and Ladder Game - Enhanced Edition
+# 🐍 Snake and Ladder Game - Enhanced Edition
 
 ![Snake and Ladder](https://img.shields.io/badge/Game-Snake%20and%20Ladder-brightgreen?style=for-the-badge)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
-**A modern, feature-rich Snake and Ladder game with power-ups, dark mode, sound effects, and more! 🐍🪜✨**
+**A modern, feature-rich Snake and Ladder game with power-ups, auto dark mode, sound effects, and full accessibility support! 🐍🪜✨**
 
 [🎮 Play Now](#how-to-play) • [⭐ Features](#features) • [🎯 Power-ups](#-power-ups-system) • [🛠️ Setup](#setup) • [📱 Compatibility](#compatibility)
 
-
 ---
 
-## 🎮 Live Preview
+## 🌙 Dark Mode & Accessibility
 
-<div align="center">
-<img src="https://via.placeholder.com/600x400?text=Snake+and+Ladder+Game" alt="Snake and Ladder Game Preview" style="width:100%; max-width:600px; border-radius: 8px; margin-bottom: 15px;">
-
-> 📌 **Try the game directly**
-
-> <a href="https://snake-ladder-wxc8.onrender.com" target="_blank" style="display: inline-block; padding: 10px 20px; font-size: 1.2em; color: white; background-color: #4CAF50; border-radius: 8px; text-decoration: none; margin-top: 15px;">🎮 Play on Render</a>
-
-> <a href="https://render.com/deploy?repo=https://github.com/faizahmad-khan/web-games/tree/main/Game3" target="_blank" style="display: inline-block; padding: 10px 20px; font-size: 1.2em; color: white; background-color: #6e00ff; border-radius: 10px; text-decoration: none; margin-top: 15px;">
-  <img src="https://render.com/images/deploy-to-render-button.svg" alt="Deploy to Render" style="height: 1.2em; vertical-align: middle; margin-right: 5px;">
-  Deploy to Render
-</a>
-
-</div>
+This game includes:
+- **🌙 Automatic Dark Mode** - Adapts to your system's theme preference automatically
+- **♿ Full Accessibility Support** - Keyboard navigation, ARIA labels, and focus indicators
+- **⌨️ Enhanced Controls** - Clear focus states for keyboard users
+- **⚡ Motion-Friendly** - Respects `prefers-reduced-motion` for users sensitive to animations
+- **🔊 Sound Control** - Toggle sound effects on/off with clear button
+- **🎨 Theme Toggle** - Manual dark mode button when you need it
 
 ---
 
