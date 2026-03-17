@@ -2,6 +2,13 @@
 
 A web-based image generation playground that allows users to create custom images by selecting different environments and objects.
 
+## What's New
+
+- Automatic dark mode support with `prefers-color-scheme`
+- Improved accessibility with ARIA labels and focus states
+- Reduced motion support with `prefers-reduced-motion`
+- Enhanced metadata for better SEO and mobile browser integration
+
 ## Features
 
 - Environment selection (forest, beach, city, space, underwater, etc.)
