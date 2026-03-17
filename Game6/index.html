@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock Paper Scissors</title>
+    <meta name="description" content="Play Rock Paper Scissors in your browser with score tracking and fast rounds.">
+    <meta name="theme-color" content="#362746">
+    <meta name="color-scheme" content="light dark">
+    <title>✊ Rock Paper Scissors</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,15 +17,16 @@
             <p>Computer: <span id="computer-score">0</span></p>
         </div>
         <div class="choices">
-            <button id="rock">Rock</button>
-            <button id="paper">Paper</button>
-            <button id="scissors">Scissors</button>
+            <button id="rock" aria-label="Choose rock">Rock</button>
+            <button id="paper" aria-label="Choose paper">Paper</button>
+            <button id="scissors" aria-label="Choose scissors">Scissors</button>
         </div>
-        <p id="result"></p>
-        <p id="message"></p>
+        <p id="result" aria-live="polite"></p>
+        <p id="message" aria-live="polite"></p>
     </div>
-    <footer style="text-align:center; padding:15px; margin-top:20px; color:#ccc; font-size:16px; font-weight:bold;">
-        <p>Developed by Faiz Ahmad Khan</p>
+    <footer style="text-align:center; padding:15px; margin-top:20px; color:#999; font-size:16px; font-weight:bold;">
+        <p>✊ Rock Paper Scissors | Developed by Faiz Ahmad Khan</p>
+        <p style="font-size:12px; margin-top:5px;">Made with HTML5, CSS3 & JavaScript</p>
     </footer>
 
     <script src="script.js"></script>
