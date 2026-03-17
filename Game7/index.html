@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Playground - Game 7</title>
+    <meta name="description" content="Create custom scene images by combining environments and objects in Image Playground.">
+    <meta name="theme-color" content="#192d6e">
+    <meta name="color-scheme" content="light dark">
+    <title>🎨 Image Playground</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,7 +20,7 @@
             <section class="controls">
                 <div class="control-group">
                     <label for="environment">Environment:</label>
-                    <select id="environment">
+                    <select id="environment" aria-label="Select environment">
                         <option value="forest">Forest</option>
                         <option value="beach">Beach</option>
                         <option value="city">City</option>
@@ -31,7 +34,7 @@
                 
                 <div class="control-group">
                     <label for="object">Object:</label>
-                    <select id="object">
+                    <select id="object" aria-label="Select object">
                         <option value="car">Car</option>
                         <option value="house">House</option>
                         <option value="animal">Animal</option>
@@ -43,7 +46,7 @@
                     </select>
                 </div>
                 
-                <button id="generate-btn">Generate Image</button>
+                <button id="generate-btn" aria-label="Generate image">Generate Image</button>
             </section>
             
             <section class="preview">
@@ -60,7 +63,8 @@
         
         <footer>
             <p>Game 7 - Image Playground | Create amazing images with AI</p>
-            <p style="margin-top:5px; color:#ccc; font-size:16px; font-weight:bold;">Developed by Faiz Ahmad Khan</p>
+            <p style="margin-top:5px; color:#999; font-size:16px; font-weight:bold;">Developed by Faiz Ahmad Khan</p>
+            <p style="font-size:12px; margin-top:5px;">Made with HTML5, CSS3 & JavaScript</p>
         </footer>
     </div>
     
