@@ -1,6 +1,13 @@
 # Rock Paper Scissors Game
 
-A classic Rock Paper Scissors game built with HTML, CSS, and JavaScript. Play against the computer in this fun and interactive game!
+A classic Rock Paper Scissors game built with HTML, CSS, and JavaScript. Play against the computer in this fun and interactive game.
+
+## What's New
+
+- Automatic dark mode support with `prefers-color-scheme`
+- Better keyboard accessibility with visible focus states
+- ARIA labels and live regions for result updates
+- Reduced motion support with `prefers-reduced-motion`
 
 ## How to Play
 
