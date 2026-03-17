@@ -109,6 +109,12 @@ main {
     transform: translateY(0);
 }
 
+#generate-btn:focus,
+.control-group select:focus {
+    outline: 3px solid #3d5ecb;
+    outline-offset: 2px;
+}
+
 .preview {
     flex: 2;
     min-width: 300px;
@@ -198,4 +204,50 @@ footer {
 
 #generated-image {
     animation: fadeIn 0.5s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: linear-gradient(135deg, #0f172a, #1e293b);
+        color: #e2e8f0;
+    }
+
+    .container {
+        background: rgba(15, 23, 42, 0.92);
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.55);
+    }
+
+    .controls,
+    footer {
+        background: #111827;
+        color: #cbd5e1;
+    }
+
+    .control-group label,
+    #placeholder {
+        color: #cbd5e1;
+    }
+
+    .control-group select {
+        background: #1f2937;
+        border-color: #374151;
+        color: #e5e7eb;
+    }
+
+    #image-container {
+        background: #111827;
+        border-color: #475569;
+    }
+
+    #generate-btn {
+        background: linear-gradient(to right, #334155, #4338ca);
+    }
 }
