@@ -2,6 +2,14 @@
 
 A feature-rich Tetris game built with HTML5 Canvas, CSS, and vanilla JavaScript. Arrange falling tetrominoes, clear lines, and chase high scores!
 
+## What's New
+
+- Accessibility upgrades with ARIA labels for key controls
+- Improved keyboard focus visibility for buttons
+- Reduced motion support using `prefers-reduced-motion`
+- Better browser metadata and theme-color support
+- Footer branding consistency with other upgraded games
+
 ## 🎮 Features
 
 - **Classic Tetris gameplay** — 7 tetromino shapes (I, J, L, O, S, T, Z) with wall-kick rotation
