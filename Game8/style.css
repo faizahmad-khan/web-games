@@ -160,6 +160,12 @@ h1 {
 }
 .btn:active { transform: scale(0.95); }
 
+.btn:focus,
+.dpad-btn:focus {
+    outline: 3px solid #00ffff;
+    outline-offset: 2px;
+}
+
 .dpad {
     display: none;
     flex-direction: column;
@@ -190,4 +196,47 @@ h1 {
 @media (max-width: 420px) {
     .left-panel { display: none; }
     .game-container { padding: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        background: linear-gradient(135deg, #dbeafe, #e0e7ff);
+        color: #0f172a;
+    }
+
+    .game-container {
+        background: rgba(255, 255, 255, 0.93);
+        border-color: #0ea5e9;
+        box-shadow: 0 0 30px rgba(14, 165, 233, 0.25);
+    }
+
+    h1,
+    .overlay h2,
+    .panel-label,
+    .info-box .label {
+        color: #0369a1;
+        text-shadow: none;
+    }
+
+    #tetris {
+        border-color: #0ea5e9;
+        box-shadow: 0 0 14px rgba(14, 165, 233, 0.25);
+    }
+
+    .overlay {
+        background: rgba(255, 255, 255, 0.92);
+    }
+
+    .overlay p,
+    .controls-box {
+        color: #334155;
+    }
 }
