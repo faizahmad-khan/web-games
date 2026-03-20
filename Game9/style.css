@@ -18,6 +18,7 @@ body{display:flex;justify-content:center;align-items:flex-start;min-height:100vh
 .high-score-msg{color:#FFD700!important;font-weight:bold;font-size:1.1rem!important}
 .btn{background:#FFD700;color:#000;border:none;padding:12px 30px;font-size:1.1rem;font-weight:900;letter-spacing:2px;border-radius:6px;cursor:pointer;margin-top:8px;transition:transform .15s,box-shadow .15s,background .15s;box-shadow:0 0 10px rgba(255,215,0,.4)}
 .btn:hover,.btn:active{background:#ffbb00;transform:scale(1.06);box-shadow:0 0 20px rgba(255,215,0,.8)}
+.btn:focus,.dpad-btn:focus{outline:3px solid #FFD700;outline-offset:2px}
 .lives-bar{display:flex;align-items:center;gap:8px;width:540px;padding:4px 8px}
 .lives-label{color:#aaa;font-size:.75rem;letter-spacing:2px;text-transform:uppercase}
 #livesDisplay{display:flex;gap:6px}
@@ -28,3 +29,5 @@ body{display:flex;justify-content:center;align-items:flex-start;min-height:100vh
 .dpad-btn{width:44px;height:44px;background:rgba(255,215,0,.15);border:2px solid rgba(255,215,0,.5);color:#FFD700;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .1s,transform .1s;border-radius:4px;user-select:none;-webkit-user-select:none}
 .dpad-btn:hover,.dpad-btn:active{background:rgba(255,215,0,.4);transform:scale(.95)}
 @media(max-width:580px){.title{font-size:2rem}.game-info,.lives-bar{width:100%;max-width:540px}#gameCanvas{width:100%;max-width:540px;height:auto}}
+
+@media (prefers-reduced-motion: reduce){*{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}}
