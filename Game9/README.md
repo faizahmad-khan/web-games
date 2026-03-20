@@ -2,6 +2,14 @@
 
 A feature-rich Pac-Man game built with HTML5 Canvas, CSS, and vanilla JavaScript. Navigate the maze, eat dots, hunt frightened ghosts, and chase high scores!
 
+## What's New
+
+- Accessibility upgrades with ARIA labels for key controls
+- Improved keyboard focus visibility for action buttons
+- Reduced motion support using `prefers-reduced-motion`
+- Better browser metadata and theme-color support
+- Footer branding consistency with other upgraded games
+
 ## 🎮 Features
 
 - **Classic Pac-Man gameplay** — fully connected maze with dot and pellet collection
