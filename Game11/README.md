@@ -2,6 +2,14 @@
 
 A feature-rich Tic Tac Toe game built with HTML, CSS, and JavaScript. Play against a friend or challenge the AI across three difficulty levels, complete with sound effects, confetti celebrations, and keyboard controls.
 
+## What's New
+
+- Better accessibility with ARIA labels for selects and key controls
+- Improved keyboard focus visibility for buttons and inputs
+- Reduced motion support via `prefers-reduced-motion`
+- Enhanced browser metadata and theme color support
+- Footer branding consistency with other upgraded games
+
 ## Features
 
 - **Player vs Player** and **Player vs AI** game modes
