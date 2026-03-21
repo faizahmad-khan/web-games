@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tic Tac Toe</title>
+    <meta name="description" content="Play Tic Tac Toe in PvP or AI mode with multiple difficulties, score tracking, and keyboard controls.">
+    <meta name="theme-color" content="#0f0c29">
+    <meta name="color-scheme" content="light dark">
+    <title>⭕ Tic Tac Toe</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,14 +19,14 @@
         <div class="top-controls">
             <div class="mode-selector">
                 <label for="game-mode">Mode:</label>
-                <select id="game-mode">
+                <select id="game-mode" aria-label="Select game mode">
                     <option value="pvp">Player vs Player</option>
                     <option value="ai">Player vs AI</option>
                 </select>
             </div>
             <div class="difficulty-selector hidden" id="difficulty-group">
                 <label for="difficulty">AI:</label>
-                <select id="difficulty">
+                <select id="difficulty" aria-label="Select AI difficulty">
                     <option value="easy">Easy</option>
                     <option value="medium" selected>Medium</option>
                     <option value="hard">Hard</option>
@@ -62,8 +65,8 @@
 
         <!-- Controls -->
         <div class="controls">
-            <button id="reset-btn">Reset Game</button>
-            <button id="new-game-btn">New Game</button>
+            <button id="reset-btn" aria-label="Reset board">Reset Game</button>
+            <button id="new-game-btn" aria-label="Start new game">New Game</button>
         </div>
 
         <!-- Keyboard hint -->
@@ -72,12 +75,13 @@
         <!-- Win / Draw overlay -->
         <div id="message" class="message hidden">
             <div class="message-text">X Wins!</div>
-            <button id="another-round-btn" class="another-round-btn">Another Round</button>
+            <button id="another-round-btn" class="another-round-btn" aria-label="Play another round">Another Round</button>
         </div>
     </div>
 
     <footer>
-        <p>Developed by Faiz Ahmad Khan</p>
+        <p>⭕ Tic Tac Toe | Developed by Faiz Ahmad Khan</p>
+        <p style="font-size:12px; margin-top:5px;">Made with HTML5, CSS3 & JavaScript</p>
     </footer>
 
     <script src="script.js"></script>
