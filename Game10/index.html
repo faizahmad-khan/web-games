@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Memory Card Game</title>
+    <meta name="description" content="Play Memory Match with multiple difficulty levels, timer tracking, and best scores.">
+    <meta name="theme-color" content="#0f0c29">
+    <meta name="color-scheme" content="light dark">
+    <title>🧠 Memory Match</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,9 +14,9 @@
         <h1>🧠 Memory Match</h1>
         <div class="toolbar">
             <div class="difficulty-bar">
-                <button class="diff-btn active" data-size="easy">Easy (4×3)</button>
-                <button class="diff-btn" data-size="medium">Medium (4×4)</button>
-                <button class="diff-btn" data-size="hard">Hard (5×4)</button>
+                <button class="diff-btn active" data-size="easy" aria-label="Set easy difficulty">Easy (4×3)</button>
+                <button class="diff-btn" data-size="medium" aria-label="Set medium difficulty">Medium (4×4)</button>
+                <button class="diff-btn" data-size="hard" aria-label="Set hard difficulty">Hard (5×4)</button>
             </div>
         </div>
         <div class="game-info">
@@ -29,13 +32,14 @@
                 <p>Moves: <span id="winMoves"></span></p>
                 <p>Time: <span id="winTime"></span></p>
                 <p id="newBestMsg" class="new-best hidden">⭐ New Best!</p>
-                <button class="reset-btn" id="play-again-btn">Play Again</button>
+                <button class="reset-btn" id="play-again-btn" aria-label="Play again">Play Again</button>
             </div>
         </div>
-        <button class="reset-btn" id="reset-btn">🔄 Reset Game</button>
+        <button class="reset-btn" id="reset-btn" aria-label="Reset game">🔄 Reset Game</button>
     </div>
-    <footer style="text-align:center; padding:15px; margin-top:20px; color:#ccc; font-size:16px; font-weight:bold;">
-        <p>Developed by Faiz Ahmad Khan</p>
+    <footer style="text-align:center; padding:15px; margin-top:20px; color:#999; font-size:16px; font-weight:bold;">
+        <p>🧠 Memory Match | Developed by Faiz Ahmad Khan</p>
+        <p style="font-size:12px; margin-top:5px;">Made with HTML5, CSS3 & JavaScript</p>
     </footer>
 
     <script src="script.js"></script>
