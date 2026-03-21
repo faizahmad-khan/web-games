@@ -2,6 +2,14 @@
 
 A polished memory matching game built with HTML5, CSS3, and vanilla JavaScript. Flip cards, find pairs, beat the clock, and set new personal bests!
 
+## What's New
+
+- Better accessibility with ARIA labels on key controls
+- Improved keyboard focus visibility for buttons and controls
+- Reduced motion support via `prefers-reduced-motion`
+- Enhanced browser metadata and theme color support
+- Footer branding consistency with other upgraded games
+
 ## 🎮 Features
 
 - **3 difficulty levels** — Easy (4×3, 6 pairs), Medium (4×4, 8 pairs), Hard (5×4, 10 pairs)
