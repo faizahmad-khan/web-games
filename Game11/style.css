@@ -97,6 +97,15 @@ h1 {
     border-color: #0072ff;
 }
 
+.mode-selector select:focus,
+.difficulty-selector select:focus,
+button:focus,
+.another-round-btn:focus,
+.cell:focus {
+    outline: 3px solid #00c6ff;
+    outline-offset: 2px;
+}
+
 /* ===== Game info ===== */
 .game-info {
     display: flex;
@@ -385,5 +394,13 @@ footer {
     button {
         width: 100%;
         max-width: 250px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }
