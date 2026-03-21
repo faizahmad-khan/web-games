@@ -180,6 +180,13 @@ h1 {
 }
 .reset-btn:active { transform: scale(0.96); }
 
+.diff-btn:focus,
+.reset-btn:focus,
+.card:focus {
+    outline: 3px solid #a064ff;
+    outline-offset: 2px;
+}
+
 /* win overlay */
 .win-overlay {
     position: fixed;
@@ -216,4 +223,40 @@ h1 {
     .front, .back { border-radius: 8px; }
     h1 { font-size: 1.6rem; }
     .front { font-size: 1.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        background: linear-gradient(135deg, #e0e7ff, #ede9fe, #dbeafe);
+        color: #1f2937;
+    }
+
+    .stat,
+    .win-box {
+        background: rgba(255, 255, 255, 0.9);
+        color: #1f2937;
+        border-color: rgba(120, 90, 200, 0.25);
+    }
+
+    .stat-label,
+    .win-box p {
+        color: #4b5563;
+    }
+
+    .front {
+        background: linear-gradient(145deg, #eef2ff, #ddd6fe);
+        border-color: rgba(120, 90, 200, 0.35);
+    }
+
+    .back {
+        background: linear-gradient(145deg, #a78bfa, #8b5cf6);
+    }
 }
