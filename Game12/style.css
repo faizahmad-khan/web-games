@@ -171,6 +171,14 @@ h1 {
     transform: scale(0.96);
 }
 
+.btn:focus,
+.difficulty-selector select:focus,
+.toggle-label input[type="checkbox"]:focus,
+.dpad-btn:focus {
+    outline: 3px solid #00c6ff;
+    outline-offset: 2px;
+}
+
 .btn-hint {
     background: linear-gradient(135deg, #f7971e, #ffd200);
     color: #1a1a2e;
@@ -451,5 +459,31 @@ kbd {
 
     .btn {
         width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        background: linear-gradient(135deg, #e0e7ff, #ede9fe, #dbeafe);
+        color: #1f2937;
+    }
+
+    .container {
+        background: rgba(255, 255, 255, 0.9);
+        border-color: rgba(0, 0, 0, 0.08);
+    }
+
+    .difficulty-selector select,
+    #maze-canvas {
+        background: #f8fafc;
+        color: #1f2937;
     }
 }
