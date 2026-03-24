@@ -98,6 +98,14 @@ h1 {
     border-color: #0072ff;
 }
 
+.control-group select:focus,
+#restartButton:focus,
+.next-level-btn:focus,
+.alphabet-btn:focus {
+    outline: 3px solid #00c6ff;
+    outline-offset: 2px;
+}
+
 /* ===== Stats bar ===== */
 .stats-bar {
     display: flex;
@@ -356,5 +364,13 @@ footer {
     
     .alphabet-container {
         grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }
