@@ -2,6 +2,14 @@
 
 An advanced maze navigation game with multiple difficulty levels, scoring system, and strategic gameplay elements. Navigate through dynamic mazes, collect bonus stars, and compete for the best score!
 
+## What's New
+
+- Better accessibility with ARIA labels for key controls
+- Improved keyboard focus visibility for interactive elements
+- Reduced motion support via `prefers-reduced-motion`
+- Enhanced browser metadata and theme color support
+- Footer branding consistency with other upgraded games
+
 ## 🎮 How to Play
 
 1. Choose your difficulty level: **Easy**, **Medium**, or **Hard**
