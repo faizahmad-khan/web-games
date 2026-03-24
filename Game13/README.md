@@ -3,6 +3,14 @@
 ## Description
 A feature-packed Hangman word guessing game built with HTML, CSS, and JavaScript. Choose a difficulty and category, then race against the clock to guess the hidden word before the hangman is completed. Includes sound effects, confetti celebrations, streak tracking, and full keyboard support.
 
+## What's New
+
+- Better accessibility with ARIA labels and live status messaging
+- Improved keyboard focus visibility for controls
+- Reduced motion support via `prefers-reduced-motion`
+- Enhanced browser metadata and theme color support
+- Footer branding consistency with other upgraded games
+
 ## Features
 - **Difficulty levels** — Easy (short words, no timer), Medium (all words, 90s timer), Hard (long words, 45s countdown)
 - **Word categories** — Filter by Tech, Lifestyle, Gaming, or All
