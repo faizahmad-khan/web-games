@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maze Game</title>
+    <meta name="description" content="Play Maze Game with difficulty levels, hints, fog of war, and score tracking.">
+    <meta name="theme-color" content="#0f0c29">
+    <meta name="color-scheme" content="light dark">
+    <title>🧭 Maze Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,7 +20,7 @@
         <div class="top-controls">
             <div class="difficulty-selector">
                 <label for="difficulty">Difficulty:</label>
-                <select id="difficulty">
+                <select id="difficulty" aria-label="Select difficulty">
                     <option value="easy">Easy</option>
                     <option value="medium" selected>Medium</option>
                     <option value="hard">Hard</option>
@@ -25,11 +28,11 @@
             </div>
             <div class="toggle-group">
                 <label class="toggle-label">
-                    <input type="checkbox" id="fog-toggle">
+                    <input type="checkbox" id="fog-toggle" aria-label="Toggle fog of war">
                     <span class="toggle-text">Fog of War</span>
                 </label>
                 <label class="toggle-label">
-                    <input type="checkbox" id="trail-toggle" checked>
+                    <input type="checkbox" id="trail-toggle" checked aria-label="Toggle trail visibility">
                     <span class="toggle-text">Show Trail</span>
                 </label>
             </div>
@@ -57,10 +60,10 @@
 
         <!-- Action buttons -->
         <div class="action-buttons">
-            <button id="hint-btn" class="btn btn-hint" title="Show solution path briefly (3 per game)">
+            <button id="hint-btn" class="btn btn-hint" title="Show solution path briefly (3 per game)" aria-label="Use a hint">
                 💡 Hint (<span id="hint-count">3</span>)
             </button>
-            <button id="reset-btn" class="btn btn-reset">🔄 New Maze</button>
+            <button id="reset-btn" class="btn btn-reset" aria-label="Generate a new maze">🔄 New Maze</button>
         </div>
 
         <!-- Game canvas -->
@@ -71,11 +74,11 @@
 
         <!-- Mobile D-Pad controls -->
         <div class="dpad-container" id="dpad">
-            <button class="dpad-btn dpad-up" data-dir="up">▲</button>
-            <button class="dpad-btn dpad-left" data-dir="left">◀</button>
+            <button class="dpad-btn dpad-up" data-dir="up" aria-label="Move up">▲</button>
+            <button class="dpad-btn dpad-left" data-dir="left" aria-label="Move left">◀</button>
             <button class="dpad-btn dpad-center" disabled></button>
-            <button class="dpad-btn dpad-right" data-dir="right">▶</button>
-            <button class="dpad-btn dpad-down" data-dir="down">▼</button>
+            <button class="dpad-btn dpad-right" data-dir="right" aria-label="Move right">▶</button>
+            <button class="dpad-btn dpad-down" data-dir="down" aria-label="Move down">▼</button>
         </div>
 
         <!-- Best Scores -->
@@ -103,8 +106,9 @@
             <p class="hint-info">Press <kbd>H</kbd> for a hint. Toggle fog of war for an extra challenge!</p>
         </div>
 
-        <footer style="text-align:center; padding:15px; margin-top:20px; color:#ccc; font-size:16px; font-weight:bold;">
-            <p>Developed by Faiz Ahmad Khan</p>
+        <footer style="text-align:center; padding:15px; margin-top:20px; color:#999; font-size:16px; font-weight:bold;">
+            <p>🧭 Maze Game | Developed by Faiz Ahmad Khan</p>
+            <p style="font-size:12px; margin-top:5px;">Made with HTML5, CSS3 & JavaScript</p>
         </footer>
     </div>
 
