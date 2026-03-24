@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hangman Game</title>
+    <meta name="description" content="Play Hangman with categories, difficulty levels, timers, streak tracking, and keyboard support.">
+    <meta name="theme-color" content="#0f0c29">
+    <meta name="color-scheme" content="light dark">
+    <title>🪢 Hangman Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,7 +20,7 @@
         <div class="top-controls">
             <div class="control-group">
                 <label for="difficulty">Difficulty:</label>
-                <select id="difficulty">
+                <select id="difficulty" aria-label="Select difficulty">
                     <option value="easy">Easy</option>
                     <option value="medium" selected>Medium</option>
                     <option value="hard">Hard</option>
@@ -25,7 +28,7 @@
             </div>
             <div class="control-group">
                 <label for="category">Category:</label>
-                <select id="category">
+                <select id="category" aria-label="Select word category">
                     <option value="all" selected>All</option>
                     <option value="tech">Tech</option>
                     <option value="lifestyle">Lifestyle</option>
@@ -80,18 +83,19 @@
 
         <!-- Controls -->
         <div class="game-controls">
-            <button id="restartButton">Restart Game</button>
+            <button id="restartButton" aria-label="Restart game">Restart Game</button>
         </div>
 
         <!-- Keyboard hint -->
         <p class="keyboard-hint">Use your keyboard to guess letters &nbsp;|&nbsp; <kbd>Enter</kbd> to restart</p>
 
         <!-- Game message -->
-        <div id="gameMessage" class="message"></div>
+        <div id="gameMessage" class="message" aria-live="polite"></div>
     </div>
 
     <footer>
-        <p>Developed by Faiz Ahmad Khan</p>
+        <p>🪢 Hangman | Developed by Faiz Ahmad Khan</p>
+        <p style="font-size:12px; margin-top:5px;">Made with HTML5, CSS3 & JavaScript</p>
     </footer>
 
     <script src="script.js"></script>
