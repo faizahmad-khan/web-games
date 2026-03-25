@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brick Breaker - Classic Arcade Game</title>
+    <meta name="description" content="Play Brick Breaker with power-ups, combos, levels, and high score tracking in your browser.">
+    <meta name="theme-color" content="#667eea">
+    <meta name="color-scheme" content="light dark">
+    <title>🧱 Brick Breaker</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -67,7 +70,7 @@
                             <p class="powerup-legend"><span class="pu-icon pu-slow">⏳</span> Slow Ball</p>
                             <p class="powerup-legend"><span class="pu-icon pu-fire">🔥</span> Fire Ball</p>
                         </div>
-                        <button id="startButton" class="game-button">START GAME</button>
+                        <button id="startButton" class="game-button" aria-label="Start game">START GAME</button>
                     </div>
                 </div>
 
@@ -79,7 +82,7 @@
                         <p class="final-level">Level Reached: <span id="finalLevel">1</span></p>
                         <p class="final-combo">Best Combo: <span id="finalCombo">0</span></p>
                         <p class="final-bricks">Bricks Destroyed: <span id="finalBricks">0</span></p>
-                        <button id="restartButton" class="game-button">PLAY AGAIN</button>
+                        <button id="restartButton" class="game-button" aria-label="Play again">PLAY AGAIN</button>
                     </div>
                 </div>
 
@@ -97,7 +100,7 @@
                         <h2>🎉 LEVEL COMPLETE! 🎉</h2>
                         <p class="level-score">Score: <span id="levelScore">0</span></p>
                         <p class="next-level">Get ready for Level <span id="nextLevel">2</span>!</p>
-                        <button id="nextLevelButton" class="game-button">CONTINUE</button>
+                        <button id="nextLevelButton" class="game-button" aria-label="Continue to next level">CONTINUE</button>
                     </div>
                 </div>
             </div>
@@ -122,7 +125,8 @@
 
         <footer>
             <p>Classic Arcade Game</p>
-            <p>Developed by Faiz Ahmad Khan</p>
+            <p>🧱 Brick Breaker | Developed by Faiz Ahmad Khan</p>
+            <p style="font-size:12px; margin-top:5px;">Made with HTML5, CSS3 & JavaScript</p>
         </footer>
     </div>
 
