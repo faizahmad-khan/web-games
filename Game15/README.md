@@ -2,6 +2,14 @@
 
 A classic arcade-style brick breaker game built with HTML5 Canvas, CSS3, and vanilla JavaScript. Break all the bricks to advance through levels while managing your lives, collecting power-ups, and chasing high scores!
 
+## What's New
+
+- Better accessibility with ARIA labels for key actions
+- Improved keyboard focus visibility for interactive buttons
+- Reduced motion support via `prefers-reduced-motion`
+- Enhanced browser metadata and theme color support
+- Footer branding consistency with other upgraded games
+
 ## 🎮 Game Features
 
 - **Classic Gameplay**: Break bricks by bouncing a ball off a paddle
