@@ -9,6 +9,14 @@
 
 **Defend Earth from the alien invasion! A classic arcade shooter with modern web technologies.**
 
+## What's New
+
+- Better accessibility with ARIA labels for key actions
+- Improved keyboard focus visibility for interactive buttons
+- Reduced motion support via `prefers-reduced-motion`
+- Enhanced browser metadata and theme color support
+- Footer branding consistency with other upgraded games
+
 [🎮 Play Now](#how-to-play) • [⭐ Features](#features) • [🎯 Game Rules](#game-rules) • [🛠️ Installation](#installation)
 
 </div>
