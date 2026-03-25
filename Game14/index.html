@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Space Invaders - Classic Arcade Game</title>
+    <meta name="description" content="Play Space Invaders in your browser with levels, high scores, and classic arcade action.">
+    <meta name="theme-color" content="#0a0a1a">
+    <meta name="color-scheme" content="light dark">
+    <title>🚀 Space Invaders</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -55,7 +58,7 @@
                             <p class="alien-points">👾 = 10 pts | 🛸 = 20 pts | 👽 = 30 pts</p>
                             <p class="alien-points">🛸 Mystery Ship = 100 pts</p>
                         </div>
-                        <button id="startButton" class="game-button">START GAME</button>
+                        <button id="startButton" class="game-button" aria-label="Start game">START GAME</button>
                     </div>
                 </div>
 
@@ -65,7 +68,7 @@
                         <h2>GAME OVER</h2>
                         <p class="final-score">Final Score: <span id="finalScore">0</span></p>
                         <p class="final-level">Level Reached: <span id="finalLevel">1</span></p>
-                        <button id="restartButton" class="game-button">PLAY AGAIN</button>
+                        <button id="restartButton" class="game-button" aria-label="Play again">PLAY AGAIN</button>
                     </div>
                 </div>
 
@@ -83,7 +86,7 @@
                         <h2>🎉 LEVEL COMPLETE! 🎉</h2>
                         <p class="level-score">Score: <span id="levelScore">0</span></p>
                         <p class="next-level">Get ready for Level <span id="nextLevel">2</span>!</p>
-                        <button id="nextLevelButton" class="game-button">CONTINUE</button>
+                        <button id="nextLevelButton" class="game-button" aria-label="Continue to next level">CONTINUE</button>
                     </div>
                 </div>
             </div>
@@ -108,7 +111,8 @@
 
         <footer>
             <p>Classic Arcade Game</p>
-            <p>Developed by Faiz Ahmad Khan</p>
+            <p>🚀 Space Invaders | Developed by Faiz Ahmad Khan</p>
+            <p style="font-size:12px; margin-top:5px;">Made with HTML5, CSS3 & JavaScript</p>
         </footer>
     </div>
 
