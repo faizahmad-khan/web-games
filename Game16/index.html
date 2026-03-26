@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Whack-a-Mole - Classic Arcade Game</title>
+    <meta name="description" content="Play Whack-a-Mole with special moles, levels, timers, and high score tracking.">
+    <meta name="theme-color" content="#667eea">
+    <meta name="color-scheme" content="light dark">
+    <title>🔨 Whack-a-Mole</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -67,8 +70,8 @@
 
             <!-- Controls -->
             <div class="controls">
-                <button id="startButton" class="game-button">START GAME</button>
-                <button id="pauseButton" class="game-button secondary" disabled>PAUSE</button>
+                <button id="startButton" class="game-button" aria-label="Start game">START GAME</button>
+                <button id="pauseButton" class="game-button secondary" aria-label="Pause game" disabled>PAUSE</button>
             </div>
 
             <!-- Start Screen -->
@@ -86,7 +89,7 @@
                         <p class="level-info">🏆 Every 100 points = Next Level</p>
                         <p class="level-info">📈 Levels increase difficulty!</p>
                     </div>
-                    <button id="startGameButton" class="game-button large">START GAME</button>
+                    <button id="startGameButton" class="game-button large" aria-label="Start game">START GAME</button>
                 </div>
             </div>
 
@@ -97,7 +100,7 @@
                     <p class="final-score">Final Score: <span id="finalScore">0</span></p>
                     <p class="final-level">Level Reached: <span id="finalLevel">1</span></p>
                     <p class="high-score-msg" id="highScoreMsg"></p>
-                    <button id="restartButton" class="game-button large">PLAY AGAIN</button>
+                    <button id="restartButton" class="game-button large" aria-label="Play again">PLAY AGAIN</button>
                 </div>
             </div>
 
@@ -106,7 +109,7 @@
                 <div class="overlay-content">
                     <h2>⏸️ PAUSED</h2>
                     <p>Game is paused</p>
-                    <button id="resumeButton" class="game-button">RESUME</button>
+                    <button id="resumeButton" class="game-button" aria-label="Resume game">RESUME</button>
                 </div>
             </div>
         </div>
@@ -128,8 +131,9 @@
         </div>
     </div>
 
-    <footer style="text-align:center; padding:15px; margin-top:20px; color:#ccc; font-size:16px; font-weight:bold;">
-        <p>Developed by Faiz Ahmad Khan</p>
+    <footer style="text-align:center; padding:15px; margin-top:20px; color:#999; font-size:16px; font-weight:bold;">
+        <p>🔨 Whack-a-Mole | Developed by Faiz Ahmad Khan</p>
+        <p style="font-size:12px; margin-top:5px;">Made with HTML5, CSS3 & JavaScript</p>
     </footer>
 
     <script src="script.js"></script>
