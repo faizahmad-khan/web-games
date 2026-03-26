@@ -2,6 +2,14 @@
 
 A fun and engaging Whack-a-Mole arcade game built with HTML, CSS, and JavaScript. Test your reflexes as you whack moles that pop up from their holes!
 
+## What's New
+
+- Better accessibility with ARIA labels for key controls
+- Improved keyboard focus visibility for interactive elements
+- Reduced motion support via `prefers-reduced-motion`
+- Enhanced browser metadata and theme color support
+- Footer branding consistency with other upgraded games
+
 ## 🎮 Game Preview
 
 Experience the classic arcade game with modern web technologies! Featuring smooth animations, progressive difficulty levels, and special moles for bonus points.
