@@ -2,6 +2,14 @@
 
 A complex, feature-rich tower defense game with RPG elements. Defend your castle from waves of enemies using strategic tower placement, hero abilities, and resource management.
 
+## What's New
+
+- Better accessibility with ARIA labels for menu controls
+- Improved keyboard focus visibility for interactive controls
+- Reduced motion support via `prefers-reduced-motion`
+- Enhanced browser metadata and theme color support
+- Footer branding consistency with other upgraded games
+
 ## 🎮 Game Features
 
 ### Core Gameplay
