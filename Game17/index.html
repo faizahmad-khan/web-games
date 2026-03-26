@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Castle Defenders - Tower Defense RPG</title>
+    <meta name="description" content="Play Castle Defenders, a tower defense RPG with heroes, abilities, upgrades, and endless mode.">
+    <meta name="theme-color" content="#0a0e1a">
+    <meta name="color-scheme" content="light dark">
+    <title>🏰 Castle Defenders</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -19,10 +22,10 @@
                 <p class="game-subtitle">Tower Defense RPG</p>
             </div>
             <div class="menu-buttons">
-                <button id="btn-new-game" class="menu-btn primary">⚔️ New Campaign</button>
-                <button id="btn-endless" class="menu-btn">🔄 Endless Mode</button>
-                <button id="btn-tutorial" class="menu-btn">📖 Tutorial</button>
-                <button id="btn-settings" class="menu-btn">⚙️ Settings</button>
+                <button id="btn-new-game" class="menu-btn primary" aria-label="Start new campaign">⚔️ New Campaign</button>
+                <button id="btn-endless" class="menu-btn" aria-label="Start endless mode">🔄 Endless Mode</button>
+                <button id="btn-tutorial" class="menu-btn" aria-label="Open tutorial">📖 Tutorial</button>
+                <button id="btn-settings" class="menu-btn" aria-label="Open settings">⚙️ Settings</button>
             </div>
             <div class="hero-select-preview">
                 <p class="select-label">Choose Your Hero</p>
@@ -373,7 +376,8 @@
     <div id="float-numbers" class="float-numbers-container"></div>
 
     <footer style="text-align:center; padding:15px; margin-top:20px; color:#ccc; font-size:16px; font-weight:bold;">
-        <p>Developed by Faiz Ahmad Khan</p>
+           <p>🏰 Castle Defenders | Developed by Faiz Ahmad Khan</p>
+           <p style="font-size:12px; margin-top:5px;">Made with HTML5, CSS3 & JavaScript</p>
     </footer>
 
     <script src="script.js"></script>
