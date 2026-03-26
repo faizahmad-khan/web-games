@@ -167,6 +167,16 @@ html, body {
     transform: translateY(-2px);
     box-shadow: var(--shadow-glow);
 }
+.menu-btn:focus,
+.hud-btn:focus,
+.tutorial-btn:focus,
+.action-btn:focus,
+.speed-btn:focus,
+.tower-slot:focus,
+.ability-slot:focus {
+    outline: 3px solid var(--accent-gold);
+    outline-offset: 2px;
+}
 .menu-btn.primary {
     background: linear-gradient(135deg, #c08020, #f0c040);
     color: #1a1000;
@@ -1077,5 +1087,13 @@ html, body {
     }
     .hud-center {
         display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }
