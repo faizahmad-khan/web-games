@@ -134,6 +134,16 @@ body {
     box-shadow: 0 6px 20px rgba(0,0,0,0.3);
 }
 
+.menu-btn:focus,
+.color-btn:focus,
+.uno-btn:focus,
+.draw-pile:focus,
+.player-select select:focus,
+.game-card:focus {
+    outline: 3px solid #F1C40F;
+    outline-offset: 2px;
+}
+
 .menu-btn.primary {
     background: linear-gradient(135deg, #E74C3C, #C0392B);
     font-size: 1.4rem;
@@ -676,5 +686,13 @@ body {
 
     .player-hand .game-card .card-label {
         display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }
