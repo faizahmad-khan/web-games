@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UNO Card Game</title>
+    <meta name="description" content="Play UNO in your browser against 1-3 bots with classic rules, wild cards, and UNO penalties.">
+    <meta name="theme-color" content="#1a1a2e">
+    <meta name="color-scheme" content="light dark">
+    <title>🃏 UNO Card Game</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -23,14 +26,14 @@
             <div class="menu-buttons">
                 <div class="player-select">
                     <label for="num-bots">Number of Opponents:</label>
-                    <select id="num-bots">
+                    <select id="num-bots" aria-label="Select number of opponents">
                         <option value="1">1 (2 Players)</option>
                         <option value="2">2 (3 Players)</option>
                         <option value="3" selected>3 (4 Players)</option>
                     </select>
                 </div>
-                <button id="btn-play" class="menu-btn primary">▶ Play Game</button>
-                <button id="btn-rules" class="menu-btn">📖 How to Play</button>
+                <button id="btn-play" class="menu-btn primary" aria-label="Start game">▶ Play Game</button>
+                <button id="btn-rules" class="menu-btn" aria-label="Open rules">📖 How to Play</button>
             </div>
         </div>
     </div>
@@ -61,7 +64,7 @@
                     <li>If you forget to call UNO, you draw 2 penalty cards.</li>
                 </ul>
             </div>
-            <button id="btn-back-menu" class="menu-btn">← Back to Menu</button>
+            <button id="btn-back-menu" class="menu-btn" aria-label="Back to main menu">← Back to Menu</button>
         </div>
     </div>
 
@@ -75,7 +78,7 @@
         <!-- Center play area -->
         <div class="play-area">
             <div class="pile-section">
-                <div id="draw-pile" class="card card-back draw-pile" title="Draw a card">
+                <div id="draw-pile" class="card card-back draw-pile" title="Draw a card" role="button" tabindex="0" aria-label="Draw a card">
                     <span class="card-back-text">UNO</span>
                 </div>
                 <div id="discard-pile" class="card discard-pile">
@@ -85,12 +88,12 @@
             <div class="game-info">
                 <div id="direction-indicator" class="direction">↻</div>
                 <div id="current-color" class="current-color"></div>
-                <div id="game-message" class="game-message"></div>
+                <div id="game-message" class="game-message" aria-live="polite"></div>
             </div>
         </div>
 
         <!-- UNO button -->
-        <button id="uno-btn" class="uno-btn hidden">UNO!</button>
+        <button id="uno-btn" class="uno-btn hidden" aria-label="Call UNO">UNO!</button>
 
         <!-- Player hand -->
         <div id="player-hand" class="player-hand">
@@ -102,10 +105,10 @@
             <div class="modal-content">
                 <h3>Choose a Color</h3>
                 <div class="color-options">
-                    <button class="color-btn" data-color="red" style="background:#E74C3C;">Red</button>
-                    <button class="color-btn" data-color="blue" style="background:#3498DB;">Blue</button>
-                    <button class="color-btn" data-color="green" style="background:#2ECC71;">Green</button>
-                    <button class="color-btn" data-color="yellow" style="background:#F1C40F;color:#333;">Yellow</button>
+                    <button class="color-btn" data-color="red" style="background:#E74C3C;" aria-label="Choose red color">Red</button>
+                    <button class="color-btn" data-color="blue" style="background:#3498DB;" aria-label="Choose blue color">Blue</button>
+                    <button class="color-btn" data-color="green" style="background:#2ECC71;" aria-label="Choose green color">Green</button>
+                    <button class="color-btn" data-color="yellow" style="background:#F1C40F;color:#333;" aria-label="Choose yellow color">Yellow</button>
                 </div>
             </div>
         </div>
@@ -116,12 +119,17 @@
                 <h2 id="winner-text"></h2>
                 <div id="final-scores"></div>
                 <div class="game-over-buttons">
-                    <button id="btn-play-again" class="menu-btn primary">🔄 Play Again</button>
-                    <button id="btn-main-menu" class="menu-btn">🏠 Main Menu</button>
+                    <button id="btn-play-again" class="menu-btn primary" aria-label="Play again">🔄 Play Again</button>
+                    <button id="btn-main-menu" class="menu-btn" aria-label="Return to main menu">🏠 Main Menu</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <footer style="text-align:center; padding:15px; margin-top:20px; color:#999; font-size:16px; font-weight:bold;">
+        <p>🃏 UNO Card Game | Developed by Faiz Ahmad Khan</p>
+        <p style="font-size:12px; margin-top:5px;">Made with HTML5, CSS3 & JavaScript</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
