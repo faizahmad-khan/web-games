@@ -2,6 +2,14 @@
 
 A fully playable browser-based UNO card game built with vanilla HTML, CSS, and JavaScript. Play against 1–3 AI opponents with classic UNO rules.
 
+## What's New
+
+- Better accessibility with ARIA labels for key controls
+- Improved keyboard focus visibility for interactive elements
+- Reduced motion support via `prefers-reduced-motion`
+- Enhanced browser metadata and theme color support
+- Footer branding consistency with other upgraded games
+
 ## 🎮 Game Features
 
 ### Core Gameplay
