@@ -5,8 +5,10 @@ Skyline Sprint is a quick reflex browser game where you dodge incoming traffic b
 ## Features
 
 - Single-player arcade gameplay
+- Difficulty selector (Easy, Normal, Hard)
 - Keyboard and touch controls
-- Speed curve that increases with score
+- Level progression that ramps up intensity
+- Pause and resume with keyboard or UI button
 - Local best-score persistence with localStorage
 - No dependencies or build tools
 
@@ -14,15 +16,18 @@ Skyline Sprint is a quick reflex browser game where you dodge incoming traffic b
 
 1. Open index.html in your browser.
 2. Click Start Run.
-3. Move left and right to dodge blocks.
-4. Press P to pause or resume.
-5. Beat your best score.
+3. Optionally choose difficulty before starting.
+4. Move left and right to dodge blocks.
+5. Press P or Pause to pause/resume.
+6. Press R any time to restart instantly.
+7. Beat your best score.
 
 ## Controls
 
 - Left movement: Left Arrow or A
 - Right movement: Right Arrow or D
-- Pause: P
+- Pause or resume: P or Pause button
+- Restart run: R
 - Mobile: Use the on-screen Left and Right buttons
 
 ## Files
