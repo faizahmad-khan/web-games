@@ -4,22 +4,67 @@
     const WIDTH = 360;
     const HEIGHT = 600;
     const PLAYER_SIZE = 34;
+    const DIFFICULTY_PRESETS = {
+        easy: {
+            label: "Easy",
+            spawnBase: 0.95,
+            speedScale: 0.85,
+            scoreStep: 1,
+        },
+        normal: {
+            label: "Normal",
+            spawnBase: 0.78,
+            speedScale: 1,
+            scoreStep: 1,
+        },
+        hard: {
+            label: "Hard",
+            spawnBase: 0.64,
+            speedScale: 1.15,
+            scoreStep: 1,
+        },
+    };
 
     const canvas = document.getElementById("game-canvas");
     const ctx = canvas.getContext("2d");
 
     const scoreEl = document.getElementById("score");
     const bestEl = document.getElementById("best");
+    const levelEl = document.getElementById("level");
     const statusEl = document.getElementById("status");
     const overlayEl = document.getElementById("overlay");
     const overlayTitleEl = document.getElementById("overlay-title");
     const overlayTextEl = document.getElementById("overlay-text");
     const startBtn = document.getElementById("start-btn");
+    const pauseBtn = document.getElementById("pause-btn");
+    const difficultySelect = document.getElementById("difficulty-select");
     const leftBtn = document.getElementById("left-btn");
     const rightBtn = document.getElementById("right-btn");
 
     const bestKey = "skylineSprintBest";
-    let bestScore = Number(localStorage.getItem(bestKey) || 0);
+    let rafId = null;
+
+    function readStoredBest() {
+        try {
+            const score = Number(localStorage.getItem(bestKey));
+            if (!Number.isFinite(score) || score < 0) {
+                return 0;
+            }
+            return Math.floor(score);
+        } catch {
+            return 0;
+        }
+    }
+
+    function saveBestScore(score) {
+        try {
+            localStorage.setItem(bestKey, String(score));
+        } catch {
+            // Ignore storage errors so gameplay still works in restricted environments.
+        }
+    }
+
+    let bestScore = readStoredBest();
 
     const input = {
         left: false,
@@ -30,6 +75,8 @@
         running: false,
         paused: false,
         score: 0,
+        level: 1,
+        difficulty: "normal",
         spawnTimer: 0,
         obstacles: [],
         lastFrame: 0,
@@ -51,6 +98,7 @@
 
     function resetRun() {
         state.score = 0;
+        state.level = 1;
         state.spawnTimer = 0;
         state.obstacles = [];
         state.player.x = WIDTH / 2 - PLAYER_SIZE / 2;
@@ -72,18 +120,19 @@
     function updateHud() {
         scoreEl.textContent = String(state.score);
         bestEl.textContent = String(bestScore);
+        levelEl.textContent = String(state.level);
     }
 
-    function setStatus(value, isDanger) {
+    function setStatus(value, tone = "ok") {
         statusEl.textContent = value;
-        statusEl.style.color = isDanger ? "#ff8b8b" : "#18f0b8";
+        statusEl.dataset.tone = tone;
     }
 
-    function spawnObstacle() {
+    function spawnObstacle(speedScale) {
         const width = 30 + Math.random() * 70;
         const height = 14 + Math.random() * 20;
         const x = Math.random() * (WIDTH - width);
-        const baseSpeed = 160 + Math.random() * 70;
+        const baseSpeed = (160 + Math.random() * 70) * speedScale;
         const hue = 18 + Math.random() * 35;
 
         state.obstacles.push({
@@ -106,6 +155,8 @@
     }
 
     function update(dt) {
+        const preset = DIFFICULTY_PRESETS[state.difficulty] || DIFFICULTY_PRESETS.normal;
+
         if (input.left) {
             state.player.x -= state.player.speed * dt;
         }
@@ -115,12 +166,14 @@
 
         state.player.x = Math.max(10, Math.min(WIDTH - state.player.w - 10, state.player.x));
 
-        const intensity = Math.min(2.9, 1 + state.score / 34);
-        const spawnEvery = Math.max(0.23, 0.78 - state.score / 230);
+        state.level = Math.min(12, 1 + Math.floor(state.score / 12));
+        const levelBoost = 1 + (state.level - 1) * 0.06;
+        const intensity = Math.min(3.8, (1 + state.score / 36) * preset.speedScale * levelBoost);
+        const spawnEvery = Math.max(0.2, preset.spawnBase - state.score / 260 - (state.level - 1) * 0.012);
 
         state.spawnTimer += dt;
         while (state.spawnTimer >= spawnEvery) {
-            spawnObstacle();
+            spawnObstacle(preset.speedScale * levelBoost * (0.95 + Math.random() * 0.1));
             state.spawnTimer -= spawnEvery;
         }
 
@@ -135,7 +188,7 @@
 
             if (obstacle.y > HEIGHT + obstacle.h) {
                 state.obstacles.splice(i, 1);
-                state.score += 1;
+                state.score += preset.scoreStep;
                 updateHud();
             }
         }
@@ -206,6 +259,7 @@
 
     function tick(ts) {
         if (!state.running) {
+            rafId = null;
             return;
         }
 
@@ -217,26 +271,44 @@
             draw();
         }
 
-        requestAnimationFrame(tick);
+        rafId = requestAnimationFrame(tick);
+    }
+
+    function stopLoop() {
+        if (rafId !== null) {
+            cancelAnimationFrame(rafId);
+            rafId = null;
+        }
+    }
+
+    function syncPauseButton() {
+        pauseBtn.disabled = !state.running;
+        pauseBtn.textContent = state.paused ? "Resume" : "Pause";
     }
 
     function beginRun() {
+        stopLoop();
         resetRun();
         state.running = true;
         state.lastFrame = performance.now();
-        setStatus("Running", false);
+        setStatus("Running", "ok");
         startBtn.textContent = "Restart Run";
         hideOverlay();
-        requestAnimationFrame(tick);
+        syncPauseButton();
+        draw();
+        rafId = requestAnimationFrame(tick);
     }
 
     function finishRun() {
         state.running = false;
-        setStatus("Crashed", true);
+        state.paused = false;
+        stopLoop();
+        syncPauseButton();
+        setStatus("Crashed", "danger");
 
         if (state.score > bestScore) {
             bestScore = state.score;
-            localStorage.setItem(bestKey, String(bestScore));
+            saveBestScore(bestScore);
             updateHud();
         }
 
@@ -250,11 +322,27 @@
 
         state.paused = !state.paused;
         if (state.paused) {
-            setStatus("Paused", false);
+            setStatus("Paused", "warn");
             setOverlay("Paused", "Press P to continue your run.");
         } else {
-            setStatus("Running", false);
+            setStatus("Running", "ok");
+            state.lastFrame = performance.now();
             hideOverlay();
+        }
+
+        syncPauseButton();
+    }
+
+    function setDifficulty(nextDifficulty) {
+        if (!DIFFICULTY_PRESETS[nextDifficulty]) {
+            return;
+        }
+
+        state.difficulty = nextDifficulty;
+
+        if (!state.running) {
+            const label = DIFFICULTY_PRESETS[nextDifficulty].label;
+            setOverlay("Ready?", `${label} mode selected. Move left and right. Dodge every incoming block.`);
         }
     }
 
@@ -269,24 +357,42 @@
 
     function bindControls() {
         startBtn.addEventListener("click", beginRun);
+        pauseBtn.addEventListener("click", togglePause);
+
+        difficultySelect.addEventListener("change", (event) => {
+            setDifficulty(event.target.value);
+        });
 
         window.addEventListener("keydown", (event) => {
-            if (event.key === "ArrowLeft" || event.key.toLowerCase() === "a") {
+            const key = event.key.toLowerCase();
+
+            if (event.key === "ArrowLeft" || key === "a") {
                 input.left = true;
+                event.preventDefault();
             }
-            if (event.key === "ArrowRight" || event.key.toLowerCase() === "d") {
+            if (event.key === "ArrowRight" || key === "d") {
                 input.right = true;
+                event.preventDefault();
             }
-            if (event.key.toLowerCase() === "p") {
+
+            if (key === "p" && !event.repeat) {
                 togglePause();
+                event.preventDefault();
+            }
+
+            if (key === "r" && !event.repeat) {
+                beginRun();
+                event.preventDefault();
             }
         });
 
         window.addEventListener("keyup", (event) => {
-            if (event.key === "ArrowLeft" || event.key.toLowerCase() === "a") {
+            const key = event.key.toLowerCase();
+
+            if (event.key === "ArrowLeft" || key === "a") {
                 input.left = false;
             }
-            if (event.key === "ArrowRight" || event.key.toLowerCase() === "d") {
+            if (event.key === "ArrowRight" || key === "d") {
                 input.right = false;
             }
         });
@@ -295,22 +401,38 @@
             [leftBtn, "left"],
             [rightBtn, "right"],
         ].forEach(([button, direction]) => {
-            button.addEventListener("pointerdown", () => onPointerMove(direction, true));
+            button.addEventListener("pointerdown", (event) => {
+                event.preventDefault();
+                onPointerMove(direction, true);
+            });
             button.addEventListener("pointerup", () => onPointerMove(direction, false));
             button.addEventListener("pointerleave", () => onPointerMove(direction, false));
             button.addEventListener("pointercancel", () => onPointerMove(direction, false));
+        });
+
+        window.addEventListener("blur", () => {
+            input.left = false;
+            input.right = false;
+            if (state.running && !state.paused) {
+                togglePause();
+            }
         });
     }
 
     function init() {
         setupCanvas();
         bindControls();
+        difficultySelect.value = state.difficulty;
         updateHud();
-        setStatus("Idle", false);
+        setStatus("Idle", "idle");
+        syncPauseButton();
         draw();
-        setOverlay("Ready?", "Move left and right. Dodge every incoming block.");
+        setOverlay("Ready?", "Choose a difficulty, then press Start Run.");
     }
 
-    window.addEventListener("resize", setupCanvas);
+    window.addEventListener("resize", () => {
+        setupCanvas();
+        draw();
+    });
     init();
 })();
