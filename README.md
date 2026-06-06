@@ -21,7 +21,7 @@
 
 ## 🎮 Games Overview
 
-This repository contains **19 exciting games** that you can play right in your browser or on desktop:
+This repository contains **20 exciting games** that you can play right in your browser or on desktop:
 
 | Game | Type | Tech | Players | Status |
 |------|------|------|---------|--------|
@@ -1049,6 +1049,10 @@ web-games/
 │   ├── script.js                  # Game Logic
 │   ├── README.md                  # Game documentation
 │   └── LICENSE                    # License file
+├── Game20/
+│   ├── index.html                 # Whack-a-Mole (All-in-one file)
+│   ├── README.md                  # Game documentation
+│   └── LICENSE                    # License file
 ├── Web_Games_Collection/
 │   └── index.html                 # Collection portal
 ├── LICENSE                        # MIT License
@@ -1224,6 +1228,7 @@ For questions, issues, or feedback:
 - 🏰 [Castle Defenders](Game17/) - Tower defense RPG
 - 🃏 [UNO Card Game](Game18/) - Classic card strategy game
 - 🏙️ [Skyline Sprint](Game19/) - High-speed dodge runner
+- 🔨 [Whack-a-Mole](Game20/) - Retro arcade reflex game
 
 
 **Made with 💖 using HTML5, CSS3, JavaScript, and Python**
