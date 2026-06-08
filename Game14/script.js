@@ -591,6 +591,7 @@ function nextLevel() {
     alienShootInterval = Math.max(400, 1000 - level * 60);
 
     gameState = 'playing';
+    if (animationId) cancelAnimationFrame(animationId);
     gameLoop();
 }
 
@@ -746,7 +747,7 @@ document.addEventListener('keydown', (e) => {
             break;
         case 'p':
         case 'P':
-            if (gameState === 'playing' || gameState === 'paused') togglePause();
+            if (!e.repeat && (gameState === 'playing' || gameState === 'paused')) togglePause();
             e.preventDefault();
             break;
     }
