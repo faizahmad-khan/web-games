@@ -451,53 +451,109 @@ function drawHangman() {
     // Rope
     ctx.beginPath(); ctx.moveTo(200, 50); ctx.lineTo(200, 80); ctx.stroke();
 
-    ctx.lineWidth = 3;
+    const bunnyX = 200, bunnyY = 140;
+    const earH = 45, earW = 12;
 
+    // Stage 1: Left ear
     if (incorrectGuesses >= 1) {
-        // Head
-        ctx.strokeStyle = '#ff6b6b';
+        ctx.fillStyle = '#ffb3d9';
         ctx.beginPath();
-        ctx.arc(200, 100, 20, 0, Math.PI * 2);
+        ctx.ellipse(bunnyX - 15, bunnyY - 45, earW, earH, -0.3, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#ff69b4';
+        ctx.lineWidth = 2;
         ctx.stroke();
-        // Face
-        ctx.fillStyle = '#ff6b6b';
-        ctx.beginPath(); ctx.arc(193, 96, 2, 0, Math.PI * 2); ctx.fill(); // left eye
-        ctx.beginPath(); ctx.arc(207, 96, 2, 0, Math.PI * 2); ctx.fill(); // right eye
-        if (incorrectGuesses >= maxIncorrectGuesses) {
-            // Sad mouth
-            ctx.strokeStyle = '#ff6b6b';
-            ctx.beginPath(); ctx.arc(200, 112, 6, Math.PI, 0); ctx.stroke();
-        }
     }
 
+    // Stage 2: Right ear
     if (incorrectGuesses >= 2) {
-        // Body
-        ctx.strokeStyle = '#54a0ff';
-        ctx.beginPath(); ctx.moveTo(200, 120); ctx.lineTo(200, 180); ctx.stroke();
+        ctx.fillStyle = '#ffb3d9';
+        ctx.beginPath();
+        ctx.ellipse(bunnyX + 15, bunnyY - 45, earW, earH, 0.3, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#ff69b4';
+        ctx.lineWidth = 2;
+        ctx.stroke();
     }
 
+    // Stage 3: Head
     if (incorrectGuesses >= 3) {
-        // Left arm
-        ctx.strokeStyle = '#2ed573';
-        ctx.beginPath(); ctx.moveTo(200, 140); ctx.lineTo(170, 165); ctx.stroke();
+        ctx.fillStyle = '#ffb3d9';
+        ctx.beginPath();
+        ctx.arc(bunnyX, bunnyY, 25, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#ff69b4';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Nose
+        ctx.fillStyle = '#ff69b4';
+        ctx.beginPath();
+        ctx.arc(bunnyX, bunnyY + 5, 3, 0, Math.PI * 2);
+        ctx.fill();
     }
 
+    // Stage 4: Eyes and mouth
     if (incorrectGuesses >= 4) {
-        // Right arm
-        ctx.strokeStyle = '#ffa502';
-        ctx.beginPath(); ctx.moveTo(200, 140); ctx.lineTo(230, 165); ctx.stroke();
+        ctx.fillStyle = '#333';
+        ctx.beginPath(); ctx.arc(bunnyX - 8, bunnyY - 5, 2.5, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(bunnyX + 8, bunnyY - 5, 2.5, 0, Math.PI * 2); ctx.fill();
+
+        // Cute smile
+        ctx.strokeStyle = '#333';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(bunnyX, bunnyY + 8, 6, 0, Math.PI);
+        ctx.stroke();
     }
 
+    // Stage 5: Body
     if (incorrectGuesses >= 5) {
-        // Left leg
-        ctx.strokeStyle = '#a55eea';
-        ctx.beginPath(); ctx.moveTo(200, 180); ctx.lineTo(170, 220); ctx.stroke();
+        ctx.fillStyle = '#ffb3d9';
+        ctx.beginPath();
+        ctx.ellipse(bunnyX, bunnyY + 50, 20, 35, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#ff69b4';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Belly spot
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+        ctx.beginPath();
+        ctx.ellipse(bunnyX, bunnyY + 50, 12, 20, 0, 0, Math.PI * 2);
+        ctx.fill();
     }
 
+    // Stage 6: Front paws
     if (incorrectGuesses >= 6) {
-        // Right leg
-        ctx.strokeStyle = '#ff6348';
-        ctx.beginPath(); ctx.moveTo(200, 180); ctx.lineTo(230, 220); ctx.stroke();
+        // Left paw
+        ctx.fillStyle = '#ffb3d9';
+        ctx.beginPath();
+        ctx.ellipse(bunnyX - 18, bunnyY + 80, 8, 12, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#ff69b4';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Right paw
+        ctx.fillStyle = '#ffb3d9';
+        ctx.beginPath();
+        ctx.ellipse(bunnyX + 18, bunnyY + 80, 8, 12, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#ff69b4';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+    }
+
+    // Sad expression on loss
+    if (incorrectGuesses >= maxIncorrectGuesses && incorrectGuesses >= 4) {
+        ctx.strokeStyle = '#333';
+        ctx.lineWidth = 2;
+        // X eyes
+        ctx.beginPath(); ctx.moveTo(bunnyX - 12, bunnyY - 10); ctx.lineTo(bunnyX - 4, bunnyY); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(bunnyX - 4, bunnyY - 10); ctx.lineTo(bunnyX - 12, bunnyY); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(bunnyX + 4, bunnyY - 10); ctx.lineTo(bunnyX + 12, bunnyY); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(bunnyX + 12, bunnyY - 10); ctx.lineTo(bunnyX + 4, bunnyY); ctx.stroke();
     }
 }
 
