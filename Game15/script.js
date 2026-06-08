@@ -180,7 +180,7 @@ document.addEventListener('keydown', (e) => {
         if (unlaunched) launchBall(unlaunched);
     }
 
-    if (e.key === 'p' || e.key === 'P') {
+    if ((e.key === 'p' || e.key === 'P') && !e.repeat) {
         togglePause();
     }
 });
